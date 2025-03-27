@@ -1,0 +1,5 @@
+{
+    "require": {
+        "matscode/paystack": "^1.10"
+    }
+}

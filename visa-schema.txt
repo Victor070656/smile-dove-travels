@@ -1,0 +1,95 @@
+CREATE TABLE applicants (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    dob DATE NOT NULL,
+    place_of_birth VARCHAR(255) NOT NULL,
+    gender ENUM('Male', 'Female') NOT NULL,
+    nationality VARCHAR(100) DEFAULT 'Nigerian',
+    phone VARCHAR(20) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE passports (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    applicant_id INT NOT NULL,
+    passport_number VARCHAR(50) UNIQUE NOT NULL,
+    issue_date DATE NOT NULL,
+    expiry_date DATE NOT NULL,
+    FOREIGN KEY (applicant_id) REFERENCES applicants(id) ON DELETE CASCADE
+);
+
+CREATE TABLE travel_details (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    applicant_id INT NOT NULL,
+    destination_country VARCHAR(100) NOT NULL,
+    purpose VARCHAR(255) NOT NULL,
+    entry_date DATE NOT NULL,
+    exit_date DATE NOT NULL,
+    FOREIGN KEY (applicant_id) REFERENCES applicants(id) ON DELETE CASCADE
+);
+
+CREATE TABLE employment (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    applicant_id INT NOT NULL,
+    employment_status ENUM('Employed', 'Self-Employed', 'Student', 'Unemployed') NOT NULL,
+    employer_name VARCHAR(255) DEFAULT NULL,
+    monthly_income DECIMAL(10,2) DEFAULT NULL,
+    bank_statement VARCHAR(255) DEFAULT NULL,
+    FOREIGN KEY (applicant_id) REFERENCES applicants(id) ON DELETE CASCADE
+);
+
+CREATE TABLE sponsorships (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    applicant_id INT NOT NULL,
+    sponsor_name VARCHAR(255) DEFAULT NULL,
+    sponsor_relationship VARCHAR(100) DEFAULT NULL,
+    sponsor_letter VARCHAR(255) DEFAULT NULL,
+    FOREIGN KEY (applicant_id) REFERENCES applicants(id) ON DELETE CASCADE
+);
+
+CREATE TABLE health_security (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    applicant_id INT NOT NULL,
+    medical_certificate VARCHAR(255) DEFAULT NULL,
+    police_clearance VARCHAR(255) DEFAULT NULL,
+    FOREIGN KEY (applicant_id) REFERENCES applicants(id) ON DELETE CASCADE
+);
+
+CREATE TABLE education (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    applicant_id INT NOT NULL,
+    certificate_files TEXT DEFAULT NULL, -- Stores file paths (comma-separated)
+    FOREIGN KEY (applicant_id) REFERENCES applicants(id) ON DELETE CASCADE
+);
+
+CREATE TABLE uploads (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    applicant_id INT NOT NULL,
+    document_type VARCHAR(100) NOT NULL,
+    file_path VARCHAR(255) NOT NULL,
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (applicant_id) REFERENCES applicants(id) ON DELETE CASCADE
+);
+
+
+
+
+Example Relationship Between Tables
+
+
+applicants: Main applicant details.
+
+passports: Stores passport details for each applicant.
+
+travel_details: Stores visa and travel-related information.
+
+employment: Stores job and financial status.
+
+sponsorships: Stores sponsor details if applicable.
+
+health_security: Stores health & police records.
+
+education: Stores educational certificates.
+
+uploads: Stores file paths for uploaded documents.

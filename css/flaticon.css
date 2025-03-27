@@ -1,0 +1,413 @@
+@font-face {
+    font-family: "flaticon_visa";
+    src: url("../fonts/flaticon_visa6cd5.ttf?174fca3cf9482f9a46c19ed8e5d38c7f") format("truetype"),
+url("../fonts/flaticon_visa6cd5.woff?174fca3cf9482f9a46c19ed8e5d38c7f") format("woff"),
+url("../fonts/flaticon_visa6cd5.woff2?174fca3cf9482f9a46c19ed8e5d38c7f") format("woff2"),
+url("../fonts/flaticon_visa6cd5.eot?174fca3cf9482f9a46c19ed8e5d38c7f#iefix") format("embedded-opentype"),
+url("../fonts/flaticon_visa6cd5.svg?174fca3cf9482f9a46c19ed8e5d38c7f#flaticon_visa") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon_visa !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon-illegal:before {
+    content: "\f101";
+}
+.flaticon-take-off:before {
+    content: "\f102";
+}
+.flaticon-insurance:before {
+    content: "\f103";
+}
+.flaticon-visa:before {
+    content: "\f104";
+}
+.flaticon-business-trip:before {
+    content: "\f105";
+}
+.flaticon-insurance-1:before {
+    content: "\f106";
+}
+.flaticon-worldwide:before {
+    content: "\f107";
+}
+.flaticon-travel:before {
+    content: "\f108";
+}
+.flaticon-shield:before {
+    content: "\f109";
+}
+.flaticon-paid:before {
+    content: "\f10a";
+}
+.flaticon-plane-ticket:before {
+    content: "\f10b";
+}
+.flaticon-flight:before {
+    content: "\f10c";
+}
+.flaticon-visa-1:before {
+    content: "\f10d";
+}
+.flaticon-passport:before {
+    content: "\f10e";
+}
+.flaticon-insurance-2:before {
+    content: "\f10f";
+}
+.flaticon-embassy:before {
+    content: "\f110";
+}
+.flaticon-currency:before {
+    content: "\f111";
+}
+.flaticon-plane:before {
+    content: "\f112";
+}
+.flaticon-flight-1:before {
+    content: "\f113";
+}
+.flaticon-luggage:before {
+    content: "\f114";
+}
+.flaticon-identification-card:before {
+    content: "\f115";
+}
+.flaticon-rubber-stamp:before {
+    content: "\f116";
+}
+.flaticon-boarding-gate:before {
+    content: "\f117";
+}
+.flaticon-police:before {
+    content: "\f118";
+}
+.flaticon-law:before {
+    content: "\f119";
+}
+.flaticon-family:before {
+    content: "\f11a";
+}
+.flaticon-airport:before {
+    content: "\f11b";
+}
+.flaticon-visa-2:before {
+    content: "\f11c";
+}
+.flaticon-scale:before {
+    content: "\f11d";
+}
+.flaticon-priority-gate:before {
+    content: "\f11e";
+}
+.flaticon-passport-control:before {
+    content: "\f11f";
+}
+.flaticon-immigration:before {
+    content: "\f120";
+}
+.flaticon-flight-2:before {
+    content: "\f121";
+}
+.flaticon-tax:before {
+    content: "\f122";
+}
+.flaticon-exit:before {
+    content: "\f123";
+}
+.flaticon-toilet-signs:before {
+    content: "\f124";
+}
+.flaticon-accomodation:before {
+    content: "\f125";
+}
+.flaticon-illegal-1:before {
+    content: "\f126";
+}
+.flaticon-ticket:before {
+    content: "\f127";
+}
+.flaticon-passport-1:before {
+    content: "\f128";
+}
+.flaticon-route:before {
+    content: "\f129";
+}
+.flaticon-escalator:before {
+    content: "\f12a";
+}
+.flaticon-embassy-1:before {
+    content: "\f12b";
+}
+.flaticon-cafe:before {
+    content: "\f12c";
+}
+.flaticon-boarding-gate-1:before {
+    content: "\f12d";
+}
+.flaticon-check-in:before {
+    content: "\f12e";
+}
+.flaticon-translation:before {
+    content: "\f12f";
+}
+.flaticon-passport-2:before {
+    content: "\f130";
+}
+.flaticon-suitcase:before {
+    content: "\f131";
+}
+.flaticon-health-check:before {
+    content: "\f132";
+}
+.flaticon-departure:before {
+    content: "\f133";
+}
+.flaticon-signage:before {
+    content: "\f134";
+}
+.flaticon-directions:before {
+    content: "\f135";
+}
+.flaticon-luggage-1:before {
+    content: "\f136";
+}
+.flaticon-escalator-1:before {
+    content: "\f137";
+}
+.flaticon-airport-1:before {
+    content: "\f138";
+}
+.flaticon-global:before {
+    content: "\f139";
+}
+.flaticon-information:before {
+    content: "\f13a";
+}
+.flaticon-life-raft:before {
+    content: "\f13b";
+}
+.flaticon-exit-1:before {
+    content: "\f13c";
+}
+.flaticon-location:before {
+    content: "\f13d";
+}
+.flaticon-currency-1:before {
+    content: "\f13e";
+}
+.flaticon-bar-chart:before {
+    content: "\f13f";
+}
+.flaticon-disabled-sign:before {
+    content: "\f140";
+}
+.flaticon-passport-3:before {
+    content: "\f141";
+}
+.flaticon-destination:before {
+    content: "\f142";
+}
+.flaticon-passport-control-1:before {
+    content: "\f143";
+}
+.flaticon-smartphone:before {
+    content: "\f144";
+}
+.flaticon-refugee-camp:before {
+    content: "\f145";
+}
+.flaticon-free-wifi:before {
+    content: "\f146";
+}
+.flaticon-rubber-stamp-1:before {
+    content: "\f147";
+}
+.flaticon-protect:before {
+    content: "\f148";
+}
+.flaticon-checking:before {
+    content: "\f149";
+}
+.flaticon-briefcase:before {
+    content: "\f14a";
+}
+.flaticon-signage-1:before {
+    content: "\f14b";
+}
+.flaticon-stamp:before {
+    content: "\f14c";
+}
+.flaticon-passport-4:before {
+    content: "\f14d";
+}
+.flaticon-trolley:before {
+    content: "\f14e";
+}
+.flaticon-travel-1:before {
+    content: "\f14f";
+}
+.flaticon-customs-agent:before {
+    content: "\f150";
+}
+.flaticon-itinerary:before {
+    content: "\f151";
+}
+.flaticon-passport-5:before {
+    content: "\f152";
+}
+.flaticon-passport-6:before {
+    content: "\f153";
+}
+.flaticon-passport-7:before {
+    content: "\f154";
+}
+.flaticon-ticket-1:before {
+    content: "\f155";
+}
+.flaticon-check:before {
+    content: "\f156";
+}
+.flaticon-passport-8:before {
+    content: "\f157";
+}
+.flaticon-approved:before {
+    content: "\f158";
+}
+.flaticon-health-check-1:before {
+    content: "\f159";
+}
+.flaticon-passport-9:before {
+    content: "\f15a";
+}
+.flaticon-itinerary-1:before {
+    content: "\f15b";
+}
+.flaticon-passport-10:before {
+    content: "\f15c";
+}
+.flaticon-passport-11:before {
+    content: "\f15d";
+}
+.flaticon-immigration-1:before {
+    content: "\f15e";
+}
+.flaticon-licensing:before {
+    content: "\f15f";
+}
+.flaticon-increase:before {
+    content: "\f160";
+}
+.flaticon-passport-12:before {
+    content: "\f161";
+}
+.flaticon-group:before {
+    content: "\f162";
+}
+.flaticon-life-insurance:before {
+    content: "\f163";
+}
+.flaticon-job-interview:before {
+    content: "\f164";
+}
+.flaticon-passport-13:before {
+    content: "\f165";
+}
+.flaticon-cooperation:before {
+    content: "\f166";
+}
+.flaticon-rating:before {
+    content: "\f167";
+}
+.flaticon-check-list:before {
+    content: "\f168";
+}
+.flaticon-documents:before {
+    content: "\f169";
+}
+.flaticon-interview:before {
+    content: "\f16a";
+}
+.flaticon-camera:before {
+    content: "\f16b";
+}
+.flaticon-family-1:before {
+    content: "\f16c";
+}
+.flaticon-graduate:before {
+    content: "\f16d";
+}
+.flaticon-online-support:before {
+    content: "\f16e";
+}
+.flaticon-loyalty:before {
+    content: "\f16f";
+}
+.flaticon-low-cost:before {
+    content: "\f170";
+}
+.flaticon-approved-1:before {
+    content: "\f171";
+}
+.flaticon-global-1:before {
+    content: "\f172";
+}
+.flaticon-passport-14:before {
+    content: "\f173";
+}
+.flaticon-discount:before {
+    content: "\f174";
+}
+.flaticon-stamp-1:before {
+    content: "\f175";
+}
+.flaticon-help:before {
+    content: "\f176";
+}
+.flaticon-passport-15:before {
+    content: "\f177";
+}
+.flaticon-interview-1:before {
+    content: "\f178";
+}
+.flaticon-form:before {
+    content: "\f179";
+}
+.flaticon-visa-3:before {
+    content: "\f17a";
+}
+.flaticon-passport-16:before {
+    content: "\f17b";
+}
+.flaticon-passport-17:before {
+    content: "\f17c";
+}
+.flaticon-document:before {
+    content: "\f17d";
+}
+.flaticon-visa-4:before {
+    content: "\f17e";
+}
+.flaticon-passport-18:before {
+    content: "\f17f";
+}
+.flaticon-visa-5:before {
+    content: "\f180";
+}
+.flaticon-passport-19:before {
+    content: "\f181";
+}
+.flaticon-travel-2:before {
+    content: "\f182";
+}
+.flaticon-passport-20:before {
+    content: "\f183";
+}

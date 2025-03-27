@@ -1,0 +1,153 @@
+<?php
+include_once "config/config.php";
+session_start();
+$loggedIn = false;
+if (!empty($_SESSION["sdtravels_user"])) {
+  $loggedIn = true;
+  $uid = $_SESSION["sdtravels_user"];
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<!-- Mirrored from html.kodesolution.com/2024/vizox-php/page-service-details.php by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Mar 2025 21:49:01 GMT -->
+<!-- Added by HTTrack -->
+<meta
+  http-equiv="content-type"
+  content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<head>
+  <meta charset="utf-8" />
+  <title>Smile Dove Travels | Visa Details</title>
+  <!-- Stylesheets -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+  <link href="css/style.css" rel="stylesheet" />
+
+  <link href="css/responsive.css" rel="stylesheet" />
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
+  <link rel="icon" href="images/favicon.png" type="image/x-icon" />
+
+  <link href="intro/intro.css" rel="stylesheet" />
+  <script src="js/jquery.js"></script>
+
+  <!-- Responsive -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <!--[if lt IE 9
+      ]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script
+    ><![endif]-->
+  <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+
+  <!-- REVOLUTION STYLE SHEETS -->
+  <link rel="stylesheet" type="text/css" href="intro/rev/css/rs6.css" />
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <!-- Preloader -->
+    <!-- Preloader -->
+    <div class="preloader"></div>
+    <!-- Main Header-->
+    <?php
+    $page = "visa";
+    include "partials/header.php";
+    ?>
+    <!--End Main Header -->
+
+    <!-- Start main-content -->
+    <section
+      class="page-title"
+      style="background-image: url(images/background/page-title.jpg)">
+      <div class="auto-container">
+        <div class="title-outer">
+          <h1 class="title">Visa </h1>
+          <ul class="page-breadcrumb">
+            <li><a href="index-2.html">Home</a></li>
+            <li>Visa</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!-- end main-content -->
+
+    <!--Start Services Details-->
+    <section class="services-details">
+      <div class="container">
+        <div class="row">
+
+
+          <!--Start Services Details Content-->
+          <div class="col-12">
+            <div class="services-details__content">
+              <img src="images/travel/03.webp" style="width: 100%;" alt="" />
+              <h2 class="mt-4">Visa Overview</h2>
+              <p>
+                Navigating the visa application process can be complex, but we are here to simplify it for you. At Smile Dove Travels, we provide expert guidance and seamless visa processing services to ensure a hassle-free experience. Whether you're traveling for education, business, tourism, or family visits, our team is dedicated to helping you secure the right visa with ease.
+                With years of experience in the travel and immigration industry, we stay updated on the latest visa policies and requirements. Our goal is to make your journey smooth by handling the complexities of documentation, application submission, and interview preparation.
+              </p>
+              <div class="content mt-40">
+                <div class="text">
+                  <h3>Visa Center</h3>
+                  <p>
+                    At Smile Dove Travels, we offer a wide range of visa assistance services tailored to your travel needs. Our Visa Center provides end-to-end support for various visa categories, ensuring you have the right documentation and expert advice at every step.
+                  </p>
+                </div>
+                <div class="feature-list">
+                  <div class="row clearfix">
+                    <?php
+                    $getVisas = mysqli_query($conn, "SELECT * FROM `visa_prices`");
+                    while ($visa = mysqli_fetch_assoc($getVisas)) {
+                    ?>
+                      <div class="col-md-3 mb-3 column">
+                        <div class="card p-3" style="border-radius: 10px;">
+                          <h6 class="mb-2"><?= ucfirst($visa["visa"]); ?> Visa</h6>
+                          <a href="get-visa.php?id=<?= $visa["id"] ?>" class="btn btn-dark w-100">Apply</a>
+                        </div>
+                      </div>
+                    <?php
+                    }
+                    ?>
+
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!--End Services Details Content-->
+        </div>
+      </div>
+    </section>
+    <!--End Services Details-->
+
+    <!-- Main Footer -->
+    <?php include "partials/footer.php"; ?>
+    <!--End Main Footer -->
+  </div>
+  <!-- End Page Wrapper -->
+
+  <!-- Scroll To Top -->
+  <div class="scroll-to-top scroll-to-target" data-target="html">
+    <span class="fa fa-angle-up"></span>
+  </div>
+
+
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.fancybox.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/appear.js"></script>
+  <script src="js/select2.min.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/mixitup.js"></script>
+  <script src="js/bxslider.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>
