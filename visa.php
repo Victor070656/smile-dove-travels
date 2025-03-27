@@ -96,19 +96,32 @@ if (!empty($_SESSION["sdtravels_user"])) {
                 </div>
                 <div class="feature-list">
                   <div class="row clearfix">
-                    <?php
-                    $getVisas = mysqli_query($conn, "SELECT * FROM `visa_prices`");
-                    while ($visa = mysqli_fetch_assoc($getVisas)) {
-                    ?>
-                      <div class="col-md-3 mb-3 column">
-                        <div class="card p-3" style="border-radius: 10px;">
-                          <h6 class="mb-2"><?= ucfirst($visa["visa"]); ?> Visa</h6>
-                          <a href="get-visa.php?id=<?= $visa["id"] ?>" class="btn btn-dark w-100">Apply</a>
-                        </div>
+
+                    <div class="col-md-3 mb-3 column">
+                      <div class="card p-3" style="border-radius: 10px;">
+                        <h6 class="mb-2">Tourist Visa</h6>
+                        <a href="get-visa.php" class="btn btn-dark w-100">Apply</a>
                       </div>
-                    <?php
-                    }
-                    ?>
+                    </div>
+                    <div class="col-md-3 mb-3 column">
+                      <div class="card p-3" style="border-radius: 10px;">
+                        <h6 class="mb-2">Student Visa</h6>
+                        <a href="get-visa.php" class="btn btn-dark w-100">Apply</a>
+                      </div>
+                    </div>
+                    <div class="col-md-3 mb-3 column">
+                      <div class="card p-3" style="border-radius: 10px;">
+                        <h6 class="mb-2">Business Visa</h6>
+                        <a href="get-visa.php" class="btn btn-dark w-100">Apply</a>
+                      </div>
+                    </div>
+                    <div class="col-md-3 mb-3 column">
+                      <div class="card p-3" style="border-radius: 10px;">
+                        <h6 class="mb-2">Work Visa</h6>
+                        <a href="get-visa.php" class="btn btn-dark w-100">Apply</a>
+                      </div>
+                    </div>
+
 
 
                   </div>
