@@ -181,8 +181,8 @@ $price_ngn = $rate * $price_usd;
                     <div class="col-md-6 mb-3">
                       <label for="destin_city" class="form-label fw-bold">Destination City</label>
                       <input type="text" id="destin_city" required name="destin_city" class="form-control">
-                      <input type="hidden" id="ticket_type" name="ticket_type" value="<?= $class; ?>" class="form-control">
-                      <input type="hidden" id="airline_class" name="airline_class" value="<?= $type; ?>" class="form-control">
+                      <input type="hidden" id="ticket_type" name="ticket_type" value="<?= $type; ?>" class="form-control">
+                      <input type="hidden" id="airline_class" name="airline_class" value="<?= $class; ?>" class="form-control">
                     </div>
 
                     <div class="col-md-6 mb-3">

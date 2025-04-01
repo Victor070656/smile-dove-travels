@@ -262,7 +262,7 @@ $getHotels = mysqli_query($conn, "SELECT * FROM hotels");
                                    <p class="mb-0">
                                         <script>
                                              document.write(new Date().getFullYear())
-                                        </script> &copy; Taplox.</a>
+                                        </script> &copy; Smile Dove Travels.</a>
                                    </p>
                               </div>
                          </div>
@@ -295,6 +295,6 @@ $getHotels = mysqli_query($conn, "SELECT * FROM hotels");
 </body>
 
 
-<!-- Mirrored from stackbros.in/taplox/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Mar 2025 10:04:58 GMT -->
+<!-- Mirrored from stackbros.in/Smile Dove Travels/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Mar 2025 10:04:58 GMT -->
 
 </html>

@@ -28,6 +28,7 @@
             </li>
 
 
+
             <li class="nav-item">
                 <a class="nav-link menu-arrow" href="#sidebarMultiLevelDemo" data-bs-toggle="collapse" role="button"
                     aria-expanded="false" aria-controls="sidebarMultiLevelDemo">
@@ -74,7 +75,46 @@
                     </ul>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="visa-applications.php">
+                    <span class="nav-icon">
+                        <iconify-icon icon="solar:map-arrow-square-bold"></iconify-icon>
+                    </span>
+                    <span class="nav-text"> Visa Applications </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="prices.php">
+                    <span class="nav-icon">
+                        <iconify-icon icon="solar:money-bag-linear"></iconify-icon>
+                    </span>
+                    <span class="nav-text"> Prices </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link menu-arrow" href="#blog" data-bs-toggle="collapse" role="button"
+                    aria-expanded="false" aria-controls="blog">
+                    <span class="nav-icon">
+                        <iconify-icon icon="solar:file-text-outline"></iconify-icon>
+                    </span>
+                    <span class="nav-text"> Blog </span>
+                </a>
+                <div class="collapse" id="blog">
+                    <ul class="nav sub-navbar-nav">
+                        <li class="sub-nav-item">
+                            <a class="sub-nav-link" href="create-blog.php">
+                                Create Blog
+                            </a>
+                        </li>
+                        <li class="sub-nav-item">
+                            <a class="sub-nav-link" href="blogs.php">
+                                <span>Blogs</span>
+                            </a>
 
+                        </li>
+                    </ul>
+                </div>
+            </li>
 
         </ul>
     </div>

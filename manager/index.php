@@ -5,8 +5,12 @@ if (!isset($_SESSION['sdtravels_manager'])) {
      echo "<script>alert('Please Login First'); location.href = 'login.php'</script>";
 }
 
-$getHotels = mysqli_query($conn, "SELECT * FROM hotels");
-// $getVisa = mysqli_query($con, "SELECT * FROM visa");
+$getHotels = mysqli_query($conn, "SELECT * FROM `hotels`");
+$getVisa = mysqli_query($conn, "SELECT * FROM `applicants`");
+$getUsers = mysqli_query($conn, "SELECT * FROM `users`");
+$getRes = mysqli_query($conn, "SELECT * FROM `hotel_reservations`");
+$getFlight = mysqli_query($conn, "SELECT * FROM `flight_bookings`");
+$res = $getFlight->num_rows + $getRes->num_rows;
 // var_dump(__DIR__);
 ?>
 <!DOCTYPE html>
@@ -118,7 +122,7 @@ $getHotels = mysqli_query($conn, "SELECT * FROM hotels");
                                              </div>
                                              <div class="col-6 text-end">
                                                   <p class="text-muted mb-0 text-truncate">Visa</p>
-                                                  <h3 class="text-dark mt-2 mb-0">8,764</h3>
+                                                  <h3 class="text-dark mt-2 mb-0"><?= $getVisa->num_rows; ?></h3>
                                              </div>
                                         </div>
                                    </div>
@@ -139,7 +143,7 @@ $getHotels = mysqli_query($conn, "SELECT * FROM hotels");
                                              </div>
                                              <div class="col-6 text-end">
                                                   <p class="text-muted mb-0 text-truncate">Bookings</p>
-                                                  <h3 class="text-dark mt-2 mb-0">5,123</h3>
+                                                  <h3 class="text-dark mt-2 mb-0"><?= $res; ?></h3>
                                              </div>
                                         </div>
                                    </div>
@@ -160,7 +164,7 @@ $getHotels = mysqli_query($conn, "SELECT * FROM hotels");
                                              </div>
                                              <div class="col-6 text-end">
                                                   <p class="text-muted mb-0 text-truncate">Users</p>
-                                                  <h3 class="text-dark mt-2 mb-0">12,945</h3>
+                                                  <h3 class="text-dark mt-2 mb-0"><?= $getUsers->num_rows; ?></h3>
                                              </div>
                                         </div>
                                    </div>
@@ -259,7 +263,7 @@ $getHotels = mysqli_query($conn, "SELECT * FROM hotels");
                                    <p class="mb-0">
                                         <script>
                                              document.write(new Date().getFullYear())
-                                        </script> &copy; Taplox.</a>
+                                        </script> &copy; Smile Dove Travels.</a>
                                    </p>
                               </div>
                          </div>
@@ -292,6 +296,6 @@ $getHotels = mysqli_query($conn, "SELECT * FROM hotels");
 </body>
 
 
-<!-- Mirrored from stackbros.in/taplox/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Mar 2025 10:04:58 GMT -->
+<!-- Mirrored from stackbros.in/Smile Dove Travels/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Mar 2025 10:04:58 GMT -->
 
 </html>

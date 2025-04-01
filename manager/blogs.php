@@ -4,17 +4,6 @@ session_start();
 if (!isset($_SESSION['sdtravels_manager'])) {
      echo "<script>alert('Please Login First'); location.href = 'login.php'</script>";
 }
-
-if (isset($_GET["hid"])) {
-     $id = $_GET["hid"];
-     $getHotels = mysqli_query($conn, "SELECT * FROM `hotels` WHERE `hotelid` = '$id'");
-     if (mysqli_num_rows($getHotels) == 0) {
-          echo "<script>alert('Hotel not found'); location.href = 'hotels.php'</script>";
-     }
-     $hotel = mysqli_fetch_assoc($getHotels);
-} else {
-     echo "<script>alert('Hotel not found'); location.href = 'hotels.php'</script>";
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +14,7 @@ if (isset($_GET["hid"])) {
 <head>
      <!-- Title Meta -->
      <meta charset="utf-8" />
-     <title>Smile Dove Admin || Rooms</title>
+     <title>Smile Dove Admin || Hotels</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta name="description" content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
      <meta name="author" content="StackBros" />
@@ -85,10 +74,10 @@ if (isset($_GET["hid"])) {
                     <div class="row">
                          <div class="col-12">
                               <div class="page-title-box">
-                                   <h4 class="mb-0">Hotel Rooms</h4>
+                                   <h4 class="mb-0">Hotels</h4>
                                    <ol class="breadcrumb mb-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Smile dove</a></li>
-                                        <li class="breadcrumb-item active">Rooms</li>
+                                        <li class="breadcrumb-item active">Hotels</li>
                                    </ol>
                               </div>
                          </div>
@@ -99,9 +88,9 @@ if (isset($_GET["hid"])) {
                     <div class="card rounded-4 py-2">
                          <div class="card-header d-flex justify-content-between align-items-center">
                               <h5 class="">
-                                   Rooms for <?= $hotel["name"]; ?>
+                                   All Hotels
                               </h5>
-                              <a href="add-room.php?hid=<?= $id; ?>" class="btn btn-primary btn-sm ">Add Room +</a>
+                              <a href="add-hotel.php" class="btn btn-primary btn-sm ">Add Hotel +</a>
 
                          </div>
 
@@ -111,30 +100,29 @@ if (isset($_GET["hid"])) {
                                         <thead>
                                              <tr>
                                                   <th scope="col">#</th>
-                                                  <th scope="col">Room Name</th>
-                                                  <th scope="col">Room Type</th>
-                                                  <th scope="col">Max Guest</th>
-                                                  <th scope="col">Price ($)</th>
+                                                  <th scope="col">Title</th>
+                                                  <th scope="col">Content</th>
                                                   <th scope="col">Date</th>
                                                   <th scope="col">Action</th>
                                              </tr>
                                         </thead>
                                         <tbody>
                                              <?php
-                                             $getRooms = mysqli_query($conn, "SELECT * FROM `hotel_rooms` WHERE `hotelid` = '$id' ORDER BY `id` DESC");
-                                             if (mysqli_num_rows($getRooms) > 0) {
+                                             $getHotels = mysqli_query($conn, "SELECT * FROM `blogs` ORDER BY `created_at` DESC");
+                                             if (mysqli_num_rows($getHotels) > 0) {
 
-                                                  while ($row = mysqli_fetch_assoc($getRooms)) {
+                                                  while ($row = mysqli_fetch_assoc($getHotels)) {
                                              ?>
                                                        <tr>
-                                                            <td><?= $row["roomid"]; ?></td>
-                                                            <td><?= $row["name"]; ?></td>
-                                                            <td><?= $row["roomtype"]; ?></td>
-                                                            <td><?= $row["max_guest"]; ?></td>
-                                                            <td><?= $row["price"]; ?></td>
+                                                            <td><?= $row["blogid"]; ?></td>
                                                             <td>
-                                                                 <small><?= date("d-m-Y H:i", strtotime($row["created_at"])); ?></small>
+                                                                 <span class="me-2">
+                                                                      <img src="../uploads/blog/<?= $row['image']; ?>" style="width: 80px; height: 80px; object-fit: cover; border-radius: 5px;" alt="">
+                                                                 </span>
+                                                                 <?= $row["title"]; ?>
                                                             </td>
+                                                            <td class="text-truncate"><?= $row["content"]; ?></td>
+                                                            <td><?= date("d-m-Y H:i", strtotime($row["created_at"])); ?></td>
                                                             <td class="">
 
 
@@ -150,8 +138,8 @@ if (isset($_GET["hid"])) {
                                                                       <div
                                                                            class="dropdown-menu dropdown-menu-end position-relative "
                                                                            aria-labelledby="triggerId">
-                                                                           <a class="dropdown-item text-primary" href="edit-room.php?rid=<?= $row["roomid"]; ?>">Edit Room</a>
-                                                                           <a class="dropdown-item text-danger" href="delete-room.php?rid=<?= $row["roomid"]; ?>">Delete Room</a>
+                                                                           <a class="dropdown-item text-primary" href="edit-blog.php?bid=<?= $row["blogid"]; ?>">Edit Blog</a>
+                                                                           <a class="dropdown-item text-danger" href="delete-blog.php?bid=<?= $row["blogid"]; ?>">Delete Blog</a>
                                                                       </div>
                                                                  </div>
                                                             </td>

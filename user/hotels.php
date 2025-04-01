@@ -9,16 +9,16 @@ if (!isset($_SESSION['sdtravels_manager'])) {
 <html lang="en">
 
 
-<!-- Mirrored from stackbros.in/taplox/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Mar 2025 10:05:24 GMT -->
+<!-- Mirrored from stackbros.in/Smile Dove Travels/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Mar 2025 10:05:24 GMT -->
 
 <head>
      <!-- Title Meta -->
      <meta charset="utf-8" />
      <title>Smile Dove Admin || Hotels</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta name="description" content="Taplox: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
+     <meta name="description" content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
      <meta name="author" content="StackBros" />
-     <meta name="keywords" content="Taplox, admin dashboard, responsive template, analytics, modern UI, management tools" />
+     <meta name="keywords" content="Smile Dove Travels, admin dashboard, responsive template, analytics, modern UI, management tools" />
      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
      <meta name="robots" content="index, follow" />
      <meta name="theme-color" content="#ffffff">
@@ -177,7 +177,7 @@ if (!isset($_SESSION['sdtravels_manager'])) {
                               <p class="mb-0">
                                    <script>
                                         document.write(new Date().getFullYear())
-                                   </script> &copy; Taplox.</a>
+                                   </script> &copy; Smile Dove Travels.</a>
                               </p>
                          </div>
                     </div>
@@ -208,6 +208,6 @@ if (!isset($_SESSION['sdtravels_manager'])) {
 </body>
 
 
-<!-- Mirrored from stackbros.in/taplox/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Mar 2025 10:05:24 GMT -->
+<!-- Mirrored from stackbros.in/Smile Dove Travels/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 19 Mar 2025 10:05:24 GMT -->
 
 </html>

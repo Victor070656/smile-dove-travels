@@ -4,17 +4,6 @@ session_start();
 if (!isset($_SESSION['sdtravels_manager'])) {
      echo "<script>alert('Please Login First'); location.href = 'login.php'</script>";
 }
-
-if (isset($_GET["hid"])) {
-     $id = $_GET["hid"];
-     $getHotels = mysqli_query($conn, "SELECT * FROM `hotels` WHERE `hotelid` = '$id'");
-     if (mysqli_num_rows($getHotels) == 0) {
-          echo "<script>alert('Hotel not found'); location.href = 'hotels.php'</script>";
-     }
-     $hotel = mysqli_fetch_assoc($getHotels);
-} else {
-     echo "<script>alert('Hotel not found'); location.href = 'hotels.php'</script>";
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +14,7 @@ if (isset($_GET["hid"])) {
 <head>
      <!-- Title Meta -->
      <meta charset="utf-8" />
-     <title>Smile Dove Admin || Rooms</title>
+     <title>Smile Dove Admin || Visa Application</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta name="description" content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
      <meta name="author" content="StackBros" />
@@ -85,10 +74,10 @@ if (isset($_GET["hid"])) {
                     <div class="row">
                          <div class="col-12">
                               <div class="page-title-box">
-                                   <h4 class="mb-0">Hotel Rooms</h4>
+                                   <h4 class="mb-0">Visa Application</h4>
                                    <ol class="breadcrumb mb-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Smile dove</a></li>
-                                        <li class="breadcrumb-item active">Rooms</li>
+                                        <li class="breadcrumb-item active">Visa Application</li>
                                    </ol>
                               </div>
                          </div>
@@ -99,61 +88,60 @@ if (isset($_GET["hid"])) {
                     <div class="card rounded-4 py-2">
                          <div class="card-header d-flex justify-content-between align-items-center">
                               <h5 class="">
-                                   Rooms for <?= $hotel["name"]; ?>
+                                   All Visa Applications
                               </h5>
-                              <a href="add-room.php?hid=<?= $id; ?>" class="btn btn-primary btn-sm ">Add Room +</a>
-
                          </div>
 
                          <div class="card-body">
                               <div class="table-responsive">
                                    <table class="table table-striped w-100" id="tablee">
                                         <thead>
-                                             <tr>
+                                             <tr class="table-nowrap">
                                                   <th scope="col">#</th>
-                                                  <th scope="col">Room Name</th>
-                                                  <th scope="col">Room Type</th>
-                                                  <th scope="col">Max Guest</th>
-                                                  <th scope="col">Price ($)</th>
+                                                  <th scope="col">Full Name</th>
+                                                  <th scope="col">Date Of Birth</th>
+                                                  <th scope="col">Place Of Birth</th>
+                                                  <th scope="col">Nationality</th>
+                                                  <th scope="col">Gender</th>
+                                                  <th scope="col">Email</th>
+                                                  <th scope="col">Phone Number</th>
+                                                  <th scope="col">Destination Country</th>
+                                                  <th scope="col">Visa Type</th>
+                                                  <th scope="col">Entry Date</th>
+                                                  <th scope="col">Exit Date</th>
+                                                  <th scope="col">Status</th>
+                                                  <th scope="col">Message</th>
                                                   <th scope="col">Date</th>
                                                   <th scope="col">Action</th>
                                              </tr>
                                         </thead>
                                         <tbody>
                                              <?php
-                                             $getRooms = mysqli_query($conn, "SELECT * FROM `hotel_rooms` WHERE `hotelid` = '$id' ORDER BY `id` DESC");
-                                             if (mysqli_num_rows($getRooms) > 0) {
+                                             $getVisa = mysqli_query($conn, "SELECT a.*, t.destination_country, t.visa_type, t.entry_date, t.exit_date FROM `applicants` as a JOIN `travel_details` as t ON a.id = t.applicant_id ");
+                                             if (mysqli_num_rows($getVisa) > 0) {
 
-                                                  while ($row = mysqli_fetch_assoc($getRooms)) {
+                                                  while ($row = mysqli_fetch_assoc($getVisa)) {
                                              ?>
                                                        <tr>
-                                                            <td><?= $row["roomid"]; ?></td>
-                                                            <td><?= $row["name"]; ?></td>
-                                                            <td><?= $row["roomtype"]; ?></td>
-                                                            <td><?= $row["max_guest"]; ?></td>
-                                                            <td><?= $row["price"]; ?></td>
+                                                            <td><?= $row["applicationid"]; ?></td>
                                                             <td>
-                                                                 <small><?= date("d-m-Y H:i", strtotime($row["created_at"])); ?></small>
+                                                                 <?= $row["full_name"]; ?>
                                                             </td>
+                                                            <td><?= $row["dob"]; ?></td>
+                                                            <td><?= $row["place_of_birth"]; ?></td>
+                                                            <td><?= $row["nationality"]; ?></td>
+                                                            <td><?= $row["gender"]; ?></td>
+                                                            <td><?= $row["email"]; ?></td>
+                                                            <td><?= $row["phone"]; ?></td>
+                                                            <td><?= $row["destination_country"]; ?></td>
+                                                            <td><?= $row["visa_type"]; ?></td>
+                                                            <td><?= $row["entry_date"]; ?></td>
+                                                            <td><?= $row["exit_date"]; ?></td>
+                                                            <td><?= $row["status"]; ?></td>
+                                                            <td><?= $row["message"]; ?></td>
+                                                            <td><?= date("d-m-Y H:i", strtotime($row["created_at"])); ?></td>
                                                             <td class="">
-
-
-                                                                 <div class="dropdown">
-                                                                      <button
-                                                                           class="btn btn-secondary rounded-4 btn-sm dropdown-toggle"
-                                                                           type="button"
-                                                                           id="triggerId"
-                                                                           data-bs-toggle="dropdown"
-                                                                           aria-haspopup="true"
-                                                                           aria-expanded="false">
-                                                                      </button>
-                                                                      <div
-                                                                           class="dropdown-menu dropdown-menu-end position-relative "
-                                                                           aria-labelledby="triggerId">
-                                                                           <a class="dropdown-item text-primary" href="edit-room.php?rid=<?= $row["roomid"]; ?>">Edit Room</a>
-                                                                           <a class="dropdown-item text-danger" href="delete-room.php?rid=<?= $row["roomid"]; ?>">Delete Room</a>
-                                                                      </div>
-                                                                 </div>
+                                                                 <a href="view-visa.php?id=<?= $row["id"]; ?>" class="btn btn-primary btn-sm">View</a>
                                                             </td>
                                                        </tr>
                                              <?php

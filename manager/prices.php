@@ -4,18 +4,16 @@ session_start();
 if (!isset($_SESSION['sdtravels_manager'])) {
      echo "<script>alert('Please Login First'); location.href = 'login.php'</script>";
 }
+$getFlightPrices = mysqli_query($conn, "SELECT * FROM `flight_prices`");
+$flightPrices = mysqli_fetch_assoc($getFlightPrices);
 
-if (isset($_GET["hid"])) {
-     $id = $_GET["hid"];
-     $getHotels = mysqli_query($conn, "SELECT * FROM `hotels` WHERE `hotelid` = '$id'");
-     if (mysqli_num_rows($getHotels) == 0) {
-          echo "<script>alert('Hotel not found'); location.href = 'hotels.php'</script>";
-     }
-     $hotel = mysqli_fetch_assoc($getHotels);
-} else {
-     echo "<script>alert('Hotel not found'); location.href = 'hotels.php'</script>";
-}
+$getVisaPrices = mysqli_query($conn, "SELECT * FROM `visa_prices`");
+$visaPrice = mysqli_fetch_assoc($getVisaPrices);
+
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +23,7 @@ if (isset($_GET["hid"])) {
 <head>
      <!-- Title Meta -->
      <meta charset="utf-8" />
-     <title>Smile Dove Admin || Rooms</title>
+     <title>Smile Dove Admin || Prices</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta name="description" content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
      <meta name="author" content="StackBros" />
@@ -85,10 +83,10 @@ if (isset($_GET["hid"])) {
                     <div class="row">
                          <div class="col-12">
                               <div class="page-title-box">
-                                   <h4 class="mb-0">Hotel Rooms</h4>
+                                   <h4 class="mb-0">Prices</h4>
                                    <ol class="breadcrumb mb-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Smile dove</a></li>
-                                        <li class="breadcrumb-item active">Rooms</li>
+                                        <li class="breadcrumb-item active">Prices</li>
                                    </ol>
                               </div>
                          </div>
@@ -96,73 +94,67 @@ if (isset($_GET["hid"])) {
                     <!-- ========== Page Title End ========== -->
 
 
-                    <div class="card rounded-4 py-2">
+                    <div class="card rounded-4 py-2 mb-4">
                          <div class="card-header d-flex justify-content-between align-items-center">
                               <h5 class="">
-                                   Rooms for <?= $hotel["name"]; ?>
+                                   Flight Prices
                               </h5>
-                              <a href="add-room.php?hid=<?= $id; ?>" class="btn btn-primary btn-sm ">Add Room +</a>
-
                          </div>
 
                          <div class="card-body">
-                              <div class="table-responsive">
-                                   <table class="table table-striped w-100" id="tablee">
-                                        <thead>
-                                             <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Room Name</th>
-                                                  <th scope="col">Room Type</th>
-                                                  <th scope="col">Max Guest</th>
-                                                  <th scope="col">Price ($)</th>
-                                                  <th scope="col">Date</th>
-                                                  <th scope="col">Action</th>
-                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                             <?php
-                                             $getRooms = mysqli_query($conn, "SELECT * FROM `hotel_rooms` WHERE `hotelid` = '$id' ORDER BY `id` DESC");
-                                             if (mysqli_num_rows($getRooms) > 0) {
+                              <form method="post">
+                                   <div class="mb-2">
+                                        <label for="one-way" class="form-label">One Way ($)</label>
+                                        <input type="number" name="one-way" value="<?= $flightPrices['one_way']; ?>" class="form-control" id="one-way">
+                                   </div>
+                                   <div class="mb-2">
+                                        <label for="round-trip" class="form-label">Round Trip ($)</label>
+                                        <input type="number" name="round-trip" value="<?= $flightPrices['round_trip']; ?>" class="form-control" id="round-trip">
+                                   </div>
+                                   <button class="btn btn-primary" name="flight">Update</button>
+                                   <?php
+                                   if (isset($_POST["flight"])) {
+                                        $one_way = $_POST["one-way"];
+                                        $round_trip = $_POST["round-trip"];
 
-                                                  while ($row = mysqli_fetch_assoc($getRooms)) {
-                                             ?>
-                                                       <tr>
-                                                            <td><?= $row["roomid"]; ?></td>
-                                                            <td><?= $row["name"]; ?></td>
-                                                            <td><?= $row["roomtype"]; ?></td>
-                                                            <td><?= $row["max_guest"]; ?></td>
-                                                            <td><?= $row["price"]; ?></td>
-                                                            <td>
-                                                                 <small><?= date("d-m-Y H:i", strtotime($row["created_at"])); ?></small>
-                                                            </td>
-                                                            <td class="">
+                                        $query = mysqli_query($conn, "UPDATE `flight_prices` SET `one_way` = '$one_way', `round_trip` = '$round_trip'");
+                                        if ($query) {
+                                             echo "<script>alert('Updated Successfully!'); location.href = 'prices.php'</script>";
+                                        } else {
+                                             echo "<script>alert('Something went wrong!'); </script>";
+                                        }
+                                   }
+                                   ?>
+                              </form>
+                         </div>
+                    </div>
+                    <div class="card rounded-4 py-2">
+                         <div class="card-header d-flex justify-content-between align-items-center">
+                              <h5 class="">
+                                   Visa Price
+                              </h5>
+                         </div>
 
+                         <div class="card-body">
+                              <form method="post">
+                                   <div class="mb-2">
+                                        <label for="visa_price" class="form-label">Visa Fee ($)</label>
+                                        <input type="number" name="visa_price" value="<?= $visaPrice['price']; ?>" class="form-control" id="visa_price">
+                                   </div>
+                                   <button class="btn btn-primary" name="visa">Update</button>
+                                   <?php
+                                   if (isset($_POST["visa"])) {
+                                        $visa_price = $_POST["visa_price"];
 
-                                                                 <div class="dropdown">
-                                                                      <button
-                                                                           class="btn btn-secondary rounded-4 btn-sm dropdown-toggle"
-                                                                           type="button"
-                                                                           id="triggerId"
-                                                                           data-bs-toggle="dropdown"
-                                                                           aria-haspopup="true"
-                                                                           aria-expanded="false">
-                                                                      </button>
-                                                                      <div
-                                                                           class="dropdown-menu dropdown-menu-end position-relative "
-                                                                           aria-labelledby="triggerId">
-                                                                           <a class="dropdown-item text-primary" href="edit-room.php?rid=<?= $row["roomid"]; ?>">Edit Room</a>
-                                                                           <a class="dropdown-item text-danger" href="delete-room.php?rid=<?= $row["roomid"]; ?>">Delete Room</a>
-                                                                      </div>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-                                             <?php
-                                                  }
-                                             }
-                                             ?>
-                                        </tbody>
-                                   </table>
-                              </div>
+                                        $query = mysqli_query($conn, "UPDATE `visa_prices` SET `price` = '$visa_price'");
+                                        if ($query) {
+                                             echo "<script>alert('Updated Successfully!'); location.href = 'prices.php'</script>";
+                                        } else {
+                                             echo "<script>alert('Something went wrong!'); </script>";
+                                        }
+                                   }
+                                   ?>
+                              </form>
                          </div>
                     </div>
 

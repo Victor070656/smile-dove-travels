@@ -5,17 +5,20 @@ if (!isset($_SESSION['sdtravels_manager'])) {
      echo "<script>alert('Please Login First'); location.href = 'login.php'</script>";
 }
 
-if (isset($_GET["hid"])) {
-     $id = $_GET["hid"];
-     $getHotels = mysqli_query($conn, "SELECT * FROM `hotels` WHERE `hotelid` = '$id'");
-     if (mysqli_num_rows($getHotels) == 0) {
-          echo "<script>alert('Hotel not found'); location.href = 'hotels.php'</script>";
+if (isset($_GET["bid"])) {
+     $id = $_GET["bid"];
+     $getBlogs = mysqli_query($conn, "SELECT * FROM `blogs` WHERE `blogid` = '$id'");
+     if (mysqli_num_rows($getBlogs) == 0) {
+          echo "<script>alert('Blog not found'); location.href = 'blogs.php'</script>";
      }
-     $hotel = mysqli_fetch_assoc($getHotels);
+     $blog = mysqli_fetch_assoc($getBlogs);
 } else {
-     echo "<script>alert('Hotel not found'); location.href = 'hotels.php'</script>";
+     echo "<script>alert('Blog not found'); location.href = 'blogs.php'</script>";
 }
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +28,7 @@ if (isset($_GET["hid"])) {
 <head>
      <!-- Title Meta -->
      <meta charset="utf-8" />
-     <title>Smile Dove Admin || Rooms</title>
+     <title>Smile Dove Admin || Edit Blog</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta name="description" content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
      <meta name="author" content="StackBros" />
@@ -85,10 +88,10 @@ if (isset($_GET["hid"])) {
                     <div class="row">
                          <div class="col-12">
                               <div class="page-title-box">
-                                   <h4 class="mb-0">Hotel Rooms</h4>
+                                   <h4 class="mb-0">Blog</h4>
                                    <ol class="breadcrumb mb-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Smile dove</a></li>
-                                        <li class="breadcrumb-item active">Rooms</li>
+                                        <li class="breadcrumb-item active">Blog</li>
                                    </ol>
                               </div>
                          </div>
@@ -96,73 +99,66 @@ if (isset($_GET["hid"])) {
                     <!-- ========== Page Title End ========== -->
 
 
-                    <div class="card rounded-4 py-2">
+                    <div class="card rounded-4 py-2 mb-4">
                          <div class="card-header d-flex justify-content-between align-items-center">
                               <h5 class="">
-                                   Rooms for <?= $hotel["name"]; ?>
+                                   Create Blog
                               </h5>
-                              <a href="add-room.php?hid=<?= $id; ?>" class="btn btn-primary btn-sm ">Add Room +</a>
-
                          </div>
 
                          <div class="card-body">
-                              <div class="table-responsive">
-                                   <table class="table table-striped w-100" id="tablee">
-                                        <thead>
-                                             <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Room Name</th>
-                                                  <th scope="col">Room Type</th>
-                                                  <th scope="col">Max Guest</th>
-                                                  <th scope="col">Price ($)</th>
-                                                  <th scope="col">Date</th>
-                                                  <th scope="col">Action</th>
-                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                             <?php
-                                             $getRooms = mysqli_query($conn, "SELECT * FROM `hotel_rooms` WHERE `hotelid` = '$id' ORDER BY `id` DESC");
-                                             if (mysqli_num_rows($getRooms) > 0) {
+                              <form method="post" enctype="multipart/form-data">
+                                   <div class="mb-2">
+                                        <label for="title" class="form-label">Title</label>
+                                        <input type="text" required name="title" value="<?= $blog['title']; ?>" class="form-control" id="title">
+                                   </div>
+                                   <div class="mb-2">
+                                        <label for="body" class="form-label">Content</label>
+                                        <textarea name="body" required id="body" class="form-control"><?= $blog['content']; ?></textarea>
+                                   </div>
+                                   <div class="mb-2">
+                                        <label for="image" class="form-label">Image</label>
+                                        <input type="file" name="image" class="form-control" id="image">
+                                   </div>
+                                   <button class="btn btn-primary" name="send">Create Post</button>
+                                   <?php
+                                   if (isset($_POST["send"])) {
+                                        $title = $_POST["title"];
+                                        $content = $_POST["body"];
+                                        $image = date("dmYHis") . $_FILES["image"]["name"];
+                                        $tmp_name = $_FILES["image"]["tmp_name"];
 
-                                                  while ($row = mysqli_fetch_assoc($getRooms)) {
-                                             ?>
-                                                       <tr>
-                                                            <td><?= $row["roomid"]; ?></td>
-                                                            <td><?= $row["name"]; ?></td>
-                                                            <td><?= $row["roomtype"]; ?></td>
-                                                            <td><?= $row["max_guest"]; ?></td>
-                                                            <td><?= $row["price"]; ?></td>
-                                                            <td>
-                                                                 <small><?= date("d-m-Y H:i", strtotime($row["created_at"])); ?></small>
-                                                            </td>
-                                                            <td class="">
+                                        $dir = "../uploads/blog";
+                                        if (!dir($dir)) {
+                                             mkdir($dir, 0777, true);
+                                        }
 
+                                        if (!empty($_FILES["image"]["name"])) {
 
-                                                                 <div class="dropdown">
-                                                                      <button
-                                                                           class="btn btn-secondary rounded-4 btn-sm dropdown-toggle"
-                                                                           type="button"
-                                                                           id="triggerId"
-                                                                           data-bs-toggle="dropdown"
-                                                                           aria-haspopup="true"
-                                                                           aria-expanded="false">
-                                                                      </button>
-                                                                      <div
-                                                                           class="dropdown-menu dropdown-menu-end position-relative "
-                                                                           aria-labelledby="triggerId">
-                                                                           <a class="dropdown-item text-primary" href="edit-room.php?rid=<?= $row["roomid"]; ?>">Edit Room</a>
-                                                                           <a class="dropdown-item text-danger" href="delete-room.php?rid=<?= $row["roomid"]; ?>">Delete Room</a>
-                                                                      </div>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-                                             <?php
+                                             if (move_uploaded_file($tmp_name, $dir . "/$image")) {
+                                                  $query = mysqli_query($conn, "UPDATE `blogs` SET `title` = '$title', `content` = '$content', `image` = '$image' WHERE `blogid` = '$id'");
+                                                  if ($query) {
+                                                       if (file_exists($dir . "/" . $blog["image"])) {
+                                                            unlink($dir . "/" . $blog["image"]);
+                                                       }
+                                                       echo "<script>alert('Updated Successfully!'); location.href = 'blogs.php'</script>";
+                                                  } else {
+                                                       echo "<script>alert('Something went wrong!'); </script>";
                                                   }
+                                             } else {
+                                                  echo "<script>alert('Something went wrong while uploading!'); </script>";
                                              }
-                                             ?>
-                                        </tbody>
-                                   </table>
-                              </div>
+                                        } else {
+                                             $query = mysqli_query($conn, "UPDATE `blogs` SET `title` = '$title', `content` = '$content' WHERE `blogid` = '$id'");
+                                             if ($query) {
+                                                  echo "<script>alert('Updated Successfully!'); location.href = 'blogs.php'</script>";
+                                             } else {
+                                                  echo "<script>alert('Something went wrong!'); </script>";
+                                             }
+                                        }
+                                   }
+                                   ?>
+                              </form>
                          </div>
                     </div>
 
