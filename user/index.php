@@ -7,10 +7,11 @@ if (!isset($_SESSION['sdtravels_user'])) {
 $uid = $_SESSION["sdtravels_user"];
 
 
+$getVisa = mysqli_query($conn, "SELECT * FROM `applicants` WHERE `userid` = '$uid'");
+$getRes = mysqli_query($conn, "SELECT * FROM `hotel_reservations` WHERE `userid` = '$uid'");
+$getFlight = mysqli_query($conn, "SELECT * FROM `flight_bookings` WHERE `userid` = '$uid'");
+$res = $getFlight->num_rows + $getRes->num_rows;
 
-$getHotels = mysqli_query($conn, "SELECT * FROM hotels");
-// $getVisa = mysqli_query($con, "SELECT * FROM visa");
-// var_dump(__DIR__);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +28,7 @@ $getHotels = mysqli_query($conn, "SELECT * FROM hotels");
      <meta name="theme-color" content="#ffffff">
 
      <!-- App favicon -->
-     <link rel="shortcut icon" href="assets/images/favicon.ico">
+     <link rel="shortcut icon" href="../images/favicon.png">
 
      <!-- Google Font Family link -->
      <link rel="preconnect" href="https://fonts.googleapis.com/index.html">
@@ -88,7 +89,7 @@ $getHotels = mysqli_query($conn, "SELECT * FROM hotels");
 
                     <div class="row">
                          <!-- Card 1 -->
-                         <div class="col-md-6 col-xl-3">
+                         <div class="col-md-6 col-xl-4">
                               <div class="card rounded-4">
                                    <div class="card-body">
                                         <div class="row">
@@ -100,7 +101,7 @@ $getHotels = mysqli_query($conn, "SELECT * FROM hotels");
                                              </div>
                                              <div class="col-6 text-end">
                                                   <p class="text-muted mb-0 text-truncate">Hotels</p>
-                                                  <h3 class="text-dark mt-2 mb-0"><?= $getHotels->num_rows ?? 0; ?></h3>
+                                                  <h3 class="text-dark mt-2 mb-0"><?= $getRes->num_rows ?? 0; ?></h3>
                                              </div>
                                         </div>
                                    </div>
@@ -109,7 +110,28 @@ $getHotels = mysqli_query($conn, "SELECT * FROM hotels");
                          </div>
 
                          <!-- Card 2 -->
-                         <div class="col-md-6 col-xl-3">
+                         <div class="col-md-6 col-xl-4">
+                              <div class="card rounded-4">
+                                   <div class="card-body">
+                                        <div class="row">
+                                             <div class="col-6">
+                                                  <div class="avatar-md bg-primary bg-opacity-10 rounded-circle">
+                                                       <iconify-icon icon="solar:rocket-2-linear"
+                                                            class="fs-32 text-primary avatar-title"></iconify-icon>
+                                                  </div>
+                                             </div>
+                                             <div class="col-6 text-end">
+                                                  <p class="text-muted mb-0 text-truncate">Flight</p>
+                                                  <h3 class="text-dark mt-2 mb-0"><?= $getFlight->num_rows ?? 0 ?></h3>
+                                             </div>
+                                        </div>
+                                   </div>
+
+                              </div>
+                         </div>
+
+                         <!-- Card 3 -->
+                         <div class="col-md-6 col-xl-4">
                               <div class="card rounded-4">
                                    <div class="card-body">
                                         <div class="row">
@@ -121,7 +143,7 @@ $getHotels = mysqli_query($conn, "SELECT * FROM hotels");
                                              </div>
                                              <div class="col-6 text-end">
                                                   <p class="text-muted mb-0 text-truncate">Visa</p>
-                                                  <h3 class="text-dark mt-2 mb-0">8,764</h3>
+                                                  <h3 class="text-dark mt-2 mb-0"><?= $getVisa->num_rows ?? 0 ?></h3>
                                              </div>
                                         </div>
                                    </div>
@@ -129,47 +151,9 @@ $getHotels = mysqli_query($conn, "SELECT * FROM hotels");
                               </div>
                          </div>
 
-                         <!-- Card 3 -->
-                         <div class="col-md-6 col-xl-3">
-                              <div class="card rounded-4">
-                                   <div class="card-body">
-                                        <div class="row">
-                                             <div class="col-6">
-                                                  <div class="avatar-md bg-primary bg-opacity-10 rounded-circle">
-                                                       <iconify-icon icon="solar:calendar-date-outline"
-                                                            class="fs-32 text-primary avatar-title"></iconify-icon>
-                                                  </div>
-                                             </div>
-                                             <div class="col-6 text-end">
-                                                  <p class="text-muted mb-0 text-truncate">Bookings</p>
-                                                  <h3 class="text-dark mt-2 mb-0">5,123</h3>
-                                             </div>
-                                        </div>
-                                   </div>
 
-                              </div>
-                         </div>
 
-                         <!-- Card 4 -->
-                         <div class="col-md-6 col-xl-3">
-                              <div class="card rounded-4">
-                                   <div class="card-body">
-                                        <div class="row">
-                                             <div class="col-6">
-                                                  <div class="avatar-md bg-primary bg-opacity-10 rounded-circle">
-                                                       <iconify-icon icon="solar:users-group-two-rounded-outline"
-                                                            class="fs-32 text-primary avatar-title"></iconify-icon>
-                                                  </div>
-                                             </div>
-                                             <div class="col-6 text-end">
-                                                  <p class="text-muted mb-0 text-truncate">Users</p>
-                                                  <h3 class="text-dark mt-2 mb-0">12,945</h3>
-                                             </div>
-                                        </div>
-                                   </div>
 
-                              </div>
-                         </div>
                     </div>
 
 
@@ -179,72 +163,61 @@ $getHotels = mysqli_query($conn, "SELECT * FROM hotels");
                               <div class="card rounded-4">
                                    <div class="card-body">
                                         <div class="d-flex align-items-center justify-content-between">
-                                             <h4 class="card-title">Recent Hotels</h4>
-
-                                             <a href="add-hotel.php" class="btn btn-primary btn-sm ">Add Hotel +</a>
+                                             <h4 class="card-title">Recent Hotel Reservations</h4>
                                         </div>
-                                   </div> <!-- end card body -->
-                                   <div class="table-responsive">
-                                        <table class="table table-striped table-centered w-100" id="tablee">
-                                             <thead>
-                                                  <tr>
-                                                       <th scope="col">#</th>
-                                                       <th scope="col">Hotel</th>
-                                                       <th scope="col">Country</th>
-                                                       <th scope="col">City</th>
-                                                       <th scope="col">Address</th>
-                                                       <th scope="col">Date</th>
-                                                       <th scope="col">Action</th>
-                                                  </tr>
-                                             </thead>
-                                             <tbody>
-                                                  <?php
-                                                  $getHotels = mysqli_query($conn, "SELECT * FROM `hotels` ORDER BY `created_at` DESC LIMIT 5");
-                                                  if (mysqli_num_rows($getHotels) > 0) {
 
-                                                       while ($row = mysqli_fetch_assoc($getHotels)) {
-                                                  ?>
-                                                            <tr>
-                                                                 <td><?= $row["hotelid"]; ?></td>
-                                                                 <td>
-                                                                      <span class="me-2">
-                                                                           <img src="../uploads/<?= $row['image']; ?>" style="width: 80px; height: 80px; object-fit: cover; border-radius: 5px;" alt="">
-                                                                      </span>
-                                                                      <?= $row["name"]; ?>
-                                                                 </td>
-                                                                 <td><?= $row["country"]; ?></td>
-                                                                 <td><?= $row["city"]; ?></td>
-                                                                 <td><?= $row["address"]; ?></td>
-                                                                 <td><?= date("d-m-Y H:i", strtotime($row["created_at"])); ?></td>
-                                                                 <td class="">
+                                        <div class="table-responsive">
+                                             <table class="table table-striped w-100" id="tablee">
+                                                  <thead>
+                                                       <tr class="table-nowrap">
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Reference ID</th>
+                                                            <th scope="col">Hotel</th>
+                                                            <th scope="col">Room</th>
+                                                            <th scope="col">Full Name</th>
+                                                            <th scope="col">Email</th>
+                                                            <th scope="col">Check-In</th>
+                                                            <th scope="col">Check-Out</th>
+                                                            <th scope="col">Duration</th>
+                                                            <th scope="col">No. Of Guests</th>
+                                                            <th scope="col">Amount ($)</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Action</th>
+                                                       </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                       <?php
+                                                       $getReservation = mysqli_query($conn, "SELECT re.*, h.name as hotelname, r.name as roomname  FROM `hotel_reservations` as re JOIN `hotels` as h ON re.hotelid = h.hotelid JOIN `hotel_rooms` as r ON r.roomid = re.roomid WHERE re.userid = '$uid' ORDER BY `created_at` DESC LIMIT 5");
+                                                       if (mysqli_num_rows($getReservation) > 0) {
 
-
-                                                                      <div class="dropdown">
-                                                                           <button
-                                                                                class="btn btn-secondary rounded-4 btn-sm dropdown-toggle"
-                                                                                type="button"
-                                                                                id="triggerId"
-                                                                                data-bs-toggle="dropdown"
-                                                                                aria-haspopup="true"
-                                                                                aria-expanded="false">
-                                                                           </button>
-                                                                           <div
-                                                                                class="dropdown-menu dropdown-menu-end position-relative "
-                                                                                aria-labelledby="triggerId">
-                                                                                <a class="dropdown-item" href="add-room.php?hid=<?= $row["hotelid"]; ?>">Add Room</a>
-                                                                                <a class="dropdown-item" href="view-rooms.php?hid=<?= $row["hotelid"]; ?>">View Rooms</a>
-                                                                                <a class="dropdown-item text-primary" href="edit-hotel.php?hid=<?= $row["hotelid"]; ?>">Edit Hotel</a>
-                                                                                <a class="dropdown-item text-danger" href="delete-hotel.php?hid=<?= $row["hotelid"]; ?>">Delete Hotel</a>
-                                                                           </div>
-                                                                      </div>
-                                                                 </td>
-                                                            </tr>
-                                                  <?php
+                                                            while ($row = mysqli_fetch_assoc($getReservation)) {
+                                                       ?>
+                                                                 <tr>
+                                                                      <td><?= $row["reservationid"]; ?></td>
+                                                                      <td>
+                                                                           <?= $row["ref"]; ?>
+                                                                      </td>
+                                                                      <td><?= $row["hotelname"]; ?></td>
+                                                                      <td><?= $row["roomname"]; ?></td>
+                                                                      <td><?= $row["fullname"]; ?></td>
+                                                                      <td><?= $row["email"]; ?></td>
+                                                                      <td><?= date("d-m-Y", strtotime($row["checkin"])); ?></td>
+                                                                      <td><?= date("d-m-Y", strtotime($row["checkout"])); ?></td>
+                                                                      <td><?= $row["duration"]; ?></td>
+                                                                      <td><?= $row["guests"]; ?></td>
+                                                                      <td><?= $row["amount"]; ?></td>
+                                                                      <td><?= date("d-m-Y H:i", strtotime($row["created_at"])); ?></td>
+                                                                      <td class="">
+                                                                           <a href="view-reservation.php?id=<?= $row["reservationid"]; ?>" class="btn btn-primary btn-sm">View</a>
+                                                                      </td>
+                                                                 </tr>
+                                                       <?php
+                                                            }
                                                        }
-                                                  }
-                                                  ?>
-                                             </tbody>
-                                        </table>
+                                                       ?>
+                                                  </tbody>
+                                             </table>
+                                        </div>
                                    </div>
                               </div> <!-- end card -->
                          </div> <!-- end col -->

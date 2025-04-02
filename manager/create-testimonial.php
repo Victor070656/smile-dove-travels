@@ -23,7 +23,7 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
 <head>
      <!-- Title Meta -->
      <meta charset="utf-8" />
-     <title>Smile Dove Admin || Create Blogs</title>
+     <title>Smile Dove Admin || Create Testimonial</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta name="description" content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
      <meta name="author" content="StackBros" />
@@ -83,10 +83,10 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
                     <div class="row">
                          <div class="col-12">
                               <div class="page-title-box">
-                                   <h4 class="mb-0">Blog</h4>
+                                   <h4 class="mb-0">Testimonial</h4>
                                    <ol class="breadcrumb mb-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Smile dove</a></li>
-                                        <li class="breadcrumb-item active">Blog</li>
+                                        <li class="breadcrumb-item active">Testimonial</li>
                                    </ol>
                               </div>
                          </div>
@@ -97,47 +97,38 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
                     <div class="card rounded-4 py-2 mb-4">
                          <div class="card-header d-flex justify-content-between align-items-center">
                               <h5 class="">
-                                   Create Blog
+                                   Create Testimonial
                               </h5>
                          </div>
 
                          <div class="card-body">
                               <form method="post" enctype="multipart/form-data">
                                    <div class="mb-2">
-                                        <label for="title" class="form-label">Title</label>
-                                        <input type="text" required name="title" class="form-control" id="title">
+                                        <label for="name" class="form-label">Testifier Name <span class="text-danger">*</span></label>
+                                        <input type="text" required name="name" class="form-control" id="name">
                                    </div>
                                    <div class="mb-2">
-                                        <label for="body" class="form-label">Content</label>
+                                        <label for="position" class="form-label">Position <span class="text-danger">*</span></label>
+                                        <input type="text" required name="position" placeholder="student, customer, businessman etc...." class="form-control" id="position">
+                                   </div>
+                                   <div class="mb-2">
+                                        <label for="body" class="form-label">Content <span class="text-danger">*</span></label>
                                         <textarea name="body" required id="body" class="form-control"></textarea>
                                    </div>
-                                   <div class="mb-2">
-                                        <label for="image" class="form-label">Image</label>
-                                        <input type="file" required name="image" class="form-control" id="image">
-                                   </div>
-                                   <button class="btn btn-primary" name="send">Create Post</button>
+                                   <button class="btn btn-dark" name="send">Create Testimonial</button>
                                    <?php
                                    if (isset($_POST["send"])) {
-                                        $title = $_POST["title"];
-                                        $content = $_POST["body"];
-                                        $image = date("dmYHis") . $_FILES["image"]["name"];
-                                        $tmp_name = $_FILES["image"]["tmp_name"];
-                                        $blogid = uniqid();
+                                        $name = $_POST["name"];
+                                        $position = $_POST["position"];
+                                        $body = $_POST["body"];
 
-                                        $dir = "../uploads/blog";
-                                        if (!dir($dir)) {
-                                             mkdir($dir, 0777, true);
-                                        }
 
-                                        if (move_uploaded_file($tmp_name, $dir . "/$image")) {
-                                             $query = mysqli_query($conn, "INSERT INTO `blogs` (`blogid`, `title`, `content`, `image`) VALUES ('$blogid', '$title', '$content', '$image')");
-                                             if ($query) {
-                                                  echo "<script>alert('Created Successfully!'); location.href = 'blogs.php'</script>";
-                                             } else {
-                                                  echo "<script>alert('Something went wrong!'); </script>";
-                                             }
+
+                                        $query = mysqli_query($conn, "INSERT INTO `testimonials` (`name`, `position`, `message`) VALUES ('$name', '$position', '$body')");
+                                        if ($query) {
+                                             echo "<script>alert('Created Successfully!'); location.href = 'testimonials.php'</script>";
                                         } else {
-                                             echo "<script>alert('Something went wrong while uploading!'); </script>";
+                                             echo "<script>alert('Something went wrong!'); </script>";
                                         }
                                    }
                                    ?>

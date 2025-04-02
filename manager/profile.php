@@ -14,7 +14,7 @@ if (!isset($_SESSION['sdtravels_manager'])) {
 <head>
      <!-- Title Meta -->
      <meta charset="utf-8" />
-     <title>Smile Dove Admin || </title>
+     <title>Smile Dove Admin || Profile</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta name="description" content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
      <meta name="author" content="StackBros" />
@@ -24,7 +24,7 @@ if (!isset($_SESSION['sdtravels_manager'])) {
      <meta name="theme-color" content="#ffffff">
 
      <!-- App favicon -->
-     <link rel="shortcut icon" href="assets/images/favicon.ico">
+     <link rel="shortcut icon" href="../images/favicon.png">
 
      <!-- Google Font Family link -->
      <link rel="preconnect" href="https://fonts.googleapis.com/index.html">
@@ -73,10 +73,10 @@ if (!isset($_SESSION['sdtravels_manager'])) {
                     <div class="row">
                          <div class="col-12">
                               <div class="page-title-box">
-                                   <h4 class="mb-0">Add Hotel</h4>
+                                   <h4 class="mb-0">Profile</h4>
                                    <ol class="breadcrumb mb-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Smile Dove</a></li>
-                                        <li class="breadcrumb-item active">Add Hotel</li>
+                                        <li class="breadcrumb-item active">Profile</li>
                                    </ol>
                               </div>
                          </div>
@@ -87,83 +87,45 @@ if (!isset($_SESSION['sdtravels_manager'])) {
                          <div class="col-12">
                               <div class="card rounded-4">
                                    <div class="card-header">
-                                        <h5 class="card-title mb-0">New Hotel</h5>
+                                        <h5 class="card-title mb-0">Edit Profile</h5>
                                    </div>
 
                                    <div class="card-body">
                                         <form method="post" enctype="multipart/form-data">
                                              <div class="row">
-                                                  <div class="mb-3">
-                                                       <label for="hotel_name" class="form-label">Hotel Name <span class="text-danger">*</span></label>
-                                                       <input type="text" id="hotel_name" name="hotel_name" required placeholder="Hotel Name" class="form-control">
+                                                  <?php
+                                                  $getInfo = mysqli_query($conn, "SELECT * FROM `admin`");
+                                                  $info = mysqli_fetch_assoc($getInfo);
+                                                  ?>
+                                                  <div class="mb-3 col-md-6">
+                                                       <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                                       <input type="email" id="email" name="email" required
+                                                            class="form-control" value="<?= $info['email']; ?>" placeholder="Email">
                                                   </div>
 
                                                   <div class="mb-3 col-md-6">
-                                                       <label for="country" class="form-label">Country <span class="text-danger">*</span></label>
-                                                       <input type="text" id="country" name="country" required
-                                                            class="form-control" placeholder="Country">
+                                                       <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                                                       <input type="text" id="password" value="<?= $info['password']; ?>" name="password" required class="form-control"
+                                                            placeholder="********">
                                                   </div>
 
-                                                  <div class="mb-3 col-md-6">
-                                                       <label for="city" class="form-label">City <span class="text-danger">*</span></label>
-                                                       <input type="text" id="city" name="city" required class="form-control"
-                                                            placeholder="City">
-                                                  </div>
 
-                                                  <div class="mb-3">
-                                                       <label for="address"
-                                                            class="form-label">Address <span class="text-danger">*</span></label>
-                                                       <input type="text" id="address" name="address" required class="form-control"
-                                                            placeholder="Address">
-                                                  </div>
-
-                                                  <div class="mb-3">
-                                                       <label for="desc" class="form-label">Description <span class="text-danger">*</span></label>
-                                                       <textarea class="form-control" id="desc" required name="desc"
-                                                            rows="5"></textarea>
-                                                  </div>
-
-                                                  <div class="mb-3">
-                                                       <div class="">
-                                                            <p class="form-label">Hotel Image <span class="text-danger">*</span></p>
-                                                            <label for="fileupload" class="mb-1 p-5 w-100 rounded-3 text-center" style="border: 2px dashed #d8dfe7;">
-                                                                 <svg class="text-dark" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#d8dfe7">
-                                                                      <path d="M180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600v-600H180v600Zm56-97h489L578-473 446-302l-93-127-117 152Zm-56 97v-600 600Z" />
-                                                                 </svg>
-                                                                 <h4 class="m-0">Select Hotel Image</h4>
-                                                            </label>
-                                                            <input name="image" hidden required type="file" id="fileupload"
-                                                                 class="form-control" />
-                                                            <small id="confirmFile" class="text-success"></small>
-                                                       </div>
-                                                  </div>
                                                   <div class="">
-                                                       <button type="submit" name="send" class="btn btn-dark">Add Hotel</button>
+                                                       <button type="submit" name="send" class="btn btn-dark">Update</button>
                                                   </div>
                                              </div>
                                              <?php
                                              if (isset($_POST["send"])) {
 
-                                                  $hotel_name = $_POST["hotel_name"];
-                                                  $country = $_POST["country"];
-                                                  $city = $_POST["city"];
-                                                  $address = $_POST["address"];
-                                                  $desc = $_POST["desc"];
-                                                  $image = date("dmyHis") . $_FILES["image"]["name"];
-                                                  $tmp_name = $_FILES["image"]["tmp_name"];
-                                                  $path = "../uploads/" . $image;
-                                                  $hotelId = uniqid();
+                                                  $email = $_POST["email"];
+                                                  $password = $_POST["password"];
 
-                                                  if (move_uploaded_file($tmp_name, $path)) {
-                                                       $sql = "INSERT INTO `hotels` (`hotelid`, `name`, `country`, `city`, `address`, `description`, `image`) VALUES ('$hotelId', '$hotel_name', '$country', '$city', '$address', '$desc', '$image')";
-                                                       $query = mysqli_query($conn, $sql);
-                                                       if ($query) {
-                                                            echo "<script>alert('Hotel added successfully'); location.href = 'hotels.php'</script>";
-                                                       } else {
-                                                            echo "<script>alert('Failed to add hotel')</script>";
-                                                       }
+                                                  $sql = "UPDATE `admin` SET `email` = '$email', `password` = '$password'";
+                                                  $query = mysqli_query($conn, $sql);
+                                                  if ($query) {
+                                                       echo "<script>alert('Profile updated successfully'); location.href = 'profile.php'</script>";
                                                   } else {
-                                                       echo "<script>alert('Failed to upload image')</script>";
+                                                       echo "<script>alert('Failed to update profile')</script>";
                                                   }
                                              }
                                              ?>

@@ -5,15 +5,15 @@ if (!isset($_SESSION['sdtravels_manager'])) {
      echo "<script>alert('Please Login First'); location.href = 'login.php'</script>";
 }
 
-if (isset($_GET["hid"])) {
-     $id = $_GET["hid"];
-     $getHotels = mysqli_query($conn, "SELECT * FROM `hotels` WHERE `hotelid` = '$id'");
-     if (mysqli_num_rows($getHotels) == 0) {
-          echo "<script>alert('Hotel not found'); location.href = 'hotels.php'</script>";
+if (isset($_GET["id"])) {
+     $id = $_GET["id"];
+     $getTest = mysqli_query($conn, "SELECT * FROM `testimonials` WHERE `id` = '$id'");
+     if (mysqli_num_rows($getTest) == 0) {
+          echo "<script>alert('Testimonial not found'); location.href = 'testimonials.php'</script>";
      }
-     $hotel = mysqli_fetch_assoc($getHotels);
+     $test = mysqli_fetch_assoc($getTest);
 } else {
-     echo "<script>alert('Hotel not found'); location.href = 'hotels.php'</script>";
+     echo "<script>alert('Testimonial not found'); location.href = 'testimonials.php'</script>";
 }
 ?>
 <!DOCTYPE html>
@@ -25,7 +25,7 @@ if (isset($_GET["hid"])) {
 <head>
      <!-- Title Meta -->
      <meta charset="utf-8" />
-     <title>Smile Dove Admin || </title>
+     <title>Smile Dove Admin || Delete Testimonial</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta name="description" content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
      <meta name="author" content="StackBros" />
@@ -35,7 +35,7 @@ if (isset($_GET["hid"])) {
      <meta name="theme-color" content="#ffffff">
 
      <!-- App favicon -->
-     <link rel="shortcut icon" href="assets/images/favicon.ico">
+     <link rel="shortcut icon" href="../images/favicon.png">
 
      <!-- Google Font Family link -->
      <link rel="preconnect" href="https://fonts.googleapis.com/index.html">
@@ -84,10 +84,10 @@ if (isset($_GET["hid"])) {
                     <div class="row">
                          <div class="col-12">
                               <div class="page-title-box">
-                                   <h4 class="mb-0">Add Room</h4>
+                                   <h4 class="mb-0">Delete Testimonial</h4>
                                    <ol class="breadcrumb mb-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Smile Dove</a></li>
-                                        <li class="breadcrumb-item active">Add Room</li>
+                                        <li class="breadcrumb-item active">Delete Testimonial</li>
                                    </ol>
                               </div>
                          </div>
@@ -98,63 +98,27 @@ if (isset($_GET["hid"])) {
                          <div class="col-12">
                               <div class="card rounded-4">
                                    <div class="card-header">
-                                        <h5 class="card-title mb-0">New Room for <?= $hotel["name"]; ?></h5>
+                                        <h5 class="card-title mb-0">Delete Testimonial #<?= $id; ?></h5>
                                    </div>
 
                                    <div class="card-body">
-                                        <form method="post" enctype="multipart/form-data">
-                                             <div class="row">
-                                                  <div class="mb-3 col-md-6">
-                                                       <label for="room_name" class="form-label">Room Name <span class="text-danger">*</span></label>
-                                                       <input type="text" id="room_name" name="room_name" required placeholder="Room Name" class="form-control">
-                                                  </div>
-
-                                                  <div class="mb-3 col-md-6">
-                                                       <label for="room_type" class="form-label">Room Type <span class="text-danger">*</span></label>
-                                                       <select name="room_type" id="room_type" class="form-control form-select" required>
-                                                            <option value="" selected hidden>Select a room type</option>
-                                                            <option value="Single">Single</option>
-                                                            <option value="Double">Double</option>
-                                                            <option value="Suite">Suite</option>
-                                                       </select>
-                                                  </div>
-
-                                                  <div class="mb-3 col-md-6">
-                                                       <label for="max_guest" class="form-label">Maximum Guest <span class="text-danger">*</span></label>
-                                                       <input type="number" id="max_guest" name="max_guest" required
-                                                            class="form-control" placeholder="Maximum Guest">
-                                                  </div>
-
-                                                  <div class="mb-3 col-md-6">
-                                                       <label for="price" class="form-label">Price <small>($)</small> <span class="text-danger">*</span></label>
-                                                       <input type="number" id="price" name="price" required class="form-control"
-                                                            placeholder="1000">
-                                                  </div>
-
-                                                  <div class="">
-                                                       <button type="submit" name="send" class="btn btn-dark">Add Room</button>
-                                                  </div>
-                                             </div>
+                                        <div class="p-5 text-center">
+                                             <h4 class="mb-4">Are you sure you want to delete this testimonial?</h4>
+                                             <p>This can't be undone</p>
+                                             <form method="POST">
+                                                  <button type="submit" name="delete" class="btn btn-danger">Delete</button>
+                                             </form>
                                              <?php
-                                             if (isset($_POST["send"])) {
-
-                                                  $room_name = $_POST["room_name"];
-                                                  $room_type = $_POST["room_type"];
-                                                  $max_guest = $_POST["max_guest"];
-                                                  $price = $_POST["price"];
-                                                  $roomId = uniqid();
-
-
-                                                  $sql = "INSERT INTO `hotel_rooms`(`roomid`, `hotelid`, `name`, `roomtype`, `max_guest`, `price`) VALUES ('$roomId', '$id', '$room_name', '$room_type', '$max_guest', '$price')";
-                                                  $query = mysqli_query($conn, $sql);
-                                                  if ($query) {
-                                                       echo "<script>alert('Room added successfully'); location.href = 'hotels.php'</script>";
+                                             if (isset($_POST["delete"])) {
+                                                  $deleteTest = mysqli_query($conn, "DELETE FROM `testimonials` WHERE `id` = '$id'");
+                                                  if ($deleteTest) {
+                                                       echo "<script>alert('Testimonial Deleted Successfully'); location.href = 'testimonials.php'</script>";
                                                   } else {
-                                                       echo "<script>alert('Failed to add room')</script>";
+                                                       echo "<script>alert('Failed to delete testimonial')</script>";
                                                   }
                                              }
                                              ?>
-                                        </form>
+                                        </div>
                                    </div>
                               </div>
                          </div>

@@ -4,16 +4,7 @@ session_start();
 if (!isset($_SESSION['sdtravels_manager'])) {
      echo "<script>alert('Please Login First'); location.href = 'login.php'</script>";
 }
-$getFlightPrices = mysqli_query($conn, "SELECT * FROM `flight_prices`");
-$flightPrices = mysqli_fetch_assoc($getFlightPrices);
-
-$getVisaPrices = mysqli_query($conn, "SELECT * FROM `visa_prices`");
-$visaPrice = mysqli_fetch_assoc($getVisaPrices);
-
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +14,7 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
 <head>
      <!-- Title Meta -->
      <meta charset="utf-8" />
-     <title>Smile Dove Admin || Create Blogs</title>
+     <title>Smile Dove Admin || Testimonials</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta name="description" content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
      <meta name="author" content="StackBros" />
@@ -83,10 +74,10 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
                     <div class="row">
                          <div class="col-12">
                               <div class="page-title-box">
-                                   <h4 class="mb-0">Blog</h4>
+                                   <h4 class="mb-0">Hotels</h4>
                                    <ol class="breadcrumb mb-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Smile dove</a></li>
-                                        <li class="breadcrumb-item active">Blog</li>
+                                        <li class="breadcrumb-item active">Hotels</li>
                                    </ol>
                               </div>
                          </div>
@@ -94,54 +85,71 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
                     <!-- ========== Page Title End ========== -->
 
 
-                    <div class="card rounded-4 py-2 mb-4">
+                    <div class="card rounded-4 py-2">
                          <div class="card-header d-flex justify-content-between align-items-center">
                               <h5 class="">
-                                   Create Blog
+                                   All Hotels
                               </h5>
+                              <a href="add-hotel.php" class="btn btn-primary btn-sm ">Add Hotel +</a>
+
                          </div>
 
                          <div class="card-body">
-                              <form method="post" enctype="multipart/form-data">
-                                   <div class="mb-2">
-                                        <label for="title" class="form-label">Title</label>
-                                        <input type="text" required name="title" class="form-control" id="title">
-                                   </div>
-                                   <div class="mb-2">
-                                        <label for="body" class="form-label">Content</label>
-                                        <textarea name="body" required id="body" class="form-control"></textarea>
-                                   </div>
-                                   <div class="mb-2">
-                                        <label for="image" class="form-label">Image</label>
-                                        <input type="file" required name="image" class="form-control" id="image">
-                                   </div>
-                                   <button class="btn btn-primary" name="send">Create Post</button>
-                                   <?php
-                                   if (isset($_POST["send"])) {
-                                        $title = $_POST["title"];
-                                        $content = $_POST["body"];
-                                        $image = date("dmYHis") . $_FILES["image"]["name"];
-                                        $tmp_name = $_FILES["image"]["tmp_name"];
-                                        $blogid = uniqid();
+                              <div class="table-responsive">
+                                   <table class="table table-striped w-100" id="tablee">
+                                        <thead>
+                                             <tr>
+                                                  <th scope="col">#</th>
+                                                  <th scope="col">Testifier</th>
+                                                  <th scope="col">Posision</th>
+                                                  <th scope="col">Content</th>
+                                                  <th scope="col">Date</th>
+                                                  <th scope="col">Action</th>
+                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                             <?php
+                                             $getHotels = mysqli_query($conn, "SELECT * FROM `testimonials` ORDER BY `created_at` DESC");
+                                             if (mysqli_num_rows($getHotels) > 0) {
 
-                                        $dir = "../uploads/blog";
-                                        if (!dir($dir)) {
-                                             mkdir($dir, 0777, true);
-                                        }
+                                                  while ($row = mysqli_fetch_assoc($getHotels)) {
+                                             ?>
+                                                       <tr>
+                                                            <td><?= $row["id"]; ?></td>
+                                                            <td>
+                                                                 <?= $row["name"]; ?>
+                                                            </td>
+                                                            <td class=""><?= $row["position"]; ?></td>
+                                                            <td class=""><?= $row["message"]; ?></td>
+                                                            <td><?= date("d-m-Y H:i", strtotime($row["created_at"])); ?></td>
+                                                            <td class="">
 
-                                        if (move_uploaded_file($tmp_name, $dir . "/$image")) {
-                                             $query = mysqli_query($conn, "INSERT INTO `blogs` (`blogid`, `title`, `content`, `image`) VALUES ('$blogid', '$title', '$content', '$image')");
-                                             if ($query) {
-                                                  echo "<script>alert('Created Successfully!'); location.href = 'blogs.php'</script>";
-                                             } else {
-                                                  echo "<script>alert('Something went wrong!'); </script>";
+
+                                                                 <div class="dropdown">
+                                                                      <button
+                                                                           class="btn btn-secondary rounded-4 btn-sm dropdown-toggle"
+                                                                           type="button"
+                                                                           id="triggerId"
+                                                                           data-bs-toggle="dropdown"
+                                                                           aria-haspopup="true"
+                                                                           aria-expanded="false">
+                                                                      </button>
+                                                                      <div
+                                                                           class="dropdown-menu dropdown-menu-end position-relative "
+                                                                           aria-labelledby="triggerId">
+                                                                           <a class="dropdown-item text-primary" href="edit-testimonial.php?id=<?= $row["id"]; ?>">Edit Testimonial</a>
+                                                                           <a class="dropdown-item text-danger" href="delete-testimonial.php?id=<?= $row["id"]; ?>">Delete Testimonial</a>
+                                                                      </div>
+                                                                 </div>
+                                                            </td>
+                                                       </tr>
+                                             <?php
+                                                  }
                                              }
-                                        } else {
-                                             echo "<script>alert('Something went wrong while uploading!'); </script>";
-                                        }
-                                   }
-                                   ?>
-                              </form>
+                                             ?>
+                                        </tbody>
+                                   </table>
+                              </div>
                          </div>
                     </div>
 

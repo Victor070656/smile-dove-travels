@@ -1,20 +1,22 @@
 <?php
 include "../config/config.php";
 session_start();
-if (!isset($_SESSION['sdtravels_manager'])) {
+if (!isset($_SESSION['sdtravels_user'])) {
      echo "<script>alert('Please Login First'); location.href = 'login.php'</script>";
 }
+$uid = $_SESSION["sdtravels_user"];
 
 if (empty($_GET["id"])) {
-     echo "<script>location.href = 'flight-bookings.php';</script>";
+     echo "<script>location.href = 'hotel-reservations.php';</script>";
 }
 $id = $_GET["id"];
 
-$getFlight = mysqli_query($conn, "SELECT * FROM `flight_bookings` WHERE `id` = '$id' ORDER BY `created_at` DESC");
-if (mysqli_num_rows($getFlight) == 0) {
-     echo "<script>location.href = 'flight-bookings.php';</script>";
+$getReservation = mysqli_query($conn, "SELECT re.*, h.name as hotelname, r.name as roomname  FROM `hotel_reservations` as re JOIN `hotels` as h ON re.hotelid = h.hotelid JOIN `hotel_rooms` as r ON r.roomid = re.roomid WHERE re.reservationid = '$id' AND re.userid = '$uid' ORDER BY `created_at` DESC");
+if (mysqli_num_rows($getReservation) == 0) {
+     echo "<script>location.href = 'hotel-reservations.php';</script>";
 }
-$flight = mysqli_fetch_assoc($getFlight);
+$reserve = mysqli_fetch_assoc($getReservation);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +27,7 @@ $flight = mysqli_fetch_assoc($getFlight);
 <head>
      <!-- Title Meta -->
      <meta charset="utf-8" />
-     <title>Smile Dove Admin || View Flight</title>
+     <title>Smile Dove Admin || View Hotel Reservation</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta name="description" content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
      <meta name="author" content="StackBros" />
@@ -85,10 +87,10 @@ $flight = mysqli_fetch_assoc($getFlight);
                     <div class="row">
                          <div class="col-12">
                               <div class="page-title-box">
-                                   <h4 class="mb-0">Flight</h4>
+                                   <h4 class="mb-0">Hotel Reservations</h4>
                                    <ol class="breadcrumb mb-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Smile dove</a></li>
-                                        <li class="breadcrumb-item active">Flight</li>
+                                        <li class="breadcrumb-item active">Hotel Reservations</li>
                                    </ol>
                               </div>
                          </div>
@@ -97,148 +99,116 @@ $flight = mysqli_fetch_assoc($getFlight);
 
 
                     <div class="card rounded-4 py-4 px-3">
-                         <h3 class="fw-bold mb-3"><b>Flight Booking</b></h3>
+                         <h3 class="fw-bold mb-3"><b>Hotel Reservation Details #<?= $reserve["reservationid"] ?></b></h3>
                          <div class="row">
-
+                              <div class="col-md-4 mb-3">
+                                   <div class="">
+                                        <h5 class=""><b>Hotel</b></h5>
+                                        <span class=""><?= $reserve["hotelname"] ?></span>
+                                   </div>
+                              </div>
+                              <div class="col-md-4 mb-3">
+                                   <div class="">
+                                        <h5 class=""><b>Room</b></h5>
+                                        <span class=""><?= $reserve["roomname"] ?></span>
+                                   </div>
+                              </div>
                               <div class="col-md-4 mb-3">
                                    <div class="">
                                         <h5 class=""><b>Payment Reference</b></h5>
-                                        <span class=""><?= $flight["ref"] ?></span>
+                                        <span class=""><?= $reserve["ref"] ?></span>
                                    </div>
                               </div>
                               <div class="col-md-4 mb-3">
                                    <div class="">
                                         <h5 class=""><b>Full Name</b></h5>
-                                        <span class=""><?= $flight["fullname"] ?></span>
+                                        <span class=""><?= $reserve["fullname"] ?></span>
                                    </div>
                               </div>
                               <div class="col-md-4 mb-3">
                                    <div class="">
                                         <h5 class=""><b>Email</b></h5>
-                                        <span class=""><?= $flight["email"] ?></span>
+                                        <span class=""><?= $reserve["email"] ?></span>
                                    </div>
                               </div>
                               <div class="col-md-4 mb-3">
                                    <div class="">
                                         <h5 class=""><b>Phone Number</b></h5>
-                                        <span class=""><?= $flight["phone"] ?></span>
+                                        <span class=""><?= $reserve["phone"] ?></span>
                                    </div>
                               </div>
                               <div class="col-md-4 mb-3">
                                    <div class="">
                                         <h5 class=""><b>Gender</b></h5>
-                                        <span class=""><?= $flight["gender"] ?></span>
-                                   </div>
-                              </div>
-                              <div class="col-md-4 mb-3">
-                                   <div class="">
-                                        <h5 class=""><b>Date Of Birth</b></h5>
-                                        <span class=""><?= $flight["dob"] ?></span>
+                                        <span class=""><?= $reserve["gender"] ?></span>
                                    </div>
                               </div>
                               <div class="col-md-4 mb-3">
                                    <div class="">
                                         <h5 class=""><b>Nationality</b></h5>
-                                        <span class=""><?= $flight["nationality"] ?></span>
+                                        <span class=""><?= $reserve["nationality"] ?></span>
                                    </div>
                               </div>
                               <div class="col-md-4 mb-3">
                                    <div class="">
                                         <h5 class=""><b>ID Type</b></h5>
-                                        <span class=""><?= $flight["id_type"] ?></span>
+                                        <span class=""><?= $reserve["idtype"] ?></span>
                                    </div>
                               </div>
                               <div class="col-md-4 mb-3">
                                    <div class="">
                                         <h5 class=""><b>ID Number</b></h5>
-                                        <span class=""><?= $flight["id_num"] ?></span>
+                                        <span class=""><?= $reserve["idnum"] ?></span>
                                    </div>
                               </div>
                               <div class="col-md-4 mb-3">
                                    <div class="">
                                         <h5 class=""><b>ID Expiry</b></h5>
-                                        <span class=""><?= $flight["id_exp"] ?></span>
+                                        <span class=""><?= $reserve["idexp"] ?></span>
                                    </div>
                               </div>
                               <div class="col-md-4 mb-3">
                                    <div class="">
-                                        <h5 class=""><b>Departure City</b></h5>
-                                        <span class=""><?= $flight["depart_city"] ?></span>
+                                        <h5 class=""><b>Check-In Date</b></h5>
+                                        <span class=""><?= date("d-m-Y", strtotime($reserve["checkin"])); ?></span>
                                    </div>
                               </div>
                               <div class="col-md-4 mb-3">
                                    <div class="">
-                                        <h5 class=""><b>Destination City</b></h5>
-                                        <span class=""><?= $flight["dest_city"] ?></span>
-                                   </div>
-                              </div>
-                              <div class="col-md-4 mb-3">
-                                   <div class="">
-                                        <h5 class=""><b>Destination Country</b></h5>
-                                        <span class=""><?= $flight["dest_country"] ?></span>
-                                   </div>
-                              </div>
-                              <div class="col-md-4 mb-3">
-                                   <div class="">
-                                        <h5 class=""><b>Departure Date</b></h5>
-                                        <span class=""><?= date("d-m-Y", strtotime($flight["depart_date"])); ?></span>
-                                   </div>
-                              </div>
-
-                              <div class="col-md-4 mb-3">
-                                   <div class="">
-                                        <h5 class="">
-                                             <b>Ticket Type</b>
-                                        </h5>
-                                        <span class=""><?= $flight["ticket_type"] ?> day(s)</span>
-                                   </div>
-                              </div>
-                              <div class="col-md-4 mb-3">
-                                   <div class="">
-                                        <h5 class=""><b>Airline Class</b></h5>
-                                        <span class=""><?= $flight["airline_class"] ?></span>
+                                        <h5 class=""><b>Check-Out Date</b></h5>
+                                        <span class=""><?= date("d-m-Y", strtotime($reserve["checkout"])); ?></span>
                                    </div>
                               </div>
                               <div class="col-md-4 mb-3">
                                    <div class="">
                                         <h5 class="">
-                                             <b>Price</b>
+                                             <tion>Duration</b>
                                         </h5>
-                                        <span class="">$<?= $flight["price"] ?></span>
+                                        <span class=""><?= $reserve["duration"] ?> day(s)</span>
+                                   </div>
+                              </div>
+                              <div class="col-md-4 mb-3">
+                                   <div class="">
+                                        <h5 class=""><b>Guests</b></h5>
+                                        <span class=""><?= $reserve["guests"] ?></span>
+                                   </div>
+                              </div>
+                              <div class="col-md-4 mb-3">
+                                   <div class="">
+                                        <h5 class="">
+                                             <tion>Amount</b>
+                                        </h5>
+                                        <span class="">$<?= $reserve["amount"] ?></span>
                                    </div>
                               </div>
                               <div class="col-md-4 mb-3">
                                    <div class="">
                                         <h5 class=""><b>Date</b></h5>
-                                        <span class=""><?= date("d-m-Y H:i", strtotime($flight["created_at"])) ?></span>
+                                        <span class=""><?= date("d-m-Y H:i", strtotime($reserve["created_at"])) ?></span>
                                    </div>
                               </div>
 
                          </div>
-                         <form method="post">
-                              <div class="mb-3">
-                                   <label for="status" class="form-label">Status</label>
-                                   <input type="text" name="status" required id="status" value="<?= $flight['status']; ?>" class="form-control">
-                              </div>
-                              <div class="mb-3">
-                                   <label for="msg" class="form-label">Message</label>
-                                   <textarea name="msg" id="msg" class="form-control"><?= $flight["message"]; ?></textarea>
-                              </div>
-                              <button type="submit" name="update" class="btn btn-dark">Update</button>
-                              <?php
-                              if (isset($_POST["update"])) {
-                                   $status = $_POST["status"];
-                                   $msg = $_POST["msg"];
-
-                                   $query = mysqli_query($conn, "UPDATE `flight_bookings` SET `status` = '$status', `message` = '$msg' WHERE `id` = '$id'");
-                                   if ($query) {
-                                        echo "<script>alert('Updated successfully!'); location.href = 'flight-bookings.php'</script>";
-                                   } else {
-                                        echo "<script>alert('Something went wrong!')</script>";
-                                   }
-                              }
-                              ?>
-                         </form>
                     </div>
 
                </div> <!-- end col -->

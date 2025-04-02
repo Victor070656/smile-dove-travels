@@ -5,15 +5,15 @@ if (!isset($_SESSION['sdtravels_manager'])) {
      echo "<script>alert('Please Login First'); location.href = 'login.php'</script>";
 }
 
-if (isset($_GET["rid"])) {
-     $id = $_GET["rid"];
-     $getRoom = mysqli_query($conn, "SELECT * FROM `hotel_rooms` WHERE `roomid` = '$id'");
-     if (mysqli_num_rows($getRoom) == 0) {
-          echo "<script>alert('Room not found'); location.href = 'hotels.php'</script>";
+if (isset($_GET["bid"])) {
+     $id = $_GET["bid"];
+     $getBlog = mysqli_query($conn, "SELECT * FROM `blogs` WHERE `blogid` = '$id'");
+     if (mysqli_num_rows($getBlog) == 0) {
+          echo "<script>alert('Blog not found'); location.href = 'blogs.php'</script>";
      }
-     $room = mysqli_fetch_assoc($getRoom);
+     $blog = mysqli_fetch_assoc($getBlog);
 } else {
-     echo "<script>alert('Room not found'); location.href = 'hotels.php'</script>";
+     echo "<script>alert('Blog not found'); location.href = 'blogs.php'</script>";
 }
 ?>
 <!DOCTYPE html>
@@ -25,7 +25,7 @@ if (isset($_GET["rid"])) {
 <head>
      <!-- Title Meta -->
      <meta charset="utf-8" />
-     <title>Smile Dove Admin || </title>
+     <title>Smile Dove Admin || Delete Blog</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta name="description" content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
      <meta name="author" content="StackBros" />
@@ -35,7 +35,7 @@ if (isset($_GET["rid"])) {
      <meta name="theme-color" content="#ffffff">
 
      <!-- App favicon -->
-     <link rel="shortcut icon" href="assets/images/favicon.ico">
+     <link rel="shortcut icon" href="../images/favicon.png">
 
      <!-- Google Font Family link -->
      <link rel="preconnect" href="https://fonts.googleapis.com/index.html">
@@ -84,10 +84,10 @@ if (isset($_GET["rid"])) {
                     <div class="row">
                          <div class="col-12">
                               <div class="page-title-box">
-                                   <h4 class="mb-0">Edit Room</h4>
+                                   <h4 class="mb-0">Delete Blog</h4>
                                    <ol class="breadcrumb mb-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Smile Dove</a></li>
-                                        <li class="breadcrumb-item active">Edit Room</li>
+                                        <li class="breadcrumb-item active">Delete Blog</li>
                                    </ol>
                               </div>
                          </div>
@@ -98,62 +98,27 @@ if (isset($_GET["rid"])) {
                          <div class="col-12">
                               <div class="card rounded-4">
                                    <div class="card-header">
-                                        <h5 class="card-title mb-0">Update Room #<?= $id; ?></h5>
+                                        <h5 class="card-title mb-0">Delete Blog #<?= $id; ?></h5>
                                    </div>
 
                                    <div class="card-body">
-                                        <form method="post" enctype="multipart/form-data">
-                                             <div class="row">
-                                                  <div class="mb-3 col-md-6">
-                                                       <label for="room_name" class="form-label">Room Name <span class="text-danger">*</span></label>
-                                                       <input type="text" id="room_name" name="room_name" value="<?= $room['name']; ?>" required placeholder="Room Name" class="form-control">
-                                                  </div>
-
-                                                  <div class="mb-3 col-md-6">
-                                                       <label for="room_type" class="form-label">Room Type <span class="text-danger">*</span></label>
-                                                       <select name="room_type" id="room_type" class="form-control form-select" required>
-                                                            <option value="" selected hidden>Select a room type</option>
-                                                            <option <?= $room['roomtype'] == "Single" ? "selected" : ""; ?> value="Single">Single</option>
-                                                            <option <?= $room['roomtype'] == "Double" ? "selected" : ""; ?> value="Double">Double</option>
-                                                            <option <?= $room['roomtype'] == "Suite" ? "selected" : ""; ?> value="Suite">Suite</option>
-                                                       </select>
-                                                  </div>
-
-                                                  <div class="mb-3 col-md-6">
-                                                       <label for="max_guest" class="form-label">Maximum Guest <span class="text-danger">*</span></label>
-                                                       <input type="number" id="max_guest" value="<?= $room['max_guest']; ?>" name="max_guest" required
-                                                            class="form-control" placeholder="Maximum Guest">
-                                                  </div>
-
-                                                  <div class="mb-3 col-md-6">
-                                                       <label for="price" class="form-label">Price <small>($)</small> <span class="text-danger">*</span></label>
-                                                       <input type="number" id="price" name="price" value="<?= $room['price']; ?>" required class="form-control"
-                                                            placeholder="1000">
-                                                  </div>
-
-                                                  <div class="">
-                                                       <button type="submit" name="update" class="btn btn-dark">Update Room</button>
-                                                  </div>
-                                             </div>
+                                        <div class="p-5 text-center">
+                                             <h4 class="mb-4">Are you sure you want to delete this blog?</h4>
+                                             <p>This can't be undone</p>
+                                             <form method="POST">
+                                                  <button type="submit" name="delete" class="btn btn-danger">Delete</button>
+                                             </form>
                                              <?php
-                                             if (isset($_POST["update"])) {
-
-                                                  $room_name = $_POST["room_name"];
-                                                  $room_type = $_POST["room_type"];
-                                                  $max_guest = $_POST["max_guest"];
-                                                  $price = $_POST["price"];
-
-
-                                                  $sql = "UPDATE `hotel_rooms` SET `name` = '$room_name', `roomtype` = '$room_type', `max_guest` = '$max_guest', `price` = '$price' WHERE `roomid` = '$id'";
-                                                  $query = mysqli_query($conn, $sql);
-                                                  if ($query) {
-                                                       echo "<script>alert('Room updated successfully'); location.href = 'hotels.php'</script>";
+                                             if (isset($_POST["delete"])) {
+                                                  $deleteBlog = mysqli_query($conn, "DELETE FROM `blogs` WHERE `blogid` = '$id'");
+                                                  if ($deleteBlog) {
+                                                       echo "<script>alert('Blog Deleted Successfully'); location.href = 'blogs.php'</script>";
                                                   } else {
-                                                       echo "<script>alert('Failed to update room')</script>";
+                                                       echo "<script>alert('Failed to delete blog')</script>";
                                                   }
                                              }
                                              ?>
-                                        </form>
+                                        </div>
                                    </div>
                               </div>
                          </div>

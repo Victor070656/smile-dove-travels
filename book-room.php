@@ -53,7 +53,7 @@ $max_guest = $room["max_guest"];
 
 <head>
   <meta charset="utf-8" />
-  <title>Smile Dove Travels | Bookings</title>
+  <title>Smile Dove Travels | Book Room</title>
   <!-- Stylesheets -->
   <link href="css/bootstrap.min.css" rel="stylesheet" />
 
@@ -99,7 +99,7 @@ $max_guest = $room["max_guest"];
         <div class="title-outer">
           <h1 class="title">Flight Booking</h1>
           <ul class="page-breadcrumb">
-            <li><a href="index-2.html">Home</a></li>
+            <li><a href="./">Home</a></li>
             <li>Booking</li>
           </ul>
         </div>

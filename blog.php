@@ -17,7 +17,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
 
 <head>
   <meta charset="utf-8" />
-  <title>Smile Dove Travels | News Grid</title>
+  <title>Smile Dove Travels | Blog</title>
   <!-- Stylesheets -->
   <link href="css/bootstrap.min.css" rel="stylesheet" />
 
@@ -63,8 +63,8 @@ if (!empty($_SESSION["sdtravels_user"])) {
         <div class="title-outer">
           <h1 class="title">Blog</h1>
           <ul class="page-breadcrumb">
-            <li><a href="index-2.html">Home</a></li>
-            <li>News</li>
+            <li><a href="./">Home</a></li>
+            <li>Blog</li>
           </ul>
         </div>
       </div>
@@ -75,80 +75,42 @@ if (!empty($_SESSION["sdtravels_user"])) {
     <section class="">
       <div class="container pb-70">
         <div class="row">
-          <!-- News Block -->
-          <div class="news-block col-lg-4 col-md-6 col-sm-12">
-            <div class="inner-box">
-              <div class="image-box">
-                <figure class="image">
-                  <a href="news-details.html"><img src="images/resource/news-1.jpg" alt="" /></a>
-                </figure>
-                <span class="date"><b>20</b> SEP</span>
-              </div>
-              <div class="content-box">
-                <div class="content">
-                  <ul class="post-info">
-                    <li><i class="fa fa-user"></i> by Admin</li>
-                    <li><i class="fa fa-comments"></i> 2 Comments</li>
-                  </ul>
-                  <h4 class="title">
-                    <a href="news-details.html">The quality role of the elementary teacher in
-                      education</a>
-                  </h4>
-                  <a href="news-details.html" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
+          <?php
+          $getBlogs = mysqli_query($conn, "SELECT * FROM `blogs` ORDER BY `id` DESC");
+          if (mysqli_num_rows($getBlogs) > 0) {
+            while ($blog = mysqli_fetch_assoc($getBlogs)) {
+          ?>
+              <!-- News Block -->
+              <div class="news-block col-lg-4 col-md-6 col-sm-12">
+                <div class="inner-box">
+                  <div class="image-box">
+                    <figure class="image shadow rounded">
+                      <a href="blog-details.php?id=<?= $blog['blogid']; ?>"><img src="uploads/blog/<?= $blog["image"]; ?>" alt="" class="bg-transparent" style="width: 100%; height: 270px; object-fit: cover; border-radius: 10px;" /></a>
+                    </figure>
+                  </div>
+                  <div class="content-box">
+                    <div class="content">
+                      <ul class="post-info">
+                        <li><i class="fa fa-clock"></i> <?= date("d M Y", strtotime($blog["created_at"])); ?></li>
+                      </ul>
+                      <h4 class="title text-truncate">
+                        <a href="blog-details.php?id=<?= $blog['blogid']; ?>" class="text-truncate"><?= $blog["title"]; ?></a>
+                      </h4>
+                      <p class="text-truncate"><?= $blog["title"]; ?></p>
+                      <a href="blog-details.php?id=<?= $blog['blogid']; ?>" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            <?php
+            }
+          } else {
+            ?>
+            <p class="p-4 text-center">No Blog Posted Yet</p>
+          <?php
+          }
+          ?>
 
-          <!-- News Block -->
-          <div class="news-block col-lg-4 col-md-6 col-sm-12">
-            <div class="inner-box">
-              <div class="image-box">
-                <figure class="image">
-                  <a href="news-details.html"><img src="images/resource/news-2.jpg" alt="" /></a>
-                </figure>
-                <span class="date"><b>20</b> SEP</span>
-              </div>
-              <div class="content-box">
-                <div class="content">
-                  <ul class="post-info">
-                    <li><i class="fa fa-user"></i> by Admin</li>
-                    <li><i class="fa fa-comments"></i> 2 Comments</li>
-                  </ul>
-                  <h4 class="title">
-                    <a href="news-details.html">The quality role of the elementary teacher in
-                      education</a>
-                  </h4>
-                  <a href="news-details.html" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- News Block -->
-          <div class="news-block col-lg-4 col-md-6 col-sm-12">
-            <div class="inner-box">
-              <div class="image-box">
-                <figure class="image">
-                  <a href="news-details.html"><img src="images/resource/news-3.jpg" alt="" /></a>
-                </figure>
-                <span class="date"><b>20</b> SEP</span>
-              </div>
-              <div class="content-box">
-                <div class="content">
-                  <ul class="post-info">
-                    <li><i class="fa fa-user"></i> by Admin</li>
-                    <li><i class="fa fa-comments"></i> 2 Comments</li>
-                  </ul>
-                  <h4 class="title">
-                    <a href="news-details.html">The quality role of the elementary teacher in
-                      education</a>
-                  </h4>
-                  <a href="news-details.html" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

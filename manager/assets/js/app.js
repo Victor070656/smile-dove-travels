@@ -284,10 +284,7 @@ class ThemeLayout {
       : this.changeMenuSize(this.config.menu.size);
   }
   setSwitchFromConfig() {
-    sessionStorage.setItem(
-      "__Smile Dove Travels_CONFIG__",
-      JSON.stringify(this.config)
-    ),
+    sessionStorage.setItem("__TAPLOX_CONFIG__", JSON.stringify(this.config)),
       document
         .querySelectorAll(".settings-bar input[type=radio]")
         .forEach(function (e) {

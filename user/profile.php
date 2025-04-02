@@ -1,20 +1,10 @@
 <?php
 include "../config/config.php";
 session_start();
-if (!isset($_SESSION['sdtravels_manager'])) {
+if (!isset($_SESSION['sdtravels_user'])) {
      echo "<script>alert('Please Login First'); location.href = 'login.php'</script>";
 }
-
-if (isset($_GET["hid"])) {
-     $id = $_GET["hid"];
-     $getHotels = mysqli_query($conn, "SELECT * FROM `hotels` WHERE `hotelid` = '$id'");
-     if (mysqli_num_rows($getHotels) == 0) {
-          echo "<script>alert('Hotel not found'); location.href = 'hotels.php'</script>";
-     }
-     $hotel = mysqli_fetch_assoc($getHotels);
-} else {
-     echo "<script>alert('Hotel not found'); location.href = 'hotels.php'</script>";
-}
+$uid = $_SESSION["sdtravels_user"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +15,7 @@ if (isset($_GET["hid"])) {
 <head>
      <!-- Title Meta -->
      <meta charset="utf-8" />
-     <title>Smile Dove Admin || </title>
+     <title>Smile Dove Admin || Profile</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta name="description" content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
      <meta name="author" content="StackBros" />
@@ -35,7 +25,7 @@ if (isset($_GET["hid"])) {
      <meta name="theme-color" content="#ffffff">
 
      <!-- App favicon -->
-     <link rel="shortcut icon" href="assets/images/favicon.ico">
+     <link rel="shortcut icon" href="../images/favicon.png">
 
      <!-- Google Font Family link -->
      <link rel="preconnect" href="https://fonts.googleapis.com/index.html">
@@ -84,10 +74,10 @@ if (isset($_GET["hid"])) {
                     <div class="row">
                          <div class="col-12">
                               <div class="page-title-box">
-                                   <h4 class="mb-0">Delete Hotel</h4>
+                                   <h4 class="mb-0">Profile</h4>
                                    <ol class="breadcrumb mb-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Smile Dove</a></li>
-                                        <li class="breadcrumb-item active">Delete Hotel</li>
+                                        <li class="breadcrumb-item active">Profile</li>
                                    </ol>
                               </div>
                          </div>
@@ -98,30 +88,55 @@ if (isset($_GET["hid"])) {
                          <div class="col-12">
                               <div class="card rounded-4">
                                    <div class="card-header">
-                                        <h5 class="card-title mb-0">Delete Hotel #<?= $id; ?></h5>
+                                        <h5 class="card-title mb-0">Edit Profile</h5>
                                    </div>
 
                                    <div class="card-body">
-                                        <div class="p-5 text-center">
-                                             <h4 class="mb-4">Are you sure you want to delete this hotel?</h4>
-                                             <p>This can't be undone</p>
-                                             <form method="POST">
-                                                  <button type="submit" name="delete" class="btn btn-danger">Delete</button>
-                                             </form>
+                                        <form method="post" enctype="multipart/form-data">
+                                             <div class="row">
+                                                  <?php
+                                                  $getInfo = mysqli_query($conn, "SELECT * FROM `users` WHERE `userid` = '$uid'");
+                                                  $info = mysqli_fetch_assoc($getInfo);
+                                                  ?>
+                                                  <div class="mb-3 col-12">
+                                                       <label for="fullname" class="form-label">Full Name <span class="text-danger">*</span></label>
+                                                       <input type="text" id="fullname" name="fullname" required
+                                                            class="form-control" value="<?= $info['fullname']; ?>" placeholder="Email">
+                                                  </div>
+                                                  <div class="mb-3 col-md-6">
+                                                       <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                                       <input type="email" id="email" name="email" required
+                                                            class="form-control" value="<?= $info['email']; ?>" placeholder="Email">
+                                                  </div>
+
+                                                  <div class="mb-3 col-md-6">
+                                                       <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                                                       <input type="text" id="password" value="<?= $info['password']; ?>" name="password" required class="form-control"
+                                                            placeholder="********">
+                                                  </div>
+
+
+                                                  <div class="">
+                                                       <button type="submit" name="send" class="btn btn-dark">Update</button>
+                                                  </div>
+                                             </div>
                                              <?php
-                                             if (isset($_POST["delete"])) {
-                                                  $deleteHotel = mysqli_query($conn, "DELETE FROM `hotels` WHERE `hotelid` = '$id'");
-                                                  if ($deleteHotel) {
-                                                       if (file_exists("../uploads/" . $hotel["image"])) {
-                                                            unlink("../uploads/" . $hotel["image"]);
-                                                       }
-                                                       echo "<script>alert('Hotel deleted successfully'); location.href = 'hotels.php'</script>";
+                                             if (isset($_POST["send"])) {
+
+                                                  $fullname = $_POST["fullname"];
+                                                  $email = $_POST["email"];
+                                                  $password = $_POST["password"];
+
+                                                  $sql = "UPDATE `users` SET `fullname` = '$fullname', `email` = '$email', `password` = '$password' WHERE `userid` = '$uid'";
+                                                  $query = mysqli_query($conn, $sql);
+                                                  if ($query) {
+                                                       echo "<script>alert('Profile updated successfully'); location.href = 'profile.php'</script>";
                                                   } else {
-                                                       echo "<script>alert('Failed to delete hotel')</script>";
+                                                       echo "<script>alert('Failed to update profile')</script>";
                                                   }
                                              }
                                              ?>
-                                        </div>
+                                        </form>
                                    </div>
                               </div>
                          </div>

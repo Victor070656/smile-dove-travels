@@ -17,7 +17,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
 
 <head>
   <meta charset="utf-8" />
-  <title>Smile Dove Travels | Coaching Details</title>
+  <title>Smile Dove Travels | IELTS</title>
   <!-- Stylesheets -->
   <link href="css/bootstrap.min.css" rel="stylesheet" />
 
@@ -78,7 +78,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
           <!--Start courses Details Content-->
           <div class="col-12">
             <div class="courses-details__content">
-              <img src="images/resource/course-details.jpg" alt="" />
+              <img src="images/travel/09.jpg" class="w-100" style="border-radius: 10px;" alt="" />
               <h2 class="mt-4">IELTS Preparation & Registration</h2>
               <p>
                 Prepare for success in the IELTS exam with our expert-led coaching and registration assistance. We provide personalized training, practice tests, and proven strategies to help you achieve your desired band score. Whether you're taking the Academic or General IELTS, our course covers all four modules:
@@ -93,10 +93,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
                 <div class="text">
                   <h3>What You Will Learn?</h3>
                   <p>
-                    Lorem ipsum is simply free text used by copytyping
-                    refreshing. Neque porro est qui dolorem ipsum quia quaed
-                    inventore veritatis et quasi architecto beatae vitae dicta
-                    sunt explicabo.
+                    With our comprehensive study materials, timed mock tests, and expert feedback, you'll feel confident on exam day.
                   </p>
                 </div>
                 <div class="row mt-30">
@@ -108,9 +105,9 @@ if (!empty($_SESSION["sdtravels_user"])) {
                         <i class="icon flaticon-passport"></i>
                       </div>
                       <div class="content-box">
-                        <h5 class="title">Apply for New Visa Online</h5>
+                        <h5 class="title">Apply for IELTS with Ease</h5>
                         <div class="text">
-                          Lorem ipsum is simply free dolo sit amet, ctetur.
+                          We assist in seamless registration for your IELTS exam, guiding you through the booking process step-by-step.
                         </div>
                       </div>
                     </div>
@@ -124,73 +121,49 @@ if (!empty($_SESSION["sdtravels_user"])) {
                         <i class="icon flaticon-visa-4"></i>
                       </div>
                       <div class="content-box">
-                        <h5 class="title">Skilled Immigration Programs</h5>
+                        <h5 class="title">Expert IELTS Coaching</h5>
                         <div class="text">
-                          Lorem ipsum is simply free dolo sit amet, ctetur.
+                          Our structured coaching covers test-taking strategies, time management, and practice exercises designed to maximise your band score.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Feature Block -->
+                  <div class="feature-block col-lg-6 col-md-6 col-sm-12">
+                    <div class="inner-box">
+                      <div class="icon-box">
+                        <span class="count">03</span>
+                        <i class="icon flaticon-visa-4"></i>
+                      </div>
+                      <div class="content-box">
+                        <h5 class="title">Mock Tests & Personalized Feedbacks</h5>
+                        <div class="text">
+                          Take realistic practice exams and receive detailed feedbacks to pinpoint areas of improvements.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Feature Block -->
+                  <div class="feature-block col-lg-6 col-md-6 col-sm-12">
+                    <div class="inner-box">
+                      <div class="icon-box">
+                        <span class="count">04</span>
+                        <i class="icon flaticon-visa-4"></i>
+                      </div>
+                      <div class="content-box">
+                        <h5 class="title">Grammer & Vocabulary Enhancement</h5>
+                        <div class="text">
+                          Boost your grammer, vocabulary and fluency for both speaking and writing tasks.
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="mt-25">
-                <h3>Frequently Asked Question</h3>
-                <p>
-                  Lorem ipsum is simply free text used by copytyping
-                  refreshing. Neque porro est qui dolorem ipsum quia quaed
-                  inventore veritatis et quasi architecto beatae vitae dicta
-                  sunt explicabo.
-                </p>
-                <ul class="accordion-box wow fadeInRight">
-                  <!--Block-->
-                  <li class="accordion block">
-                    <div class="acc-btn">
-                      Is my technology allowed on tech?
-                      <div class="icon fa fa-plus"></div>
-                    </div>
-                    <div class="acc-content">
-                      <div class="content">
-                        <div class="text">
-                          There are many variations of passages the majority
-                          have suffered alteration in some fo injected humour,
-                          or randomised words believable.
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <!--Block-->
-                  <li class="accordion block active-block">
-                    <div class="acc-btn active">
-                      How to soft launch your business?
-                      <div class="icon fa fa-plus"></div>
-                    </div>
-                    <div class="acc-content current">
-                      <div class="content">
-                        <div class="text">
-                          There are many variations of passages the majority
-                          have suffered alteration in some fo injected humour,
-                          or randomised words believable.
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <!--Block-->
-                  <li class="accordion block">
-                    <div class="acc-btn">
-                      How to turn visitors into contributors
-                      <div class="icon fa fa-plus"></div>
-                    </div>
-                    <div class="acc-content">
-                      <div class="content">
-                        <div class="text">
-                          There are many variations of passages the majority
-                          have suffered alteration in some fo injected humour,
-                          or randomised words believable.
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
+              <div class="text-center my-4">
+                <a href="https://affiliates-britishcouncil.org/?a=113&c=488&p=r&s1=&s3=web" target="_blank" class="theme-btn btn-style-one fw-bold">Register For IELTS</a>
               </div>
             </div>
           </div>

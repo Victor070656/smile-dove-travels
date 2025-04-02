@@ -97,7 +97,7 @@ $price_ngn = $rate * $price_usd;
         <div class="title-outer">
           <h1 class="title">Flight Booking</h1>
           <ul class="page-breadcrumb">
-            <li><a href="index-2.html">Home</a></li>
+            <li><a href="./">Home</a></li>
             <li>Booking</li>
           </ul>
         </div>

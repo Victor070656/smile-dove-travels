@@ -1,14 +1,18 @@
 <div class="app-sidebar">
     <!-- Sidebar Logo -->
     <div class="logo-box">
-        <a href="index-2.html" class="logo-dark">
-            <img src="assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
-            <img src="assets/images/logo-dark.png" class="logo-lg" alt="logo dark">
+        <a href="./" class="logo-dark">
+            <img src="../images/favicon.png"
+                style="height: 30px; border-radius: 7px;" class="logo-sm" alt="logo sm">
+            <img src="../images/logo-2.png"
+                style="height: 40px; border-radius: 7px;" class="logo-lg" alt="logo dark">
         </a>
 
-        <a href="index-2.html" class="logo-light">
-            <img src="assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
-            <img src="assets/images/logo-light.png" class="logo-lg" alt="logo light">
+        <a href="./" class="logo-light">
+            <img src="../images/favicon.png"
+                style="height: 30px; border-radius: 7px;" class="logo-sm" alt="logo sm">
+            <img src="../images/logo-2.png"
+                style="height: 40px; border-radius: 7px;" class="logo-lg" alt="logo light">
         </a>
     </div>
 
@@ -115,7 +119,38 @@
                     </ul>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link menu-arrow" href="#testimonial" data-bs-toggle="collapse" role="button"
+                    aria-expanded="false" aria-controls="testimonial">
+                    <span class="nav-icon">
+                        <iconify-icon icon="solar:file-text-outline"></iconify-icon>
+                    </span>
+                    <span class="nav-text"> Testimonial </span>
+                </a>
+                <div class="collapse" id="testimonial">
+                    <ul class="nav sub-navbar-nav">
+                        <li class="sub-nav-item">
+                            <a class="sub-nav-link" href="create-testimonial.php">
+                                Create Testimonial
+                            </a>
+                        </li>
+                        <li class="sub-nav-item">
+                            <a class="sub-nav-link" href="testimonials.php">
+                                <span>Testimonials</span>
+                            </a>
 
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="profile.php">
+                    <span class="nav-icon">
+                        <iconify-icon icon="solar:user-outline"></iconify-icon>
+                    </span>
+                    <span class="nav-text"> My Account </span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

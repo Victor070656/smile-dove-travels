@@ -63,7 +63,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
         <div class="title-outer">
           <h1 class="title">Contact Us</h1>
           <ul class="page-breadcrumb">
-            <li><a href="index-2.html">Home</a></li>
+            <li><a href="./">Home</a></li>
             <li>Contact</li>
           </ul>
         </div>
@@ -85,7 +85,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
               id="contact_form"
               name="contact_form"
               class=""
-              action="https://html.kodesolution.com/2024/vizox-php/includes/sendmail.php"
+              action="https://formsubmit.co/info@smiledovetravels.com"
               method="post">
               <div class="row">
                 <div class="col-sm-6">
@@ -161,9 +161,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
                 <span class="sub-title">Need any help?</span>
                 <h2>Get in touch with us</h2>
                 <div class="text">
-                  Lorem ipsum is simply free text available dolor sit amet
-                  consectetur notted adipisicing elit sed do eiusmod tempor
-                  incididunt simply dolore magna.
+                  Have an enquiry? reach out to us.
                 </div>
               </div>
               <ul class="list-unstyled contact-details__info">
@@ -173,7 +171,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
                   </div>
                   <div class="text">
                     <h6>Have any question?</h6>
-                    <a href="tel:980089850"><span>Free</span> +92 (020)-9850</a>
+                    <a href="tel:+2349069503394"> +234 906 9503 394</a>
                   </div>
                 </li>
                 <li>
@@ -183,9 +181,8 @@ if (!empty($_SESSION["sdtravels_user"])) {
                   <div class="text">
                     <h6>Write email</h6>
                     <a
-                      href="https://html.kodesolution.com/cdn-cgi/l/email-protection#244a4141404c41485464474b4954454a5d0a474b49"><span
-                        class="__cf_email__"
-                        data-cfemail="610f04040509040d1121020e0c11000f184f020e0c">[email&#160;protected]</span></a>
+                      href="mailto:info@smiledovetravels.com"><span
+                        class="">info@smiledovetravels.com</span></a>
                   </div>
                 </li>
                 <li>

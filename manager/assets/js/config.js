@@ -1,5 +1,5 @@
 !(function () {
-  var t = sessionStorage.getItem("__Smile Dove Travels_CONFIG__"),
+  var t = sessionStorage.getItem("__TAPLOX_CONFIG__"),
     e = document.getElementsByTagName("html")[0],
     i = {
       theme: "light",

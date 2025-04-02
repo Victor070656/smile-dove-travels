@@ -1,9 +1,10 @@
 <?php
 include "../config/config.php";
 session_start();
-if (!isset($_SESSION['sdtravels_manager'])) {
+if (!isset($_SESSION['sdtravels_user'])) {
      echo "<script>alert('Please Login First'); location.href = 'login.php'</script>";
 }
+$uid = $_SESSION["sdtravels_user"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +15,7 @@ if (!isset($_SESSION['sdtravels_manager'])) {
 <head>
      <!-- Title Meta -->
      <meta charset="utf-8" />
-     <title>Smile Dove Admin || Hotels</title>
+     <title>Smile Dove Admin || Flight Bookings</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta name="description" content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
      <meta name="author" content="StackBros" />
@@ -24,7 +25,7 @@ if (!isset($_SESSION['sdtravels_manager'])) {
      <meta name="theme-color" content="#ffffff">
 
      <!-- App favicon -->
-     <link rel="shortcut icon" href="assets/images/favicon.ico">
+     <link rel="shortcut icon" href="../images/favicon.png">
 
      <!-- Google Font Family link -->
      <link rel="preconnect" href="https://fonts.googleapis.com/index.html">
@@ -74,10 +75,10 @@ if (!isset($_SESSION['sdtravels_manager'])) {
                     <div class="row">
                          <div class="col-12">
                               <div class="page-title-box">
-                                   <h4 class="mb-0">Hotels</h4>
+                                   <h4 class="mb-0">Flights</h4>
                                    <ol class="breadcrumb mb-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Smile dove</a></li>
-                                        <li class="breadcrumb-item active">Hotels</li>
+                                        <li class="breadcrumb-item active">Flights</li>
                                    </ol>
                               </div>
                          </div>
@@ -88,66 +89,56 @@ if (!isset($_SESSION['sdtravels_manager'])) {
                     <div class="card rounded-4 py-2">
                          <div class="card-header d-flex justify-content-between align-items-center">
                               <h5 class="">
-                                   All Hotels
+                                   All Flights Booked
                               </h5>
-                              <a href="add-hotel.php" class="btn btn-primary btn-sm ">Add Hotel +</a>
-
                          </div>
 
                          <div class="card-body">
                               <div class="table-responsive">
                                    <table class="table table-striped w-100" id="tablee">
                                         <thead>
-                                             <tr>
+                                             <tr class="table-nowrap">
                                                   <th scope="col">#</th>
-                                                  <th scope="col">Hotel</th>
-                                                  <th scope="col">Country</th>
-                                                  <th scope="col">City</th>
-                                                  <th scope="col">Address</th>
+                                                  <th scope="col">Full Name</th>
+                                                  <th scope="col">Nationality</th>
+                                                  <th scope="col">Email</th>
+                                                  <th scope="col">Departure City</th>
+                                                  <th scope="col">Destination City</th>
+                                                  <th scope="col">Destination Country</th>
+                                                  <th scope="col">Ticket Type</th>
+                                                  <th scope="col">Airline Class</th>
+                                                  <th scope="col">Price</th>
+                                                  <th scope="col">Status</th>
+                                                  <th scope="col">Message</th>
                                                   <th scope="col">Date</th>
                                                   <th scope="col">Action</th>
                                              </tr>
                                         </thead>
                                         <tbody>
                                              <?php
-                                             $getHotels = mysqli_query($conn, "SELECT * FROM `hotels` ORDER BY `created_at` DESC");
-                                             if (mysqli_num_rows($getHotels) > 0) {
+                                             $getFlight = mysqli_query($conn, "SELECT * FROM `flight_bookings` WHERE `userid` = '$uid' ORDER BY `created_at` DESC");
+                                             if (mysqli_num_rows($getFlight) > 0) {
 
-                                                  while ($row = mysqli_fetch_assoc($getHotels)) {
+                                                  while ($row = mysqli_fetch_assoc($getFlight)) {
                                              ?>
                                                        <tr>
-                                                            <td><?= $row["hotelid"]; ?></td>
+                                                            <td><?= $row["id"]; ?></td>
                                                             <td>
-                                                                 <span class="me-2">
-                                                                      <img src="../uploads/<?= $row['image']; ?>" style="width: 80px; height: 80px; object-fit: cover; border-radius: 5px;" alt="">
-                                                                 </span>
-                                                                 <?= $row["name"]; ?>
+                                                                 <?= $row["fullname"]; ?>
                                                             </td>
-                                                            <td><?= $row["country"]; ?></td>
-                                                            <td><?= $row["city"]; ?></td>
-                                                            <td><?= $row["address"]; ?></td>
+                                                            <td><?= $row["nationality"]; ?></td>
+                                                            <td><?= $row["email"]; ?></td>
+                                                            <td><?= $row["depart_city"]; ?></td>
+                                                            <td><?= $row["dest_city"]; ?></td>
+                                                            <td><?= $row["dest_country"]; ?></td>
+                                                            <td><?= $row["ticket_type"]; ?></td>
+                                                            <td><?= $row["airline_class"]; ?></td>
+                                                            <td><?= $row["price"]; ?></td>
+                                                            <td><?= $row["status"]; ?></td>
+                                                            <td><?= $row["message"]; ?></td>
                                                             <td><?= date("d-m-Y H:i", strtotime($row["created_at"])); ?></td>
                                                             <td class="">
-
-
-                                                                 <div class="dropdown">
-                                                                      <button
-                                                                           class="btn btn-secondary rounded-4 btn-sm dropdown-toggle"
-                                                                           type="button"
-                                                                           id="triggerId"
-                                                                           data-bs-toggle="dropdown"
-                                                                           aria-haspopup="true"
-                                                                           aria-expanded="false">
-                                                                      </button>
-                                                                      <div
-                                                                           class="dropdown-menu dropdown-menu-end position-relative "
-                                                                           aria-labelledby="triggerId">
-                                                                           <a class="dropdown-item" href="add-room.php?hid=<?= $row["hotelid"]; ?>">Add Room</a>
-                                                                           <a class="dropdown-item" href="view-rooms.php?hid=<?= $row["hotelid"]; ?>">View Rooms</a>
-                                                                           <a class="dropdown-item text-primary" href="edit-hotel.php?hid=<?= $row["hotelid"]; ?>">Edit Hotel</a>
-                                                                           <a class="dropdown-item text-danger" href="delete-hotel.php?hid=<?= $row["hotelid"]; ?>">Delete Hotel</a>
-                                                                      </div>
-                                                                 </div>
+                                                                 <a href="view-flight.php?id=<?= $row["id"]; ?>" class="btn btn-primary btn-sm">View</a>
                                                             </td>
                                                        </tr>
                                              <?php

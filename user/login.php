@@ -22,7 +22,7 @@ session_start();
     <meta name="theme-color" content="#ffffff">
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="../images/favicon.png">
 
     <!-- Google Font Family link -->
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com/index.html">

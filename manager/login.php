@@ -22,7 +22,7 @@ session_start();
     <meta name="theme-color" content="#ffffff">
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="../images/favicon.png">
 
     <!-- Google Font Family link -->
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com/index.html">
@@ -54,13 +54,7 @@ session_start();
                             <div class="card-body p-5">
                                 <div class="text-center">
                                     <div class="mx-auto mb-4 text-center auth-logo">
-                                        <a href="index-2.html" class="logo-dark">
-                                            <img src="assets/images/logo-dark.png" height="32" alt="logo dark">
-                                        </a>
-
-                                        <a href="index-2.html" class="logo-light">
-                                            <img src="assets/images/logo-light.png" height="28" alt="logo light">
-                                        </a>
+                                        
                                     </div>
                                     <h4 class="fw-bold text-dark mb-2">Welcome Back!</h3>
                                         <p class="text-muted">Sign in to your account to continue</p>

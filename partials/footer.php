@@ -2,7 +2,7 @@
     <div class="auto-container">
         <div class="upper-box">
             <div class="logo">
-                <a href="index-2.html"><img
+                <a href="./"><img
                         src="images/logo-2.png"
                         style="height: 50px"
                         class="rounded"
@@ -12,7 +12,7 @@
             </div>
             <div class="subscribe-form">
                 <h5 class="title">Subscribe to Newsletter</h5>
-                <form method="post" action="#">
+                <form method="post" action="https://formsubmit.co/info@smiledovetravels.com">
                     <div class="form-group">
                         <input
                             type="email"
@@ -50,13 +50,11 @@
                                 <li>
                                     <i class="fa fa-envelope"></i>
                                     <a
-                                        href="https://html.kodesolution.com/cdn-cgi/l/email-protection#a6c8c3c3c2cec3cad6e6d6c9d2cfd5c3c888c5c9cb"><span
-                                            class="__cf_email__"
-                                            data-cfemail="4f212a2a2b272a233f0f2c20223f2e2136612c2022">[email&#160;protected]</span></a><br />
+                                        href="mailto:info@smiledovetravels.com"><span>info@smiledovetravels.com</span></a><br />
                                 </li>
                                 <li>
                                     <i class="fa fa-phone-square"></i>
-                                    <a href="tel:+926668880000">+92 666 888 0000</a><br />
+                                    <a href="tel:+2349069503394">+234 906 9503 394</a><br />
                                 </li>
                             </ul>
                         </div>
@@ -87,7 +85,7 @@
             <div class="inner-container">
                 <div class="copyright-text">
                     &copy; Copyright Reserved by
-                    <a href="index-2.html">Smile Dove Travels</a>
+                    <a href="./">Smile Dove Travels</a>
                 </div>
 
                 <ul class="social-icon-two">

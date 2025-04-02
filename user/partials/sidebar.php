@@ -1,14 +1,18 @@
 <div class="app-sidebar">
     <!-- Sidebar Logo -->
     <div class="logo-box">
-        <a href="index-2.html" class="logo-dark">
-            <img src="assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
-            <img src="assets/images/logo-dark.png" class="logo-lg" alt="logo dark">
+        <a href="./" class="logo-dark">
+            <img src="../images/favicon.png"
+                style="height: 30px; border-radius: 7px;" class="logo-sm" alt="logo sm">
+            <img src="../images/logo-2.png"
+                style="height: 40px; border-radius: 7px;" class="logo-lg" alt="logo dark">
         </a>
 
-        <a href="index-2.html" class="logo-light">
-            <img src="assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
-            <img src="assets/images/logo-light.png" class="logo-lg" alt="logo light">
+        <a href="./" class="logo-light">
+            <img src="../images/favicon.png"
+                style="height: 30px; border-radius: 7px;" class="logo-sm" alt="logo sm">
+            <img src="../images/logo-2.png"
+                style="height: 40px; border-radius: 7px;" class="logo-lg" alt="logo light">
         </a>
     </div>
 
@@ -29,52 +33,37 @@
 
 
             <li class="nav-item">
-                <a class="nav-link menu-arrow" href="#sidebarMultiLevelDemo" data-bs-toggle="collapse" role="button"
-                    aria-expanded="false" aria-controls="sidebarMultiLevelDemo">
+                <a class="nav-link " href="hotel-reservations.php">
                     <span class="nav-icon">
                         <iconify-icon icon="solar:share-circle-outline"></iconify-icon>
                     </span>
-                    <span class="nav-text"> Hotel </span>
+                    <span class="nav-text"> Hotel Reservation </span>
                 </a>
-                <div class="collapse" id="sidebarMultiLevelDemo">
-                    <ul class="nav sub-navbar-nav">
-                        <li class="sub-nav-item">
-                            <a class="sub-nav-link" href="add-hotel.php">Add Hotel</a>
-                        </li>
-                        <li class="sub-nav-item">
-                            <a class="sub-nav-link" href="hotels.php">
-                                <span> Hotels</span>
-                            </a>
-
-                        </li>
-                    </ul>
-                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link menu-arrow" href="#booking" data-bs-toggle="collapse" role="button"
-                    aria-expanded="false" aria-controls="booking">
+                <a class="nav-link " href="flight-bookings.php">
                     <span class="nav-icon">
                         <iconify-icon icon="solar:share-circle-outline"></iconify-icon>
                     </span>
-                    <span class="nav-text"> Bookings </span>
+                    <span class="nav-text"> Flight Bookings </span>
                 </a>
-                <div class="collapse" id="booking">
-                    <ul class="nav sub-navbar-nav">
-                        <li class="sub-nav-item">
-                            <a class="sub-nav-link" href="hotel-reservations.php">
-                                Hotel Reservations
-                            </a>
-                        </li>
-                        <li class="sub-nav-item">
-                            <a class="sub-nav-link" href="flight-bookings.php">
-                                <span>Flight Bookings</span>
-                            </a>
-
-                        </li>
-                    </ul>
-                </div>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link " href="visa-applications.php">
+                    <span class="nav-icon">
+                        <iconify-icon icon="solar:map-arrow-square-bold"></iconify-icon>
+                    </span>
+                    <span class="nav-text"> Visa Application </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="profile.php">
+                    <span class="nav-icon">
+                        <iconify-icon icon="solar:user-outline"></iconify-icon>
+                    </span>
+                    <span class="nav-text"> My Account </span>
+                </a>
+            </li>
 
         </ul>
     </div>

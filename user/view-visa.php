@@ -1,9 +1,10 @@
 <?php
 include "../config/config.php";
 session_start();
-if (!isset($_SESSION['sdtravels_manager'])) {
+if (!isset($_SESSION['sdtravels_user'])) {
      echo "<script>alert('Please Login First'); location.href = 'login.php'</script>";
 }
+$uid = $_SESSION["sdtravels_user"];
 
 if (empty($_GET["id"])) {
      echo "<script>location.href = 'visa-applications.php';</script>";
@@ -30,7 +31,7 @@ $sql = "SELECT a.*,
       ON a.id = p.applicant_id
       LEFT JOIN `sponsorships` as s
       ON a.id = s.applicant_id
-       WHERE a.id = '$id'";
+       WHERE a.id = '$id' AND a.userid = '$uid'";
 
 $getVisa = mysqli_query(
      $conn,
@@ -207,6 +208,18 @@ $visa = mysqli_fetch_assoc($getVisa);
                                    <div class="">
                                         <h5 class=""><b>Exit Date</b></h5>
                                         <span class=""><?= date("d-m-Y", strtotime($visa["exit_date"])) ?></span>
+                                   </div>
+                              </div>
+                              <div class="col-md-4 mb-3">
+                                   <div class="">
+                                        <h5 class=""><b>Status</b></h5>
+                                        <span class=""><?= $visa["status"] ?></span>
+                                   </div>
+                              </div>
+                              <div class="col-md-4 mb-3">
+                                   <div class="">
+                                        <h5 class=""><b>Message</b></h5>
+                                        <span class=""><?= $visa["message"] ?></span>
                                    </div>
                               </div>
 
@@ -396,31 +409,7 @@ $visa = mysqli_fetch_assoc($getVisa);
 
                          </div>
 
-                         <!-- status form -->
-                         <form method="post">
-                              <div class="mb-3">
-                                   <label for="status" class="form-label">Status</label>
-                                   <input type="text" name="status" required id="status" value="<?= $visa['status']; ?>" class="form-control">
-                              </div>
-                              <div class="mb-3">
-                                   <label for="msg" class="form-label">Message</label>
-                                   <textarea name="msg" id="msg" class="form-control"><?= $visa["message"]; ?></textarea>
-                              </div>
-                              <button type="submit" name="update" class="btn btn-dark">Update</button>
-                              <?php
-                              if (isset($_POST["update"])) {
-                                   $status = $_POST["status"];
-                                   $msg = $_POST["msg"];
 
-                                   $query = mysqli_query($conn, "UPDATE `applicants` SET `status` = '$status', `message` = '$msg' WHERE `id` = '$id'");
-                                   if ($query) {
-                                        echo "<script>alert('Updated successfully!'); location.href = 'visa-applications.php'</script>";
-                                   } else {
-                                        echo "<script>alert('Something went wrong!')</script>";
-                                   }
-                              }
-                              ?>
-                         </form>
                     </div>
 
                </div> <!-- end col -->

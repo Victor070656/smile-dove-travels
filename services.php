@@ -17,7 +17,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
 
 <head>
   <meta charset="utf-8" />
-  <title>Smile Dove Travels | Visa Grid</title>
+  <title>Smile Dove Travels | Services</title>
   <!-- Stylesheets -->
   <link href="css/bootstrap.min.css" rel="stylesheet" />
 
@@ -81,7 +81,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box">
               <div class="image-box">
                 <figure class="image">
-                  <a href="page-service-details.html"><img
+                  <a href="visa.php"><img
                       src="images/travel/12.jpg"
                       style="width: 100%; height: 200px; object-fit: cover"
                       alt="" /></a>
@@ -92,14 +92,14 @@ if (!empty($_SESSION["sdtravels_user"])) {
               </div>
               <div class="content-box">
                 <h5 class="title">
-                  <a href="page-service-details.html">Pilgrimage Packages</a>
+                  <a href="visa.php">Pilgrimage Packages</a>
                 </h5>
                 <div class="text">
                   Embark on a spiritual journey to Jordan, Jerusalem, and Rome
                   with our well-planned pilgrimage tours. We handle visas,
                   accommodations, and guided experiences.
                 </div>
-                <a href="page-service-details.html" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
+                <a href="visa.php" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
               </div>
             </div>
           </div>
@@ -109,7 +109,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box">
               <div class="image-box">
                 <figure class="image">
-                  <a href="page-service-details.html"><img
+                  <a href="visa.php"><img
                       src="images/travel/04.webp"
                       style="width: 100%; height: 200px; object-fit: cover"
                       alt="" /></a>
@@ -118,14 +118,14 @@ if (!empty($_SESSION["sdtravels_user"])) {
               </div>
               <div class="content-box">
                 <h5 class="title">
-                  <a href="page-service-details.html">Study Abroad Visa & Consultation</a>
+                  <a href="visa.php">Study Abroad Visa & Consultation</a>
                 </h5>
                 <div class="text">
                   Get expert assistance for study visa applications,
                   university selection, and financial documentation. We ensure
                   a smooth process for international students.
                 </div>
-                <a href="page-service-details.html" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
+                <a href="visa.php" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
               </div>
             </div>
           </div>
@@ -135,7 +135,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box">
               <div class="image-box">
                 <figure class="image">
-                  <a href="page-service-details.html"><img
+                  <a href="ielts.php"><img
                       src="images/travel/07.jpg"
                       style="width: 100%; height: 200px; object-fit: cover"
                       alt="" /></a>
@@ -144,14 +144,14 @@ if (!empty($_SESSION["sdtravels_user"])) {
               </div>
               <div class="content-box">
                 <h5 class="title">
-                  <a href="page-service-details.html">IELTS Registration & Coaching</a>
+                  <a href="ielts.php">IELTS Registration & Coaching</a>
                 </h5>
                 <div class="text">
                   Prepare for success with our IELTS coaching and registration
                   services. Our expert instructors help you achieve your
                   desired band score with ease.
                 </div>
-                <a href="page-service-details.html" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
+                <a href="ielts.php" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
               </div>
             </div>
           </div>
@@ -161,7 +161,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box">
               <div class="image-box">
                 <figure class="image">
-                  <a href="page-service-details.html"><img
+                  <a href="visa.php"><img
                       src="images/travel/03.webp"
                       style="width: 100%; height: 200px; object-fit: cover"
                       alt="" /></a>
@@ -170,14 +170,14 @@ if (!empty($_SESSION["sdtravels_user"])) {
               </div>
               <div class="content-box">
                 <h5 class="title">
-                  <a href="page-service-details.html">Business & Conference Travel</a>
+                  <a href="visa.php">Business & Conference Travel</a>
                 </h5>
                 <div class="text">
                   Travel for work made easy! We assist with business visa
                   processing, conference invitations, and corporate travel
                   arrangements worldwide.
                 </div>
-                <a href="page-service-details.html" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
+                <a href="visa.php" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
               </div>
             </div>
           </div>
@@ -187,7 +187,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box">
               <div class="image-box">
                 <figure class="image">
-                  <a href="page-service-details.html"><img
+                  <a href="visa.php"><img
                       src="images/travel/13.jpg"
                       style="width: 100%; height: 200px; object-fit: cover"
                       alt="" /></a>
@@ -198,14 +198,14 @@ if (!empty($_SESSION["sdtravels_user"])) {
               </div>
               <div class="content-box">
                 <h5 class="title">
-                  <a href="page-service-details.html">Tourist & Family Visit Visas</a>
+                  <a href="visa.php">Tourist & Family Visit Visas</a>
                 </h5>
                 <div class="text">
                   Planning a vacation or visiting family? We provide tourist
                   and family visit visa assistance for stress-free
                   international travel.
                 </div>
-                <a href="page-service-details.html" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
+                <a href="visa.php" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
               </div>
             </div>
           </div>
@@ -215,7 +215,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box">
               <div class="image-box">
                 <figure class="image">
-                  <a href="page-service-details.html"><img
+                  <a href="visa.php"><img
                       src="images/travel/15.png"
                       style="width: 100%; height: 200px; object-fit: cover"
                       alt="" /></a>
@@ -224,14 +224,14 @@ if (!empty($_SESSION["sdtravels_user"])) {
               </div>
               <div class="content-box">
                 <h5 class="title">
-                  <a href="page-service-details.html">Group Tours & Excursions</a>
+                  <a href="visa.php">Group Tours & Excursions</a>
                 </h5>
                 <div class="text">
                   Join our exclusive group tours for tourism, networking, and
                   cultural exchange. Travel with ease while we handle the
                   logistics.
                 </div>
-                <a href="page-service-details.html" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
+                <a href="visa.php" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
               </div>
             </div>
           </div>
@@ -240,7 +240,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box">
               <div class="image-box">
                 <figure class="image">
-                  <a href="page-service-details.html"><img
+                  <a href="booking.php"><img
                       src="images/travel/02.webp"
                       style="width: 100%; height: 200px; object-fit: cover"
                       alt="" /></a>
@@ -249,14 +249,14 @@ if (!empty($_SESSION["sdtravels_user"])) {
               </div>
               <div class="content-box">
                 <h5 class="title">
-                  <a href="page-service-details.html">Flight Ticket Booking & Reservation</a>
+                  <a href="booking.php">Flight Ticket Booking & Reservation</a>
                 </h5>
                 <div class="text">
                   Book international and domestic flights hassle-free! Enjoy
                   our 24-hour hold option for added flexibility on ticket
                   reservations.
                 </div>
-                <a href="page-service-details.html" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
+                <a href="booking.php" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
               </div>
             </div>
           </div>
@@ -265,7 +265,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box">
               <div class="image-box">
                 <figure class="image">
-                  <a href="page-service-details.html"><img
+                  <a href="booking.php"><img
                       src="images/travel/14.png"
                       style="width: 100%; height: 200px; object-fit: cover"
                       alt="" /></a>
@@ -274,14 +274,14 @@ if (!empty($_SESSION["sdtravels_user"])) {
               </div>
               <div class="content-box">
                 <h5 class="title">
-                  <a href="page-service-details.html">Hotel Reservations & Airport Pickup</a>
+                  <a href="booking.php">Hotel Reservations & Airport Pickup</a>
                 </h5>
                 <div class="text">
                   Secure the best hotels at great rates and enjoy smooth
                   airport pickups for a comfortable arrival at your
                   destination.
                 </div>
-                <a href="page-service-details.html" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
+                <a href="booking.php" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
               </div>
             </div>
           </div>
@@ -289,6 +289,102 @@ if (!empty($_SESSION["sdtravels_user"])) {
       </div>
     </section>
     <!-- End Services Section-->
+    <!-- FAQ Section -->
+    <section class="faqs-section">
+      <div class="anim-icons">
+        <span class="icon icon-object-2"></span>
+        <span class="icon icon-object-3"></span>
+      </div>
+      <div class="auto-container">
+        <div class="row">
+          <!-- FAQ Column -->
+          <div class="faq-column col-lg-6 col-md-12 col-sm-12">
+            <div class="inner-column">
+              <div class="sec-title">
+                <span class="sub-title">Our faqs</span>
+                <h2>Frequently Asked Questions.</h2>
+                <div class="text">
+                  We understand that immigration can be complex. Here are
+                  answers to some of the most common questions to help guide
+                  you.
+                </div>
+              </div>
+
+              <ul class="accordion-box wow fadeInRight">
+                <!--Block-->
+                <li class="accordion block active-block">
+                  <div class="acc-btn active">
+                    What services does Smile Dove Travels offer?
+                    <div class="icon fa fa-angle-right"></div>
+                  </div>
+                  <div class="acc-content current">
+                    <div class="content">
+                      <div class="text">
+                        We provide visa processing, study abroad consultation, IELTS coaching, pilgrimage travel, flight bookings, and more.
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <!--Block-->
+                <li class="accordion block">
+                  <div class="acc-btn">
+                    How long does visa processing take?
+                    <div class="icon fa fa-angle-right"></div>
+                  </div>
+                  <div class="acc-content">
+                    <div class="content">
+                      <div class="text">
+                        Visa processing times vary by country. On average:
+                        <ul>
+                          <li>Student Visa: 3-6 weeks</li>
+                          <li>Tourist Visa: 2-4 weeks</li>
+                          <li>Business Visa: 1-3 weeks</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <!--Block-->
+                <li class="accordion block">
+                  <div class="acc-btn">
+                    Can I register for the IELTS exam through you?
+                    <div class="icon fa fa-angle-right"></div>
+                  </div>
+                  <div class="acc-content">
+                    <div class="content">
+                      <div class="text">
+                        Yes! We help with official IELTS registration and exam booking.
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Form Column -->
+          <div class="content-column col-lg-6 col-md-12 col-sm-12">
+            <div class="inner-column">
+              <div class="banner-box-one">
+                <i class="icon flaticon-visa-4"></i>
+                <h3 class="title">
+                  With 10+ years of immigration experience, we ensure a smooth
+                  visa approval process.
+                </h3>
+              </div>
+              <div class="banner-box-two">
+                <figure class="image">
+                  <img src="images/resource/image-4.jpg" alt="" />
+                </figure>
+                <h5 class="caption">Immigration Consultant Agency.</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--End FAQ Section -->
     <!-- Main Footer -->
     <?php include "partials/footer.php"; ?>
     <!--End Main Footer -->

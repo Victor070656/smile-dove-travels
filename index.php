@@ -420,7 +420,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box">
               <div class="image-box">
                 <figure class="image">
-                  <a href="page-service-details.html"><img src="images/resource/service-1.jpg" alt="" /></a>
+                  <a href="visa.php"><img src="images/travel/01.webp" alt="" style="width: 100%; height: 200px; object-fit: cover;" /></a>
                 </figure>
                 <div class="icon-box">
                   <i class="icon fa fa-graduation-cap"></i>
@@ -428,13 +428,13 @@ if (!empty($_SESSION["sdtravels_user"])) {
               </div>
               <div class="content-box">
                 <h5 class="title">
-                  <a href="page-service-details.html">Student Visa</a>
+                  <a href="visa.php">Student Visa</a>
                 </h5>
                 <div class="text">
                   Apply for study visas hassle-free with guidance on
                   admission, IELTS, and documentation.
                 </div>
-                <a href="page-service-details.html" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
+                <a href="visa.php" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
               </div>
             </div>
           </div>
@@ -444,19 +444,19 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box">
               <div class="image-box">
                 <figure class="image">
-                  <a href="page-service-details.html"><img src="images/resource/service-2.jpg" alt="" /></a>
+                  <a href="visa.php"><img src="images/travel/13.jpg" alt="" style="width: 100%; height: 200px; object-fit: cover;" /></a>
                 </figure>
                 <div class="icon-box"><i class="icon fa fa-school"></i></div>
               </div>
               <div class="content-box">
                 <h5 class="title">
-                  <a href="page-service-details.html">Family Visa</a>
+                  <a href="visa.php">Family Visa</a>
                 </h5>
                 <div class="text">
                   Travel together with ease – we assist with dependent and
                   spousal visa applications.
                 </div>
-                <a href="page-service-details.html" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
+                <a href="visa.php" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
               </div>
             </div>
           </div>
@@ -466,19 +466,19 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box h-100">
               <div class="image-box">
                 <figure class="image">
-                  <a href="page-service-details.html"><img src="images/resource/service-3.jpg" alt="" /></a>
+                  <a href="visa.php"><img src="images/travel/03.webp" alt="" style="width: 100%; height: 200px; object-fit: cover;" /></a>
                 </figure>
                 <div class="icon-box"><i class="icon fa fa-school"></i></div>
               </div>
               <div class="content-box">
                 <h5 class="title">
-                  <a href="page-service-details.html">Tourist Visa</a>
+                  <a href="visa.php">Tourist Visa</a>
                 </h5>
                 <div class="text">
                   Visit your dream destinations with seamless visa application
                   support.
                 </div>
-                <a href="page-service-details.html" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
+                <a href="visa.php" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
               </div>
             </div>
           </div>
@@ -534,56 +534,37 @@ if (!empty($_SESSION["sdtravels_user"])) {
         </div>
         <div class="carousel-outer">
           <div class="testimonial-carousel owl-carousel owl-theme">
-            <!-- Testimonial Block -->
-            <div class="testimonial-block">
-              <div class="inner-box">
-                <div class="content-box">
-                  <div class="text">
-                    Their service was outstanding from start to finish. The
-                    process was smooth, and I felt supported throughout.
-                    Highly recommend!
-                  </div>
-                  <div class="info-box">
-                    <h5 class="name">Michael Brown</h5>
-                    <span class="designation">Customer</span>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <!-- Testimonial Block -->
-            <div class="testimonial-block">
-              <div class="inner-box">
-                <div class="content-box">
-                  <div class="text">
-                    Professional, reliable, and efficient. They made
-                    everything simple, and my visa was approved without any
-                    stress!
-                  </div>
-                  <div class="info-box">
-                    <h5 class="name">Mary Godswill</h5>
-                    <span class="designation">Customer</span>
+            <?php
+            $getTest = mysqli_query($conn, "SELECT * FROM `testimonials` ORDER BY `created_at` DESC LIMIT 10");
+            if (mysqli_num_rows($getTest) > 0) {
+              while ($test = mysqli_fetch_assoc($getTest)) {
+            ?>
+                <!-- Testimonial Block -->
+                <div class="testimonial-block">
+                  <div class="inner-box">
+                    <div class="content-box">
+                      <div class="text">
+                        <?= $test["message"]; ?>
+                      </div>
+                      <div class="info-box">
+                        <h5 class="name"><?= $test["name"]; ?></h5>
+                        <span class="designation"><?= $test["position"]; ?></span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              <?php
+              }
+            } else {
+              ?>
+              <h3 class="text-center py-4 text-light">No Testimonial Yet</h3>
+            <?php
+            }
+            ?>
 
-            <!-- Testimonial Block -->
-            <div class="testimonial-block">
-              <div class="inner-box">
-                <div class="content-box">
-                  <div class="text">
-                    Fantastic experience! The team provided clear guidance,
-                    and I had no issues at all. I truly appreciate their
-                    support!
-                  </div>
-                  <div class="info-box">
-                    <h5 class="name">Christiana Evans</h5>
-                    <span class="designation">Customer</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+
           </div>
         </div>
       </div>
@@ -835,33 +816,15 @@ if (!empty($_SESSION["sdtravels_user"])) {
 
               <ul class="accordion-box wow fadeInRight">
                 <!--Block-->
-                <li class="accordion block">
-                  <div class="acc-btn">
-                    How to get free immigration?
-                    <div class="icon fa fa-angle-right"></div>
-                  </div>
-                  <div class="acc-content">
-                    <div class="content">
-                      <div class="text">
-                        Find out about countries offering immigration
-                        opportunities with sponsorships or asylum programs.
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <!--Block-->
                 <li class="accordion block active-block">
                   <div class="acc-btn active">
-                    Which country is good for residence?
+                    What services does Smile Dove Travels offer?
                     <div class="icon fa fa-angle-right"></div>
                   </div>
                   <div class="acc-content current">
                     <div class="content">
                       <div class="text">
-                        The best country for residency depends on your career
-                        goals, lifestyle, and financial plans. Top options
-                        include Canada, Australia, and Germany due to their
-                        high quality of life and strong economies.
+                        We provide visa processing, study abroad consultation, IELTS coaching, pilgrimage travel, flight bookings, and more.
                       </div>
                     </div>
                   </div>
@@ -869,15 +832,33 @@ if (!empty($_SESSION["sdtravels_user"])) {
                 <!--Block-->
                 <li class="accordion block">
                   <div class="acc-btn">
-                    Canada study visa requirements?
+                    How long does visa processing take?
                     <div class="icon fa fa-angle-right"></div>
                   </div>
                   <div class="acc-content">
                     <div class="content">
                       <div class="text">
-                        Learn about student visa eligibility, required
-                        documents, and the application process for studying in
-                        Canada.
+                        Visa processing times vary by country. On average:
+                        <ul>
+                          <li>Student Visa: 3-6 weeks</li>
+                          <li>Tourist Visa: 2-4 weeks</li>
+                          <li>Business Visa: 1-3 weeks</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <!--Block-->
+                <li class="accordion block">
+                  <div class="acc-btn">
+                    Can I register for the IELTS exam through you?
+                    <div class="icon fa fa-angle-right"></div>
+                  </div>
+                  <div class="acc-content">
+                    <div class="content">
+                      <div class="text">
+                        Yes! We help with official IELTS registration and exam booking.
                       </div>
                     </div>
                   </div>
@@ -914,7 +895,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
           <h5 class="title">
             Are you Looking for Visa Applications Just Call us!
           </h5>
-          <a href="tel:+928800683000" class="info-btn"><i class="fa fa-phone"></i> +92 (8800) 6830 00</a>
+          <a href="tel:+2349069503394" class="info-btn"><i class="fa fa-phone"></i> +234 906 9503 394</a>
         </div>
       </div>
     </section>
@@ -927,75 +908,41 @@ if (!empty($_SESSION["sdtravels_user"])) {
         </div>
 
         <div class="row">
-          <!-- News Block -->
-          <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp">
-            <div class="inner-box">
-              <div class="image-box">
-                <figure class="image">
-                  <a href="news-details.html"><img src="images/resource/news-1.jpg" alt="" /></a>
-                </figure>
-                <span class="date"><b>26</b> Nov</span>
+          <?php
+          $getBlogs = mysqli_query($conn, "SELECT * FROM `blogs` ORDER BY `id` DESC LIMIT 3");
+          if (mysqli_num_rows($getBlogs) > 0) {
+            while ($blog = mysqli_fetch_assoc($getBlogs)) {
+          ?>
+              <!-- News Block -->
+              <div class="news-block col-lg-4 col-md-6 col-sm-12">
+                <div class="inner-box">
+                  <div class="image-box">
+                    <figure class="image shadow rounded">
+                      <a href="blog-details.php?id=<?= $blog['blogid']; ?>"><img src="uploads/blog/<?= $blog["image"]; ?>" alt="" class="bg-transparent" style="width: 100%; height: 270px; object-fit: cover; border-radius: 10px;" /></a>
+                    </figure>
+                  </div>
+                  <div class="content-box">
+                    <div class="content">
+                      <ul class="post-info">
+                        <li><i class="fa fa-clock"></i> <?= date("d M Y", strtotime($blog["created_at"])); ?></li>
+                      </ul>
+                      <h4 class="title text-truncate">
+                        <a href="blog-details.php?id=<?= $blog['blogid']; ?>" class="text-truncate"><?= $blog["title"]; ?></a>
+                      </h4>
+                      <p class="text-truncate"><?= $blog["title"]; ?></p>
+                      <a href="blog-details.php?id=<?= $blog['blogid']; ?>" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="content-box">
-                <ul class="post-info">
-                  <li><i class="fa fa-user-circle"></i> by Admin</li>
-                  <li><i class="fa fa-comments"></i> 2 Comments</li>
-                </ul>
-                <h4 class="title">
-                  <a href="news-details.html">The Human Rights and Democracy Study Visa Programms</a>
-                </h4>
-                <a href="news-details.html" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <!-- News Block -->
-          <div
-            class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp"
-            data-wow-delay="300ms">
-            <div class="inner-box">
-              <div class="image-box">
-                <figure class="image">
-                  <a href="news-details.html"><img src="images/resource/news-2.jpg" alt="" /></a>
-                </figure>
-                <span class="date"><b>26</b> Nov</span>
-              </div>
-              <div class="content-box">
-                <ul class="post-info">
-                  <li><i class="fa fa-user-circle"></i> by Admin</li>
-                  <li><i class="fa fa-comments"></i> 2 Comments</li>
-                </ul>
-                <h4 class="title">
-                  <a href="news-details.html">The Human Rights and Democracy Study Visa Programms</a>
-                </h4>
-                <a href="news-details.html" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <!-- News Block -->
-          <div
-            class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp"
-            data-wow-delay="600ms">
-            <div class="inner-box">
-              <div class="image-box">
-                <figure class="image">
-                  <a href="news-details.html"><img src="images/resource/news-3.jpg" alt="" /></a>
-                </figure>
-                <span class="date"><b>26</b> Nov</span>
-              </div>
-              <div class="content-box">
-                <ul class="post-info">
-                  <li><i class="fa fa-user-circle"></i> by Admin</li>
-                  <li><i class="fa fa-comments"></i> 2 Comments</li>
-                </ul>
-                <h4 class="title">
-                  <a href="news-details.html">The Human Rights and Democracy Study Visa Programms</a>
-                </h4>
-                <a href="news-details.html" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
-              </div>
-            </div>
-          </div>
+            <?php
+            }
+          } else {
+            ?>
+            <p class="p-4 text-center">No Blog Posted Yet</p>
+          <?php
+          }
+          ?>
         </div>
       </div>
     </section>

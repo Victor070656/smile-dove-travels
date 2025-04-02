@@ -18,10 +18,10 @@ if (!empty($_SESSION["sdtravels_user"])) {
 //   echo "<script>location.href = 'booking.php'</script>";
 // }
 
-// $getVisa = mysqli_query($conn, "SELECT * FROM `visa_prices` WHERE `id` = '$id'");
-// $visa = mysqli_fetch_assoc($getVisa);
+$getVisa = mysqli_query($conn, "SELECT * FROM `visa_prices`");
+$visa = mysqli_fetch_assoc($getVisa);
 
-$price_usd = 150;
+$price_usd = $visa["price"];
 
 
 // var_dump($price_usd);
@@ -91,7 +91,7 @@ $price_ngn = $rate * $price_usd;
         <div class="title-outer">
           <h1 class="title">Flight Booking</h1>
           <ul class="page-breadcrumb">
-            <li><a href="index-2.html">Home</a></li>
+            <li><a href="./">Home</a></li>
             <li>Booking</li>
           </ul>
         </div>

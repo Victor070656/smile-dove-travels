@@ -1,19 +1,11 @@
 <?php
 include "../config/config.php";
 session_start();
-if (!isset($_SESSION['sdtravels_manager'])) {
+if (!isset($_SESSION['sdtravels_user'])) {
      echo "<script>alert('Please Login First'); location.href = 'login.php'</script>";
 }
-$getFlightPrices = mysqli_query($conn, "SELECT * FROM `flight_prices`");
-$flightPrices = mysqli_fetch_assoc($getFlightPrices);
-
-$getVisaPrices = mysqli_query($conn, "SELECT * FROM `visa_prices`");
-$visaPrice = mysqli_fetch_assoc($getVisaPrices);
-
-
+$uid = $_SESSION["sdtravels_user"];
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +15,7 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
 <head>
      <!-- Title Meta -->
      <meta charset="utf-8" />
-     <title>Smile Dove Admin || Create Blogs</title>
+     <title>Smile Dove Admin || Visa Application</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta name="description" content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
      <meta name="author" content="StackBros" />
@@ -83,10 +75,10 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
                     <div class="row">
                          <div class="col-12">
                               <div class="page-title-box">
-                                   <h4 class="mb-0">Blog</h4>
+                                   <h4 class="mb-0">Visa Application</h4>
                                    <ol class="breadcrumb mb-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Smile dove</a></li>
-                                        <li class="breadcrumb-item active">Blog</li>
+                                        <li class="breadcrumb-item active">Visa Application</li>
                                    </ol>
                               </div>
                          </div>
@@ -94,54 +86,72 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
                     <!-- ========== Page Title End ========== -->
 
 
-                    <div class="card rounded-4 py-2 mb-4">
+                    <div class="card rounded-4 py-2">
                          <div class="card-header d-flex justify-content-between align-items-center">
                               <h5 class="">
-                                   Create Blog
+                                   All Visa Applications
                               </h5>
                          </div>
 
                          <div class="card-body">
-                              <form method="post" enctype="multipart/form-data">
-                                   <div class="mb-2">
-                                        <label for="title" class="form-label">Title</label>
-                                        <input type="text" required name="title" class="form-control" id="title">
-                                   </div>
-                                   <div class="mb-2">
-                                        <label for="body" class="form-label">Content</label>
-                                        <textarea name="body" required id="body" class="form-control"></textarea>
-                                   </div>
-                                   <div class="mb-2">
-                                        <label for="image" class="form-label">Image</label>
-                                        <input type="file" required name="image" class="form-control" id="image">
-                                   </div>
-                                   <button class="btn btn-primary" name="send">Create Post</button>
-                                   <?php
-                                   if (isset($_POST["send"])) {
-                                        $title = $_POST["title"];
-                                        $content = $_POST["body"];
-                                        $image = date("dmYHis") . $_FILES["image"]["name"];
-                                        $tmp_name = $_FILES["image"]["tmp_name"];
-                                        $blogid = uniqid();
+                              <div class="table-responsive">
+                                   <table class="table table-striped w-100" id="tablee">
+                                        <thead>
+                                             <tr class="table-nowrap">
+                                                  <th scope="col">#</th>
+                                                  <th scope="col">Full Name</th>
+                                                  <th scope="col">Date Of Birth</th>
+                                                  <th scope="col">Place Of Birth</th>
+                                                  <th scope="col">Nationality</th>
+                                                  <th scope="col">Gender</th>
+                                                  <th scope="col">Email</th>
+                                                  <th scope="col">Phone Number</th>
+                                                  <th scope="col">Destination Country</th>
+                                                  <th scope="col">Visa Type</th>
+                                                  <th scope="col">Entry Date</th>
+                                                  <th scope="col">Exit Date</th>
+                                                  <th scope="col">Status</th>
+                                                  <th scope="col">Message</th>
+                                                  <th scope="col">Date</th>
+                                                  <th scope="col">Action</th>
+                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                             <?php
+                                             $getVisa = mysqli_query($conn, "SELECT a.*, t.destination_country, t.visa_type, t.entry_date, t.exit_date FROM `applicants` as a JOIN `travel_details` as t ON a.id = t.applicant_id WHERE a.userid = '$uid'");
+                                             if (mysqli_num_rows($getVisa) > 0) {
 
-                                        $dir = "../uploads/blog";
-                                        if (!dir($dir)) {
-                                             mkdir($dir, 0777, true);
-                                        }
-
-                                        if (move_uploaded_file($tmp_name, $dir . "/$image")) {
-                                             $query = mysqli_query($conn, "INSERT INTO `blogs` (`blogid`, `title`, `content`, `image`) VALUES ('$blogid', '$title', '$content', '$image')");
-                                             if ($query) {
-                                                  echo "<script>alert('Created Successfully!'); location.href = 'blogs.php'</script>";
-                                             } else {
-                                                  echo "<script>alert('Something went wrong!'); </script>";
+                                                  while ($row = mysqli_fetch_assoc($getVisa)) {
+                                             ?>
+                                                       <tr>
+                                                            <td><?= $row["applicationid"]; ?></td>
+                                                            <td>
+                                                                 <?= $row["full_name"]; ?>
+                                                            </td>
+                                                            <td><?= $row["dob"]; ?></td>
+                                                            <td><?= $row["place_of_birth"]; ?></td>
+                                                            <td><?= $row["nationality"]; ?></td>
+                                                            <td><?= $row["gender"]; ?></td>
+                                                            <td><?= $row["email"]; ?></td>
+                                                            <td><?= $row["phone"]; ?></td>
+                                                            <td><?= $row["destination_country"]; ?></td>
+                                                            <td><?= $row["visa_type"]; ?></td>
+                                                            <td><?= $row["entry_date"]; ?></td>
+                                                            <td><?= $row["exit_date"]; ?></td>
+                                                            <td><?= $row["status"]; ?></td>
+                                                            <td><?= $row["message"]; ?></td>
+                                                            <td><?= date("d-m-Y H:i", strtotime($row["created_at"])); ?></td>
+                                                            <td class="">
+                                                                 <a href="view-visa.php?id=<?= $row["id"]; ?>" class="btn btn-primary btn-sm">View</a>
+                                                            </td>
+                                                       </tr>
+                                             <?php
+                                                  }
                                              }
-                                        } else {
-                                             echo "<script>alert('Something went wrong while uploading!'); </script>";
-                                        }
-                                   }
-                                   ?>
-                              </form>
+                                             ?>
+                                        </tbody>
+                                   </table>
+                              </div>
                          </div>
                     </div>
 

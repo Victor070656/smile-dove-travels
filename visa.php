@@ -64,7 +64,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
         <div class="title-outer">
           <h1 class="title">Visa </h1>
           <ul class="page-breadcrumb">
-            <li><a href="index-2.html">Home</a></li>
+            <li><a href="./">Home</a></li>
             <li>Visa</li>
           </ul>
         </div>

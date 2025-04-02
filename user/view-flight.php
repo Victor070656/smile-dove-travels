@@ -1,16 +1,17 @@
 <?php
 include "../config/config.php";
 session_start();
-if (!isset($_SESSION['sdtravels_manager'])) {
+if (!isset($_SESSION['sdtravels_user'])) {
      echo "<script>alert('Please Login First'); location.href = 'login.php'</script>";
 }
+$uid = $_SESSION["sdtravels_user"];
 
 if (empty($_GET["id"])) {
      echo "<script>location.href = 'flight-bookings.php';</script>";
 }
 $id = $_GET["id"];
 
-$getFlight = mysqli_query($conn, "SELECT * FROM `flight_bookings` WHERE `id` = '$id' ORDER BY `created_at` DESC");
+$getFlight = mysqli_query($conn, "SELECT * FROM `flight_bookings` WHERE `id` = '$id' AND `userid` = '$uid' ORDER BY `created_at` DESC");
 if (mysqli_num_rows($getFlight) == 0) {
      echo "<script>location.href = 'flight-bookings.php';</script>";
 }
@@ -213,32 +214,24 @@ $flight = mysqli_fetch_assoc($getFlight);
                                         <span class=""><?= date("d-m-Y H:i", strtotime($flight["created_at"])) ?></span>
                                    </div>
                               </div>
-
+                              <div class="col-md-4 mb-3">
+                                   <div class="">
+                                        <h5 class="">
+                                             <b>Status</b>
+                                        </h5>
+                                        <span class=""><?= $flight["status"] ?></span>
+                                   </div>
+                              </div>
+                              <div class="col-md-4 mb-3">
+                                   <div class="">
+                                        <h5 class="">
+                                             <b>Message</b>
+                                        </h5>
+                                        <span class=""><?= $flight["message"] ?></span>
+                                   </div>
+                              </div>
                          </div>
-                         <form method="post">
-                              <div class="mb-3">
-                                   <label for="status" class="form-label">Status</label>
-                                   <input type="text" name="status" required id="status" value="<?= $flight['status']; ?>" class="form-control">
-                              </div>
-                              <div class="mb-3">
-                                   <label for="msg" class="form-label">Message</label>
-                                   <textarea name="msg" id="msg" class="form-control"><?= $flight["message"]; ?></textarea>
-                              </div>
-                              <button type="submit" name="update" class="btn btn-dark">Update</button>
-                              <?php
-                              if (isset($_POST["update"])) {
-                                   $status = $_POST["status"];
-                                   $msg = $_POST["msg"];
 
-                                   $query = mysqli_query($conn, "UPDATE `flight_bookings` SET `status` = '$status', `message` = '$msg' WHERE `id` = '$id'");
-                                   if ($query) {
-                                        echo "<script>alert('Updated successfully!'); location.href = 'flight-bookings.php'</script>";
-                                   } else {
-                                        echo "<script>alert('Something went wrong!')</script>";
-                                   }
-                              }
-                              ?>
-                         </form>
                     </div>
 
                </div> <!-- end col -->
