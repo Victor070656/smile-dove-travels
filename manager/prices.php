@@ -10,6 +10,9 @@ $flightPrices = mysqli_fetch_assoc($getFlightPrices);
 $getVisaPrices = mysqli_query($conn, "SELECT * FROM `visa_prices`");
 $visaPrice = mysqli_fetch_assoc($getVisaPrices);
 
+$getPilgrimPrices = mysqli_query($conn, "SELECT * FROM `pilgrimage_prices`");
+$pilgrimPrice = mysqli_fetch_assoc($getPilgrimPrices);
+
 
 ?>
 
@@ -25,9 +28,11 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
      <meta charset="utf-8" />
      <title>Smile Dove Admin || Prices</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta name="description" content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
+     <meta name="description"
+          content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
      <meta name="author" content="StackBros" />
-     <meta name="keywords" content="Smile Dove Travels, admin dashboard, responsive template, analytics, modern UI, management tools" />
+     <meta name="keywords"
+          content="Smile Dove Travels, admin dashboard, responsive template, analytics, modern UI, management tools" />
      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
      <meta name="robots" content="index, follow" />
      <meta name="theme-color" content="#ffffff">
@@ -38,7 +43,8 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
      <!-- Google Font Family link -->
      <link rel="preconnect" href="https://fonts.googleapis.com/index.html">
      <link rel="preconnect" href="https://fonts.gstatic.com/index.html" crossorigin>
-     <link href="https://fonts.googleapis.com/css2c4ad.css?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2c4ad.css?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap"
+          rel="stylesheet">
 
      <!-- Vendor css -->
      <link href="assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
@@ -105,11 +111,14 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
                               <form method="post">
                                    <div class="mb-2">
                                         <label for="one-way" class="form-label">One Way ($)</label>
-                                        <input type="number" name="one-way" value="<?= $flightPrices['one_way']; ?>" class="form-control" id="one-way">
+                                        <input type="number" name="one-way" value="<?= $flightPrices['one_way']; ?>"
+                                             class="form-control" id="one-way">
                                    </div>
                                    <div class="mb-2">
                                         <label for="round-trip" class="form-label">Round Trip ($)</label>
-                                        <input type="number" name="round-trip" value="<?= $flightPrices['round_trip']; ?>" class="form-control" id="round-trip">
+                                        <input type="number" name="round-trip"
+                                             value="<?= $flightPrices['round_trip']; ?>" class="form-control"
+                                             id="round-trip">
                                    </div>
                                    <button class="btn btn-primary" name="flight">Update</button>
                                    <?php
@@ -128,7 +137,7 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
                               </form>
                          </div>
                     </div>
-                    <div class="card rounded-4 py-2">
+                    <div class="card rounded-4 py-2 mb-4">
                          <div class="card-header d-flex justify-content-between align-items-center">
                               <h5 class="">
                                    Visa Price
@@ -139,7 +148,8 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
                               <form method="post">
                                    <div class="mb-2">
                                         <label for="visa_price" class="form-label">Visa Fee ($)</label>
-                                        <input type="number" name="visa_price" value="<?= $visaPrice['price']; ?>" class="form-control" id="visa_price">
+                                        <input type="number" name="visa_price" value="<?= $visaPrice['price']; ?>"
+                                             class="form-control" id="visa_price">
                                    </div>
                                    <button class="btn btn-primary" name="visa">Update</button>
                                    <?php
@@ -147,6 +157,42 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
                                         $visa_price = $_POST["visa_price"];
 
                                         $query = mysqli_query($conn, "UPDATE `visa_prices` SET `price` = '$visa_price'");
+                                        if ($query) {
+                                             echo "<script>alert('Updated Successfully!'); location.href = 'prices.php'</script>";
+                                        } else {
+                                             echo "<script>alert('Something went wrong!'); </script>";
+                                        }
+                                   }
+                                   ?>
+                              </form>
+                         </div>
+                    </div>
+                    <div class="card rounded-4 py-2 mb-4">
+                         <div class="card-header d-flex justify-content-between align-items-center">
+                              <h5 class="">
+                                   Pilgrimage Prices
+                              </h5>
+                         </div>
+
+                         <div class="card-body">
+                              <form method="post">
+                                   <div class="mb-2">
+                                        <label for="nigerian" class="form-label">Nigerian (₦)</label>
+                                        <input type="number" name="nigerian" value="<?= $pilgrimPrice['nigeria']; ?>"
+                                             class="form-control" id="nigerian">
+                                   </div>
+                                   <div class="mb-2">
+                                        <label for="foreigner" class="form-label">Foreigner ($)</label>
+                                        <input type="number" name="foreigner" value="<?= $pilgrimPrice['diaspora']; ?>"
+                                             class="form-control" id="foreigner">
+                                   </div>
+                                   <button class="btn btn-primary" name="pilgrim">Update</button>
+                                   <?php
+                                   if (isset($_POST["pilgrim"])) {
+                                        $nigerian = $_POST["nigerian"];
+                                        $foreigner = $_POST["foreigner"];
+
+                                        $query = mysqli_query($conn, "UPDATE `pilgrimage_prices` SET `nigeria` = '$nigerian', `diaspora` = '$foreigner'");
                                         if ($query) {
                                              echo "<script>alert('Updated Successfully!'); location.href = 'prices.php'</script>";
                                         } else {
@@ -193,7 +239,7 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
      <script src="assets/js/vendor.min.js"></script>
 
      <script>
-          $(document).ready(function() {
+          $(document).ready(function () {
                $('#tablee').DataTable({
                     "scrollX": "100%",
                });

@@ -96,6 +96,14 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="pilgrimage.php">
+                    <span class="nav-icon">
+                        <iconify-icon icon="solar:file-text-outline"></iconify-icon>
+                    </span>
+                    <span class="nav-text"> Pilgrimage </span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link menu-arrow" href="#blog" data-bs-toggle="collapse" role="button"
                     aria-expanded="false" aria-controls="blog">
                     <span class="nav-icon">

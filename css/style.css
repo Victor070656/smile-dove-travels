@@ -41,10 +41,12 @@ License: copyright commercial
 @import url("tm-bs-mp.css");
 @import url("tm-utility-classes.css");
 :root {
+  --theme-color111: #fefefe;
   --theme-color1: #1d2f41;
   --theme-color2: #ff494a;
   --theme-color3: #4476a8;
   --theme-color4: #ecf0f4;
+  --bg-theme-color111: var(--theme-color111);
   --bg-theme-color1: var(--theme-color1);
   --bg-theme-color2: var(--theme-color2);
   --bg-theme-color3: var(--theme-color3);
@@ -2109,7 +2111,7 @@ Main Header
   display: block;
   text-align: center;
   opacity: 1;
-  color: #aab3bb;
+  color: #8e9194;
   font-size: 16px;
   line-height: 30px;
   font-weight: 400;
@@ -2127,10 +2129,10 @@ Main Header
   margin-left: 10px;
 }
 .main-menu .navigation > li > a:hover {
-  color: #ffffff;
+  color: #222;
 }
 .main-menu .navigation > li.current > a {
-  color: #ffffff;
+  color: #222;
   font-weight: 700;
 }
 .main-menu .navigation > li.dropdown > a {
@@ -2385,7 +2387,7 @@ Header Style One
 
 ***/
 .header-style-one .header-lower {
-  background-color: var(--bg-theme-color1);
+  background-color: var(--bg-theme-color111);
 }
 .header-style-one .header-lower .logo-box {
   position: relative;
@@ -2403,7 +2405,7 @@ Header Style One
   justify-content: center;
   margin-top: -40px;
   padding: 20px 20px;
-  background-color: #ffffff;
+  background-color: transparent;
 }
 .header-style-one .header-lower .main-box {
   -webkit-box-align: end;

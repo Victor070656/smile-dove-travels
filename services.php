@@ -11,9 +11,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
 <html lang="en">
 <!-- Mirrored from html.kodesolution.com/2024/vizox-php/page-service.php by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Mar 2025 21:49:01 GMT -->
 <!-- Added by HTTrack -->
-<meta
-  http-equiv="content-type"
-  content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
   <meta charset="utf-8" />
@@ -32,9 +30,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
 
   <!-- Responsive -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <!--[if lt IE 9
       ]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script
     ><![endif]-->
@@ -57,9 +53,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
     <!--End Main Header -->
 
     <!-- Start main-content -->
-    <section
-      class="page-title"
-      style="background-image: url(images/background/page-title.jpg)">
+    <section class="page-title" style="background-image: url(images/background/page-title.jpg)">
       <div class="auto-container">
         <div class="title-outer">
           <h1 class="title">Our Services</h1>
@@ -81,10 +75,8 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box">
               <div class="image-box">
                 <figure class="image">
-                  <a href="visa.php"><img
-                      src="images/travel/12.jpg"
-                      style="width: 100%; height: 200px; object-fit: cover"
-                      alt="" /></a>
+                  <a href="visa.php"><img src="images/travel/12.jpg"
+                      style="width: 100%; height: 200px; object-fit: cover" alt="" /></a>
                 </figure>
                 <div class="icon-box">
                   <i class="icon fa fa-graduation-cap"></i>
@@ -99,7 +91,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
                   with our well-planned pilgrimage tours. We handle visas,
                   accommodations, and guided experiences.
                 </div>
-                <a href="visa.php" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
+                <a href="pilgrimage.php" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
               </div>
             </div>
           </div>
@@ -109,10 +101,8 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box">
               <div class="image-box">
                 <figure class="image">
-                  <a href="visa.php"><img
-                      src="images/travel/04.webp"
-                      style="width: 100%; height: 200px; object-fit: cover"
-                      alt="" /></a>
+                  <a href="visa.php"><img src="images/travel/04.webp"
+                      style="width: 100%; height: 200px; object-fit: cover" alt="" /></a>
                 </figure>
                 <div class="icon-box"><i class="icon fa fa-users"></i></div>
               </div>
@@ -135,10 +125,8 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box">
               <div class="image-box">
                 <figure class="image">
-                  <a href="ielts.php"><img
-                      src="images/travel/07.jpg"
-                      style="width: 100%; height: 200px; object-fit: cover"
-                      alt="" /></a>
+                  <a href="ielts.php"><img src="images/travel/07.jpg"
+                      style="width: 100%; height: 200px; object-fit: cover" alt="" /></a>
                 </figure>
                 <div class="icon-box"><i class="icon fa fa-school"></i></div>
               </div>
@@ -161,10 +149,8 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box">
               <div class="image-box">
                 <figure class="image">
-                  <a href="visa.php"><img
-                      src="images/travel/03.webp"
-                      style="width: 100%; height: 200px; object-fit: cover"
-                      alt="" /></a>
+                  <a href="visa.php"><img src="images/travel/03.webp"
+                      style="width: 100%; height: 200px; object-fit: cover" alt="" /></a>
                 </figure>
                 <div class="icon-box"><i class="icon fa fa-school"></i></div>
               </div>
@@ -187,10 +173,8 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box">
               <div class="image-box">
                 <figure class="image">
-                  <a href="visa.php"><img
-                      src="images/travel/13.jpg"
-                      style="width: 100%; height: 200px; object-fit: cover"
-                      alt="" /></a>
+                  <a href="visa.php"><img src="images/travel/13.jpg"
+                      style="width: 100%; height: 200px; object-fit: cover" alt="" /></a>
                 </figure>
                 <div class="icon-box">
                   <i class="icon fa fa-graduation-cap"></i>
@@ -215,10 +199,8 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box">
               <div class="image-box">
                 <figure class="image">
-                  <a href="visa.php"><img
-                      src="images/travel/15.png"
-                      style="width: 100%; height: 200px; object-fit: cover"
-                      alt="" /></a>
+                  <a href="visa.php"><img src="images/travel/15.png"
+                      style="width: 100%; height: 200px; object-fit: cover" alt="" /></a>
                 </figure>
                 <div class="icon-box"><i class="icon fa fa-users"></i></div>
               </div>
@@ -240,10 +222,8 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box">
               <div class="image-box">
                 <figure class="image">
-                  <a href="booking.php"><img
-                      src="images/travel/02.webp"
-                      style="width: 100%; height: 200px; object-fit: cover"
-                      alt="" /></a>
+                  <a href="booking.php"><img src="images/travel/02.webp"
+                      style="width: 100%; height: 200px; object-fit: cover" alt="" /></a>
                 </figure>
                 <div class="icon-box"><i class="icon fa fa-users"></i></div>
               </div>
@@ -265,10 +245,8 @@ if (!empty($_SESSION["sdtravels_user"])) {
             <div class="inner-box">
               <div class="image-box">
                 <figure class="image">
-                  <a href="booking.php"><img
-                      src="images/travel/14.png"
-                      style="width: 100%; height: 200px; object-fit: cover"
-                      alt="" /></a>
+                  <a href="booking.php"><img src="images/travel/14.png"
+                      style="width: 100%; height: 200px; object-fit: cover" alt="" /></a>
                 </figure>
                 <div class="icon-box"><i class="icon fa fa-users"></i></div>
               </div>
@@ -289,6 +267,46 @@ if (!empty($_SESSION["sdtravels_user"])) {
       </div>
     </section>
     <!-- End Services Section-->
+
+    <!-- Gallery Section -->
+    <section class="gallery-section pt-0">
+      <div class="auto-container">
+        <div class="">
+          <h3 class="">Video Gallery</h3>
+        </div>
+        <div class="carousel-outer">
+          <!--clients carousel-->
+          <ul class="gallery-carousel owl-carousel owl-theme wow fadeInUp">
+            <li class="gallery-item">
+              <a href="images/travel/new/others/01.mp4" class="lightbox-image">
+                <video src="images/travel/new/others/01.mp4" style="width: 100%; height: 450px; object-fit: cover"
+                  alt=""></video>
+              </a>
+            </li>
+            <li class="gallery-item">
+              <a href="images/travel/new/others/02.mp4" class="lightbox-image">
+                <video src="images/travel/new/others/02.mp4" style="width: 100%; height: 450px; object-fit: cover"
+                  alt=""></video>
+              </a>
+            </li>
+            <li class="gallery-item">
+              <a href="images/travel/new/others/03.mp4" class="lightbox-image">
+                <video src="images/travel/new/others/03.mp4" style="width: 100%; height: 450px; object-fit: cover"
+                  alt=""></video>
+              </a>
+            </li>
+            <li class="gallery-item">
+              <a href="images/travel/new/others/04.mp4" class="lightbox-image">
+                <video src="images/travel/new/others/04.mp4" style="width: 100%; height: 450px; object-fit: cover"
+                  alt=""></video>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!--End Gallery Section -->
+
     <!-- FAQ Section -->
     <section class="faqs-section">
       <div class="anim-icons">
@@ -320,7 +338,8 @@ if (!empty($_SESSION["sdtravels_user"])) {
                   <div class="acc-content current">
                     <div class="content">
                       <div class="text">
-                        We provide visa processing, study abroad consultation, IELTS coaching, pilgrimage travel, flight bookings, and more.
+                        We provide visa processing, study abroad consultation, IELTS coaching, pilgrimage travel, flight
+                        bookings, and more.
                       </div>
                     </div>
                   </div>

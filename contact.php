@@ -171,7 +171,9 @@ if (!empty($_SESSION["sdtravels_user"])) {
                   </div>
                   <div class="text">
                     <h6>Have any question?</h6>
-                    <a href="tel:+2349069503394"> +234 906 9503 394</a>
+                    <a href="tel:+2349069503394"><b>Secretary:</b> +234 906 9503 394</a><br>
+                    <a href="tel:+2349023297280"><b>Manager:</b> +234 902 3297 280</a><br>
+                    <a href="tel:+2348145450396"><b>MD:</b> +234 814 5450 396</a>
                   </div>
                 </li>
                 <li>
@@ -191,7 +193,8 @@ if (!empty($_SESSION["sdtravels_user"])) {
                   </div>
                   <div class="text">
                     <h6>Visit anytime</h6>
-                    <span>66 broklyn golden street. New York</span>
+                    <span style="font-size: 15px !important;"><b>Location 1:</b><br> 4 animashaun st OPP teju hospital ajegbe ring road Ibadan, Oyo State.</span><br>
+                    <span style="font-size: 15px !important;"><b>Location 2:</b><br> Properties plaza beside bank of industry first bank junction alagbaka Akure Ondo state</span><br>
                   </div>
                 </li>
               </ul>
@@ -207,8 +210,8 @@ if (!empty($_SESSION["sdtravels_user"])) {
       <div class="container-fluid p-0">
         <div class="row">
           <!-- Google Map HTML Codes -->
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.843149788316!2d144.9537131159042!3d-37.81714274201087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1sbn!2sbd!4v1583760510840!5m2!1sbn!2sbd"
+
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.0228649087003!2d3.872499073870538!3d7.35132861299248!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10398d001d271eb3%3A0x81ed092bffc4ca30!2sSmile%20Dove%20Nigeria%20Limited!5e0!3m2!1sen!2sng!4v1744215177663!5m2!1sen!2sng"
             data-tm-width="100%"
             height="500"
             frameborder="0"

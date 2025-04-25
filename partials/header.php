@@ -1,4 +1,4 @@
-<?php  ?>
+<?php ?>
 <header class="main-header header-style-one" id="home">
     <!-- Header Lower -->
     <div class="header-lower">
@@ -6,10 +6,7 @@
         <div class="main-box">
             <div class="logo-box">
                 <div class="logo">
-                    <a href="./" title=""><img
-                            src="images/logo-2.png"
-                            style="height: 40px"
-                            alt=""
+                    <a href="./" title=""><img src="images/logo-3.png" style="height: 40px; border-radius: 5px;" alt=""
                             title="Tronis" /></a>
                 </div>
             </div>
@@ -29,6 +26,9 @@
                         </li>
                         <li class="<?= $page == "visa" ? "current" : "" ?>">
                             <a href="visa.php">Visa</a>
+                        </li>
+                        <li class="<?= $page == "pilgrimage" ? "current" : "" ?>">
+                            <a href="pilgrimage.php">Pilgrimage</a>
                         </li>
                         <li class="<?= $page == "booking" ? "current" : "" ?>">
                             <a href="booking.php">Booking</a>
@@ -50,7 +50,7 @@
                 <div class="outer-box">
                     <!-- Mobile Nav toggler -->
                     <div class="mobile-nav-toggler">
-                        <span class="icon lnr-icon-bars"></span>
+                        <span class="icon lnr-icon-bars text-black"></span>
                     </div>
                 </div>
             </div>
@@ -66,11 +66,7 @@
         <nav class="menu-box">
             <div class="upper-box">
                 <div class="nav-logo">
-                    <a href="index.html"><img
-                            src="images/logo-2.png"
-                            style="height: 40px"
-                            alt=""
-                            title="" /></a>
+                    <a href="index.html"><img src="images/logo-3.png" style="height: 40px" alt="" title="" /></a>
                 </div>
                 <div class="close-btn"><i class="icon fa fa-times"></i></div>
             </div>
@@ -84,7 +80,7 @@
                     <div class="contact-info-box">
                         <i class="icon lnr-icon-phone-handset"></i>
                         <span class="title">Call Now</span>
-                        <a href="tel:+92880098670">+92 (8800) - 98670</a>
+                        <a href="tel:+2349069503394">+234 906 9503 394</a>
                     </div>
                 </li>
                 <li>
@@ -92,10 +88,7 @@
                     <div class="contact-info-box">
                         <span class="icon lnr-icon-envelope1"></span>
                         <span class="title">Send Email</span>
-                        <a
-                            href="https://html.kodesolution.com/cdn-cgi/l/email-protection#ef878a839faf8c80829f8e8196c18c8082"><span
-                                class="__cf_email__"
-                                data-cfemail="244c41485464474b4954454a5d0a474b49">[email&#160;protected]</span></a>
+                        <a href="mailto:info@smiledovetravels.com.ng"><span>info@smiledovetravels.com.ng</span></a>
                     </div>
                 </li>
                 <li>
@@ -116,9 +109,6 @@
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                 </li>
                 <li>
-                    <a href="#"><i class="fab fa-pinterest"></i></a>
-                </li>
-                <li>
                     <a href="#"><i class="fab fa-instagram"></i></a>
                 </li>
             </ul>
@@ -132,11 +122,7 @@
             <div class="inner-container">
                 <!--Logo-->
                 <div class="logo">
-                    <a href="./" title=""><img
-                            src="images/logo-2.png"
-                            style="height: 40px"
-                            alt=""
-                            title="vizox" /></a>
+                    <a href="./" title=""><img src="images/logo-2.png" style="height: 40px" alt="" title="vizox" /></a>
                 </div>
 
                 <!--Right Col-->

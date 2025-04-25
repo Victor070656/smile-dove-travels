@@ -2,17 +2,13 @@
     <!-- Sidebar Logo -->
     <div class="logo-box">
         <a href="./" class="logo-dark">
-            <img src="../images/favicon.png"
-                style="height: 30px; border-radius: 7px;" class="logo-sm" alt="logo sm">
-            <img src="../images/logo-2.png"
-                style="height: 40px; border-radius: 7px;" class="logo-lg" alt="logo dark">
+            <img src="../images/favicon.png" style="height: 30px; border-radius: 7px;" class="logo-sm" alt="logo sm">
+            <img src="../images/logo-2.png" style="height: 40px; border-radius: 7px;" class="logo-lg" alt="logo dark">
         </a>
 
         <a href="./" class="logo-light">
-            <img src="../images/favicon.png"
-                style="height: 30px; border-radius: 7px;" class="logo-sm" alt="logo sm">
-            <img src="../images/logo-2.png"
-                style="height: 40px; border-radius: 7px;" class="logo-lg" alt="logo light">
+            <img src="../images/favicon.png" style="height: 30px; border-radius: 7px;" class="logo-sm" alt="logo sm">
+            <img src="../images/logo-2.png" style="height: 40px; border-radius: 7px;" class="logo-lg" alt="logo light">
         </a>
     </div>
 
@@ -54,6 +50,14 @@
                         <iconify-icon icon="solar:map-arrow-square-bold"></iconify-icon>
                     </span>
                     <span class="nav-text"> Visa Application </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="pilgrimage.php">
+                    <span class="nav-icon">
+                        <iconify-icon icon="solar:file-text-outline"></iconify-icon>
+                    </span>
+                    <span class="nav-text"> Pilgrimage </span>
                 </a>
             </li>
             <li class="nav-item">
