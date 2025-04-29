@@ -239,6 +239,31 @@ if (mysqli_num_rows($getPilgrimPrice) > 0) {
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group mb-3">
+                      <label for="name" class="form-label">Full Name</label>
+                      <input type="text" name="name" id="name" placeholder="Enter Your Full Name"
+                        class="form-control shadow" accept=".pdf" required />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="group" class="form-label">Departure Group</label>
+                      <select name="group" id="group" required class="form-control form-select shadow">
+                        <option value="" selected hidden>--- Select a Departure Group ----</option>
+                        <?php
+                        $getGroups = mysqli_query($conn, "SELECT * FROM `pilgrim_dates`");
+                        if (mysqli_num_rows($getGroups) > 0) {
+                          while ($group = mysqli_fetch_assoc($getGroups)) {
+                            ?>
+                            <option><?= $group["location"] . " " . date("d M Y",strtotime($group["from"])) . " To " . date("d M Y",strtotime($group["to_"])); ?></option>
+                            <?php
+                          }
+                        }
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
                       <label for="origin" class="form-label">Ethnic Origin</label>
                       <select name="origin" id="origin" required class="form-control form-select shadow">
                         <option value="">--- Select an Origin ----</option>

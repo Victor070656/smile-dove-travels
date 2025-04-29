@@ -11,9 +11,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
 <html lang="en">
 <!-- Mirrored from html.kodesolution.com/2024/vizox-php/page-course.php by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Mar 2025 21:49:00 GMT -->
 <!-- Added by HTTrack -->
-<meta
-  http-equiv="content-type"
-  content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
   <meta charset="utf-8" />
@@ -32,9 +30,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
 
   <!-- Responsive -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <!--[if lt IE 9
       ]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script
     ><![endif]-->
@@ -56,9 +52,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
     <!--End Main Header -->
 
     <!-- Start main-content -->
-    <section
-      class="page-title"
-      style="background-image: url(images/background/page-title.jpg)">
+    <section class="page-title" style="background-image: url(images/background/page-title.jpg)">
       <div class="auto-container">
         <div class="title-outer">
           <h1 class="title">Bookings</h1>
@@ -74,6 +68,41 @@ if (!empty($_SESSION["sdtravels_user"])) {
     <!-- Courses Section -->
     <section class="">
       <div class="container pb-100">
+
+        <!-- Features Section Two -->
+        <section class="features-section-two mb-5">
+          <div class="auto-container">
+            <div class="outer-box">
+              <span class="icon-plane"></span>
+              <div class="row">
+                <div class="title-column col-lg-6">
+                  <div class="inner-column">
+                    <a class="sec-title light">
+                      <span class="sub-title">Tour & Guide</span>
+                      <h2>Explore the World with Ease</h2>
+                      <a href="tour.php" class="btn btn-light fw-bold mt-3 btn-lg">Book Your Tour Now</a>
+                    </a>
+                  </div>
+                </div>
+                <div class="features-column col-lg-6">
+                  <div class="inner-column">
+                    <figure class="image">
+                      <img src="images/resource/image-1.png" alt="" />
+                    </figure>
+                    <ul class="features-list">
+                      <li>Personalized Tour Packages</li>
+                      <li>Personal & Group Tour</li>
+                      <li>Party Tour</li>
+                      <li>Expert Travel Guides</li>
+                      <li>24/7 Help & Support</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- End Features Section Two -->
         <div class="row">
           <!-- flight -->
           <div class="col-12 mb-5">
@@ -118,7 +147,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
           $getHotels = mysqli_query($conn, "SELECT * FROM `hotels` ORDER BY `id` DESC");
           if (mysqli_num_rows($getHotels) > 0) {
             while ($hotel = mysqli_fetch_assoc($getHotels)) {
-          ?>
+              ?>
               <!-- Course Block Two-->
               <div class="col-lg-4 col-md-6 ">
                 <!-- Training Block Three-->
@@ -126,9 +155,11 @@ if (!empty($_SESSION["sdtravels_user"])) {
                   <div class="inner-box">
                     <div class="image-box">
                       <figure class="image">
-                        <a href="hotel.php?hid=<?= $hotel['hotelid']; ?>"><img src="images/resource/course-8.jpg" alt="" /></a>
+                        <a href="hotel.php?hid=<?= $hotel['hotelid']; ?>"><img src="images/resource/course-8.jpg"
+                            alt="" /></a>
                       </figure>
-                      <a href="hotel.php?hid=<?= $hotel['hotelid']; ?>" class="read-more"><i class="fa fa-long-arrow-alt-right"></i></a>
+                      <a href="hotel.php?hid=<?= $hotel['hotelid']; ?>" class="read-more"><i
+                          class="fa fa-long-arrow-alt-right"></i></a>
                       <div class="info-box">
                         <h4 class="title">
                           <a class="text-truncate" href="hotel.php?hid=<?= $hotel['hotelid']; ?>"><?= $hotel["name"] ?></a>
@@ -149,7 +180,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
                   </div>
                 </div>
               </div>
-          <?php
+              <?php
             }
           }
           ?>

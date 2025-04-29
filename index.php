@@ -938,7 +938,8 @@ if (!empty($_SESSION["sdtravels_user"])) {
         </div>
       </div>
     </section>
-    <!-- End Features Section Two --><!-- Testimonial Section -->
+    <!-- End Features Section Two -->
+     <!-- Testimonial Section -->
     <section class="testimonial-section" id="testimonial">
       <div class="bg-image" style="background-image: url(images/background/1.jpg)"></div>
       <div class="anim-icons">

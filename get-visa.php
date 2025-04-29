@@ -12,13 +12,16 @@ if (!empty($_SESSION["sdtravels_user"])) {
 }
 
 
-// if (isset($_GET["id"])) {
-//   $id = $_GET["id"];
-// } else {
-//   echo "<script>location.href = 'booking.php'</script>";
-// }
+if (isset($_GET["vid"])) {
+  $id = $_GET["vid"];
+} else {
+  echo "<script>location.href = 'visa.php'</script>";
+}
 
-$getVisa = mysqli_query($conn, "SELECT * FROM `visa_prices`");
+$getVisa = mysqli_query($conn, "SELECT * FROM `visa_prices` WHERE `id` = '$id'");
+if (mysqli_num_rows($getVisa) === 0) {
+  echo "<script>location.href = 'visa.php'</script>";
+}
 $visa = mysqli_fetch_assoc($getVisa);
 
 $price_usd = $visa["price"];
@@ -30,7 +33,7 @@ $price_usd = $visa["price"];
 $res = getCurrencyExchange();
 // var_dump($res);
 $rate = $res["conversion_rate"] ?? 1500;
-$rate = (int)$rate;
+$rate = (int) $rate;
 
 $price_ngn = $rate * $price_usd;
 // var_dump(__DIR__);
@@ -41,9 +44,7 @@ $price_ngn = $rate * $price_usd;
 
 
 <head>
-  <meta
-    http-equiv="content-type"
-    content="text/html;charset=UTF-8" />
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <meta charset="utf-8" />
   <title>Smile Dove Travels | Visa Application</title>
   <!-- Stylesheets -->
@@ -60,9 +61,7 @@ $price_ngn = $rate * $price_usd;
 
   <!-- Responsive -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <!--[if lt IE 9
       ]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script
     ><![endif]-->
@@ -84,12 +83,10 @@ $price_ngn = $rate * $price_usd;
     <!--End Main Header -->
 
     <!-- Start main-content -->
-    <section
-      class="page-title"
-      style="background-image: url(images/background/page-title.jpg)">
+    <section class="page-title" style="background-image: url(images/background/page-title.jpg)">
       <div class="auto-container">
         <div class="title-outer">
-          <h1 class="title">Flight Booking</h1>
+          <h1 class="title">Visa Application</h1>
           <ul class="page-breadcrumb">
             <li><a href="./">Home</a></li>
             <li>Booking</li>
@@ -110,7 +107,10 @@ $price_ngn = $rate * $price_usd;
                 <div class="mb-3">
                   <h5 class="card-title">Visa Application</h5>
                   <p class="">
-                    <span class="fw-bold">$150 (₦<?= number_format($price_ngn); ?>)</span> is application fee deposit paid to Smile Dove Travels, and it is not refundable. Visa and Ticket fee are not included in your charges fee <br>
+                    A first deposit of <span class="fw-bold"> ₦<?= number_format($visa["deposit"]); ?></span> out of
+                    <span class="fw-bold"> ₦<?= number_format($visa["price"]); ?></span> is to be
+                    paid to Smile Dove Travels for <span class="fw-bold"><?= $visa["visa_type"] ?></span> Package, and
+                    it is not refundable. Visa fee is not included in your charges fee. <br>
                     The more accurate information you give increases your chances for visa approval.
                   </p>
                 </div>
@@ -120,11 +120,13 @@ $price_ngn = $rate * $price_usd;
                   <div class="row">
                     <!-- Personal Information -->
                     <div class="col-md-6 mb-3">
-                      <label for="fullname" class="form-label fw-bold">Full Name <span class="text-danger">*</span></label>
+                      <label for="fullname" class="form-label fw-bold">Full Name <span
+                          class="text-danger">*</span></label>
                       <input type="text" id="fullname" name="fullname" required class="form-control">
                     </div>
                     <div class="col-md-6 mb-3">
-                      <label for="dob" class="form-label fw-bold">Date Of Birth <span class="text-danger">*</span></label>
+                      <label for="dob" class="form-label fw-bold">Date Of Birth <span
+                          class="text-danger">*</span></label>
                       <input type="date" id="dob" name="dob" required class="form-control">
                     </div>
                     <div class="col-md-6 mb-3">
@@ -132,8 +134,10 @@ $price_ngn = $rate * $price_usd;
                       <input type="email" id="email" name="email" required class="form-control">
                     </div>
                     <div class="col-md-6 mb-3">
-                      <label for="phone" class="form-label fw-bold">Phone Number <span class="text-danger">*</span></label>
-                      <input type="tel" id="phone" name="phone" required placeholder="+234 xxxxxxxxx" class="form-control">
+                      <label for="phone" class="form-label fw-bold">Phone Number <span
+                          class="text-danger">*</span></label>
+                      <input type="tel" id="phone" name="phone" required placeholder="+234 xxxxxxxxx"
+                        class="form-control">
                     </div>
 
                     <!-- Identity Details -->
@@ -145,17 +149,20 @@ $price_ngn = $rate * $price_usd;
                       </select>
                     </div>
                     <div class="col-md-6 mb-3">
-                      <label for="pob" class="form-label fw-bold">State Of Origin <span class="text-danger">*</span></label>
+                      <label for="pob" class="form-label fw-bold">State Of Origin <span
+                          class="text-danger">*</span></label>
                       <input type="text" id="pob" name="pob" required class="form-control">
                     </div>
                     <div class="col-md-6 mb-3">
-                      <label for="nationality" class="form-label fw-bold">Nationality <span class="text-danger">*</span></label>
+                      <label for="nationality" class="form-label fw-bold">Nationality <span
+                          class="text-danger">*</span></label>
                       <input type="text" id="nationality" name="nationality" required class="form-control">
                     </div>
 
                     <!-- Passport Details -->
                     <div class="col-md-6 mb-3">
-                      <label for="passport_num" class="form-label fw-bold">Passport Number <span class="text-danger">*</span></label>
+                      <label for="passport_num" class="form-label fw-bold">Passport Number <span
+                          class="text-danger">*</span></label>
                       <input type="text" id="passport_num" name="passport_num" required class="form-control">
                     </div>
                     <div class="col-md-6 mb-3">
@@ -169,37 +176,40 @@ $price_ngn = $rate * $price_usd;
 
                     <!-- Travel Information -->
                     <div class="col-md-6 mb-3">
-                      <label for="destin_country" class="form-label fw-bold">Destination Country <span class="text-danger">*</span></label>
+                      <label for="destin_country" class="form-label fw-bold">Destination Country <span
+                          class="text-danger">*</span></label>
                       <input type="text" id="destin_country" name="destin_country" required class="form-control">
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="visa_type" class="form-label fw-bold">Visa Type</label>
-                      <select name="visa_type" id="visa_type" class="form-control form-select">
-                        <option value="Tourist">Tourist</option>
-                        <option value="Business">Business</option>
-                        <option value="Student">Student</option>
-                        <option value="Work">Work</option>
-                      </select>
+
+                      <input type="text" id="visa_type" name="visa_type" required readonly
+                        value="<?= $visa['visa_type']; ?>" class="form-control">
                     </div>
                     <div class="col-md-6 mb-3">
-                      <label for="entry_date" class="form-label fw-bold">Arrival Date <span class="text-danger">*</span></label>
+                      <label for="entry_date" class="form-label fw-bold">Arrival Date <span
+                          class="text-danger">*</span></label>
                       <input type="date" id="entry_date" name="entry_date" required class="form-control">
                     </div>
                     <div class="col-md-6 mb-3">
-                      <label for="exit_date" class="form-label fw-bold">Departure Date <span class="text-danger">*</span></label>
+                      <label for="exit_date" class="form-label fw-bold">Departure Date <span
+                          class="text-danger">*</span></label>
                       <input type="date" id="exit_date" name="exit_date" required class="form-control">
                     </div>
 
                     <div class="col-md-6 mb-3">
-                      <label for="purpose_visit" class="form-label fw-bold">Purpose of Visit <span class="text-danger">*</span></label>
+                      <label for="purpose_visit" class="form-label fw-bold">Purpose of Visit <span
+                          class="text-danger">*</span></label>
                       <input type="text" id="purpose_visit" name="purpose_visit" required class="form-control">
                     </div>
 
                     <!-- Employment/Education Details -->
                     <div class="col-md-6 mb-3">
-                      <label for="occupation" class="form-label fw-bold">Employment Status <span class="text-danger">*</span></label>
+                      <label for="occupation" class="form-label fw-bold">Employment Status <span
+                          class="text-danger">*</span></label>
                       <select name="occupation" id="occupation" required class="form-control form-select">
                         <option value="" selected hidden> -- Select an Employment status -- </option>
+
                         <option>Student</option>
                         <option>Self-Employed</option>
                         <option>Employed</option>
@@ -221,11 +231,13 @@ $price_ngn = $rate * $price_usd;
 
                     <!-- Accommodation & Contact in Destination Country -->
                     <div class="col-md-6 mb-3">
-                      <label for="host_name" class="form-label fw-bold">Host/Hotel Name <span class="text-danger">*</span></label>
+                      <label for="host_name" class="form-label fw-bold">Host/Hotel Name <span
+                          class="text-danger">*</span></label>
                       <input type="text" id="host_name" name="host_name" required class="form-control">
                     </div>
                     <div class="col-md-6 mb-3">
-                      <label for="host_address" class="form-label fw-bold">Host/Hotel Address <span class="text-danger">*</span></label>
+                      <label for="host_address" class="form-label fw-bold">Host/Hotel Address <span
+                          class="text-danger">*</span></label>
                       <input type="text" id="host_address" name="host_address" required class="form-control">
                     </div>
                     <div class="col-md-6 mb-3">
@@ -246,31 +258,39 @@ $price_ngn = $rate * $price_usd;
                     <!-- File Uploads -->
                     <div class="col-md-6 mb-3">
                       <label for="passport_scan" class="form-label fw-bold">Upload Passport Scan</label>
-                      <input type="file" id="passport_scan" name="passport_scan" class="form-control" accept="image/*,application/pdf">
+                      <input type="file" id="passport_scan" name="passport_scan" class="form-control"
+                        accept="image/*,application/pdf">
                     </div>
                     <div class="col-md-6 mb-3">
-                      <label for="certificates" class="form-label fw-bold">Academic Certificates <small>(For student visa)</small></label>
-                      <input type="file" id="certificates" name="certificates[]" multiple class="form-control" accept="image/*,application/pdf">
+                      <label for="certificates" class="form-label fw-bold">All Your Academic Certificates
+                        <small>(O'level, BSC/HND/ND, SOP, CV, etc - <span class="text-danger">For Student Visa</span>
+                          )</small></label>
+                      <input type="file" id="certificates" name="certificates[]" multiple class="form-control"
+                        accept="image/*,application/pdf">
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="bank_statement" class="form-label fw-bold">Upload Bank Statement</label>
-                      <input type="file" id="bank_statement" name="bank_statement" class="form-control" accept="image/*,application/pdf">
+                      <input type="file" id="bank_statement" name="bank_statement" class="form-control"
+                        accept="image/*,application/pdf">
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="sponsor_letter" class="form-label fw-bold">Upload Sponsor Letter</label>
-                      <input type="file" id="sponsor_letter" name="sponsor_letter" class="form-control" accept="image/*,application/pdf">
+                      <input type="file" id="sponsor_letter" name="sponsor_letter" class="form-control"
+                        accept="image/*,application/pdf">
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="medical_certificate" class="form-label fw-bold">Upload Medical Certificate</label>
-                      <input type="file" id="medical_certificate" name="medical_certificate" class="form-control" accept="image/*,application/pdf">
+                      <input type="file" id="medical_certificate" name="medical_certificate" class="form-control"
+                        accept="image/*,application/pdf">
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="police_clearance" class="form-label fw-bold">Upload Police Clearance</label>
-                      <input type="file" id="police_clearance" name="police_clearance" class="form-control" accept="image/*,application/pdf">
+                      <input type="file" id="police_clearance" name="police_clearance" class="form-control"
+                        accept="image/*,application/pdf">
                     </div>
 
                     <!-- Visa Processing Fee -->
-                    <input type="hidden" id="visa_fee" name="visa_fee" value="<?= $price_usd; ?>">
+                    <input type="hidden" id="visa_fee" name="visa_fee" value="<?= $visa['deposit']; ?>">
 
 
                     <div class="text-center mt-3">
@@ -319,7 +339,7 @@ $price_ngn = $rate * $price_usd;
                   $_SESSION['visa_application']['files'] = $uploaded_files;
                   $_SESSION['visa_application']['certificates'] = $certificates;
 
-                  makePayment($email, $price_ngn, "http://localhost/sdtravels/visa-callback.php");
+                  makePayment($email, $visa['deposit'], "http://localhost/sdtravels/visa-callback.php");
                 }
 
                 ?>

@@ -26,6 +26,8 @@ if (confirmTransaction($_GET["trxref"])) {
 
     // die();
     $ref = $_GET["trxref"];
+    $fullname = $data['name'];
+    $group = $data['group'];
     $origin = $data['origin'];
     $price = $data['price'];
     $files = $data['file'];
@@ -45,7 +47,7 @@ if (confirmTransaction($_GET["trxref"])) {
 
 
 
-    $sql = "INSERT INTO `pilgrims` (`userid`, `ref`, `origin`, `price`, `file`) VALUES ('$uid', '$ref', '$origin', '$price', '$fileName')";
+    $sql = "INSERT INTO `pilgrims` (`userid`, `fullname`, `pilgrim_group`, `ref`, `origin`, `price`, `file`) VALUES ('$uid', '$fullname', '$group', '$ref', '$origin', '$price', '$fileName')";
     $run = mysqli_query($conn, $sql);
     if ($run) {
         echo "<script>alert('Payment successful! Pilgrimage package booked'); location.href = 'pilgrimage.php'</script>";
