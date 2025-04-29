@@ -14,7 +14,7 @@ if (!isset($_SESSION['sdtravels_manager'])) {
 <head>
      <!-- Title Meta -->
      <meta charset="utf-8" />
-     <title>Smile Dove Admin || Pilgrimage</title>
+     <title>Smile Dove Admin || Tour</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta name="description"
           content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
@@ -77,10 +77,10 @@ if (!isset($_SESSION['sdtravels_manager'])) {
                     <div class="row">
                          <div class="col-12">
                               <div class="page-title-box">
-                                   <h4 class="mb-0">Pilgrimage</h4>
+                                   <h4 class="mb-0">Tour</h4>
                                    <ol class="breadcrumb mb-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Smile dove</a></li>
-                                        <li class="breadcrumb-item active">Pilgrimage</li>
+                                        <li class="breadcrumb-item active">Tour</li>
                                    </ol>
                               </div>
                          </div>
@@ -91,7 +91,7 @@ if (!isset($_SESSION['sdtravels_manager'])) {
                     <div class="card rounded-4 py-2">
                          <div class="card-header d-flex justify-content-between align-items-center">
                               <h5 class="">
-                                   All Pilgrimage Application
+                                   All Tour Application
                               </h5>
                          </div>
 
@@ -100,46 +100,42 @@ if (!isset($_SESSION['sdtravels_manager'])) {
                                    <table class="table table-striped w-100" id="tablee">
                                         <thead>
                                              <tr class="table-nowrap">
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Reference</th>
-                                                  <th scope="col">Full Name</th>
-                                                  <th scope="col">Departure Group</th>
-                                                  <th scope="col">Origin</th>
-                                                  <th scope="col">Amount</th>
-                                                  <th scope="col">Registration Form</th>
                                                   <th scope="col">Date</th>
+                                                  <th scope="col">Full Name</th>
+                                                  <th scope="col">Email</th>
+                                                  <th scope="col">Phone Number</th>
+                                                  <th scope="col">Destination</th>
+                                                  <th scope="col">Departure</th>
+                                                  <th scope="col">Duration</th>
+                                                  <th scope="col">No. Of Guests</th>
                                              </tr>
                                         </thead>
                                         <tbody>
                                              <?php
-                                             $getPilgrim = mysqli_query($conn, "SELECT * FROM `pilgrims` ORDER BY `created_at` DESC");
+                                             $getPilgrim = mysqli_query($conn, "SELECT * FROM `tour` ORDER BY `id` DESC");
                                              if (mysqli_num_rows($getPilgrim) > 0) {
 
                                                   while ($row = mysqli_fetch_assoc($getPilgrim)) {
                                                        ?>
                                                        <tr>
-                                                            <td><?= $row["id"]; ?></td>
-                                                            <td><?= $row["ref"]; ?></td>
-                                                            <td>
-                                                                 <?= $row["fullname"]; ?>
-                                                            </td>
-                                                            <td>
-                                                                 <?= $row["pilgrim_group"]; ?>
-                                                            </td>
-                                                            <td><?= ucfirst($row["origin"]); ?></td>
-                                                            <td>
-                                                                 <?= $row["origin"] == "nigerian" ? "₦" : "$" ?>
-                                                                 <?= number_format($row["price"]); ?>
-                                                            </td>
-                                                            <td>
-                                                                 <a href="../uploads/pilgrim_files/<?= $row['file']; ?>"
-                                                                      class="text-primary text-decoration-underline"
-                                                                      target="_blank">
-                                                                      View Form
-                                                                 </a>
-                                                            </td>
                                                             <td><?= date("d-m-Y H:i", strtotime($row["created_at"])); ?></td>
-
+                                                            <td>
+                                                                 <?= $row["name"]; ?>
+                                                            </td>
+                                                            <td><?= $row["email"]; ?></td>
+                                                            <td><?= $row["phone"]; ?></td>
+                                                            <td>
+                                                                 <?= $row["destination"]; ?>
+                                                            </td>
+                                                            <td>
+                                                                 <?= date("d-m-Y", strtotime($row["departure_date"])); ?>
+                                                            </td>
+                                                            <td>
+                                                                 <?= $row["duration"]; ?>
+                                                            </td>
+                                                            <td>
+                                                                 <?= $row["guests"] ?? 0; ?>
+                                                            </td>
                                                        </tr>
                                                        <?php
                                                   }

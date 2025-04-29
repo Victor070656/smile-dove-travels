@@ -3,6 +3,7 @@ include_once "config/config.php";
 include_once "config/function.php";
 session_start();
 $loggedIn = false;
+$uid = null;
 if (!empty($_SESSION["sdtravels_user"])) {
   $loggedIn = true;
   $uid = $_SESSION["sdtravels_user"];
@@ -64,7 +65,7 @@ if (mysqli_num_rows($getPilgrimPrice) > 0) {
     <!-- <div class="preloader"></div> -->
     <!-- Main Header-->
     <?php
-    $page = "pilgrimage";
+    $page = "booking";
     include "partials/header.php";
     ?>
     <!--End Main Header -->
@@ -154,28 +155,28 @@ if (mysqli_num_rows($getPilgrimPrice) > 0) {
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group mb-3">
-                    <label for="name" class="form-label">Full Name</label>
+                    <label for="name" class="form-label">Full Name <span class="text-danger">*</span></label>
                     <input type="text" name="name" id="name" placeholder="Enter Your Full Name"
-                      class="form-control shadow" accept=".pdf" required />
+                      class="form-control shadow" required />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group mb-3">
-                    <label for="email" class="form-label">Email</label>
+                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
                     <input type="email" name="email" id="email" placeholder="Enter Your Email"
-                      class="form-control shadow" accept=".pdf" required />
+                      class="form-control shadow" required />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group mb-3">
-                    <label for="phone" class="form-label">Phone Number</label>
+                    <label for="phone" class="form-label">Phone Number <span class="text-danger">*</span></label>
                     <input type="text" name="phone" id="phone" placeholder="Enter Your Phone Number"
-                      class="form-control shadow" accept=".pdf" required />
+                      class="form-control shadow" required />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group mb-3">
-                    <label for="dest" class="form-label">Tour Destination</label>
+                    <label for="dest" class="form-label">Tour Destination <span class="text-danger">*</span></label>
                     <select name="dest" id="dest" required class="form-control form-select shadow">
                       <option value="" selected hidden>--- Select a Tour Destination ----</option>
                       <?php
@@ -195,89 +196,52 @@ if (mysqli_num_rows($getPilgrimPrice) > 0) {
                 </div>
                 <div class="col-md-6">
                   <div class="form-group mb-3">
-                    <label for="depart" class="form-label">Departure Date</label>
-                    <input type="date" name="depart" id="depart" class="form-control shadow" accept=".pdf" required />
+                    <label for="depart" class="form-label">Departure Date <span class="text-danger">*</span></label>
+                    <input type="date" name="depart" id="depart" class="form-control shadow" required />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group mb-3">
-                    <label for="duration" class="form-label">Duration</label>
-                    <input type="text" name="duration" id="duration" placeholder="How many days are you staying..."
-                      class="form-control shadow" accept=".pdf" required />
+                    <label for="duration" class="form-label">Duration <span class="text-danger">*</span></label>
+                    <input type="number" name="duration" id="duration" placeholder="How many days are you staying..."
+                      class="form-control shadow" required />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <label for="guest" class="form-label">Guests</label>
+                    <input type="number" name="guest" id="guest" placeholder="How many guests..."
+                      class="form-control shadow" />
                   </div>
                 </div>
                 <div class="">
-                  <button type="submit" class="btn btn-dark">Complete Registration</button>
+                  <button type="submit" class="btn btn-dark">Book Your Tour</button>
                 </div>
               </div>
 
               <?php
               if ($_POST) {
-                if (!$loggedIn) {
-                  echo "<script>alert('You need to be logged in'); location.href = 'user/login.php'</script>";
+                $name = $_POST['name'];
+                $email = $_POST['email'];
+                $phone = $_POST['phone'];
+                $dest = $_POST['dest'];
+                $depart = $_POST['depart'];
+                $duration = $_POST['duration'];
+                $guest = $_POST['guest'];
+
+                $insert = mysqli_query($conn, "INSERT INTO `tour`(`userid`, `name`, `email`, `phone`, `destination`, `departure_date`, `duration`, `guests`) VALUES ('$uid', '$name', '$email', '$phone', '$dest', '$depart', '$duration', '$guest')");
+                if ($insert) {
+                  echo "<script>alert('Tour Booking Successful!')</script>";
                 } else {
-
-                  $origin = $_POST['origin'];
-                  $file = $_FILES['file'];
-                  if ($origin == 'nigerian') {
-                    $price = $pilgrimPrice['nigeria'];
-                    $price_ngn = $price;
-                  } else {
-                    $price = $pilgrimPrice['diaspora'];
-
-                    $res = getCurrencyExchange();
-                    // var_dump($res);
-                    $rate = $res["conversion_rate"] ?? 1500;
-                    $rate = (int) $rate;
-
-                    $price_ngn = $rate * $price;
-                  }
-                  $_POST["price"] = $price;
-
-                  $email = $user['email'];
-
-
-                  if ($file['type'] == 'application/pdf') {
-                    $fileName = time() . "_" . basename($file['name']);
-                    $upload_dir = "uploads/temp/"; // Store files temporarily
-                    if (!is_dir($upload_dir)) {
-                      mkdir($upload_dir, 0777, true);
-                    }
-                    $targetFilePath = $upload_dir . $fileName;
-
-                    if (move_uploaded_file($file['tmp_name'], $targetFilePath)) {
-                      // Save to database
-                      $_POST["file"] = $targetFilePath;
-                      $_SESSION["pilgrim"] = $_POST;
-
-                      // Redirect to payment page
-                      makePayment($email, $price_ngn, "http://localhost/sdtravels/pilgrim-callback.php");
-                    } else {
-                      echo "<div class='alert alert-danger'>Error uploading file. Please try again.</div>";
-                    }
-                  } else {
-                    echo "<div class='alert alert-danger'>Invalid file type. Only PDF files are allowed.</div>";
-                  }
+                  echo "<script>alert('Tour Booking Failed!')</script>";
                 }
+
               }
               ?>
             </form>
 
 
-            <div class="row mt-5">
-              <div class="col-md-3">
-                <img src="images/travel/new/others/p1.jpeg" alt="" class="w-100" style="border-radius: 10px;">
-              </div>
-              <div class="col-md-3">
-                <img src="images/travel/new/others/p2.jpeg" alt="" class="w-100" style="border-radius: 10px;">
-              </div>
-              <div class="col-md-3">
-                <img src="images/travel/new/others/p3.jpeg" alt="" class="w-100" style="border-radius: 10px;">
-              </div>
-              <div class="col-md-3">
-                <img src="images/travel/new/others/p4.jpeg" alt="" class="w-100" style="border-radius: 10px;">
-              </div>
-            </div>
+
           </div>
         </div>
         <!--End Services Details Content-->

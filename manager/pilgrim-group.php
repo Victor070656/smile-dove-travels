@@ -4,7 +4,19 @@ session_start();
 if (!isset($_SESSION['sdtravels_manager'])) {
      echo "<script>alert('Please Login First'); location.href = 'login.php'</script>";
 }
+$getFlightPrices = mysqli_query($conn, "SELECT * FROM `flight_prices`");
+$flightPrices = mysqli_fetch_assoc($getFlightPrices);
+
+$getVisaPrices = mysqli_query($conn, "SELECT * FROM `visa_prices`");
+$visaPrice = mysqli_fetch_assoc($getVisaPrices);
+
+$getPilgrimPrices = mysqli_query($conn, "SELECT * FROM `pilgrimage_prices`");
+$pilgrimPrice = mysqli_fetch_assoc($getPilgrimPrices);
+
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +26,7 @@ if (!isset($_SESSION['sdtravels_manager'])) {
 <head>
      <!-- Title Meta -->
      <meta charset="utf-8" />
-     <title>Smile Dove Admin || Pilgrimage</title>
+     <title>Smile Dove Admin || Pilgrim Group</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta name="description"
           content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
@@ -77,10 +89,10 @@ if (!isset($_SESSION['sdtravels_manager'])) {
                     <div class="row">
                          <div class="col-12">
                               <div class="page-title-box">
-                                   <h4 class="mb-0">Pilgrimage</h4>
+                                   <h4 class="mb-0">Pilgrim Group</h4>
                                    <ol class="breadcrumb mb-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Smile dove</a></li>
-                                        <li class="breadcrumb-item active">Pilgrimage</li>
+                                        <li class="breadcrumb-item active">Pilgrim Group</li>
                                    </ol>
                               </div>
                          </div>
@@ -88,61 +100,79 @@ if (!isset($_SESSION['sdtravels_manager'])) {
                     <!-- ========== Page Title End ========== -->
 
 
-                    <div class="card rounded-4 py-2">
+                    <div class="card rounded-4 py-2 mb-4">
                          <div class="card-header d-flex justify-content-between align-items-center">
                               <h5 class="">
-                                   All Pilgrimage Application
+                                   Add Pilgrim Group
                               </h5>
                          </div>
 
                          <div class="card-body">
+                              <form method="post">
+                                   <div class="mb-2">
+                                        <label for="location" class="form-label">Location</label>
+                                        <input type="text" name="location" class="form-control" required id="location">
+                                   </div>
+                                   <div class="mb-2">
+                                        <label for="from" class="form-label">From</label>
+                                        <input type="date" name="from" required class="form-control" id="from">
+                                   </div>
+                                   <div class="mb-2">
+                                        <label for="to" class="form-label">To</label>
+                                        <input type="date" name="to" class="form-control" id="to">
+                                   </div>
+                                   <button class="btn btn-primary" name="flight">Add</button>
+                                   <?php
+                                   if (isset($_POST["flight"])) {
+                                        $location = $_POST["location"];
+                                        $from = $_POST["from"];
+                                        $to = $_POST["to"];
+
+                                        $query = mysqli_query($conn, "INSERT INTO `pilgrim_dates`(`location`, `from`, `to_`) VALUES ('$location', '$from', '$to')");
+                                        if ($query) {
+                                             echo "<script>alert('Added Successfully!'); location.href = 'pilgrim-group.php'</script>";
+                                        } else {
+                                             echo "<script>alert('Something went wrong!'); </script>";
+                                        }
+                                   }
+                                   ?>
+                              </form>
+                         </div>
+                    </div>
+                    <div class="card rounded-4 py-2 mb-4">
+
+                         <div class="card-body">
                               <div class="table-responsive">
-                                   <table class="table table-striped w-100" id="tablee">
+                                   <table class="table table-all">
                                         <thead>
-                                             <tr class="table-nowrap">
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Reference</th>
-                                                  <th scope="col">Full Name</th>
-                                                  <th scope="col">Departure Group</th>
-                                                  <th scope="col">Origin</th>
-                                                  <th scope="col">Amount</th>
-                                                  <th scope="col">Registration Form</th>
-                                                  <th scope="col">Date</th>
+                                             <tr>
+                                                  <th>Location</th>
+                                                  <th>From</th>
+                                                  <th>To</th>
+                                                  <th>Create Date</th>
+                                                  <th>Action</th>
                                              </tr>
                                         </thead>
                                         <tbody>
                                              <?php
-                                             $getPilgrim = mysqli_query($conn, "SELECT * FROM `pilgrims` ORDER BY `created_at` DESC");
-                                             if (mysqli_num_rows($getPilgrim) > 0) {
-
-                                                  while ($row = mysqli_fetch_assoc($getPilgrim)) {
+                                             $getPilgrimGroups = mysqli_query($conn, "SELECT * FROM `pilgrim_dates` ORDER BY `id` DESC");
+                                             if (mysqli_num_rows($getPilgrimGroups) > 0) {
+                                                  while ($row = mysqli_fetch_assoc($getPilgrimGroups)) {
                                                        ?>
                                                        <tr>
-                                                            <td><?= $row["id"]; ?></td>
-                                                            <td><?= $row["ref"]; ?></td>
-                                                            <td>
-                                                                 <?= $row["fullname"]; ?>
-                                                            </td>
-                                                            <td>
-                                                                 <?= $row["pilgrim_group"]; ?>
-                                                            </td>
-                                                            <td><?= ucfirst($row["origin"]); ?></td>
-                                                            <td>
-                                                                 <?= $row["origin"] == "nigerian" ? "₦" : "$" ?>
-                                                                 <?= number_format($row["price"]); ?>
-                                                            </td>
-                                                            <td>
-                                                                 <a href="../uploads/pilgrim_files/<?= $row['file']; ?>"
-                                                                      class="text-primary text-decoration-underline"
-                                                                      target="_blank">
-                                                                      View Form
-                                                                 </a>
-                                                            </td>
+                                                            <td><?= $row["location"]; ?></td>
+                                                            <td><?= date("d-m-Y", strtotime($row["from"])); ?></td>
+                                                            <td><?= date("d-m-Y", strtotime($row["to_"])); ?></td>
                                                             <td><?= date("d-m-Y H:i", strtotime($row["created_at"])); ?></td>
-
+                                                            <td>
+                                                                 <a href="delete-pilgrim-group.php?id=<?= $row["id"]; ?>"
+                                                                      class="btn btn-danger btn-sm">Delete</a>
+                                                            </td>
                                                        </tr>
                                                        <?php
                                                   }
+                                             } else {
+                                                  echo "<tr><td colspan='3' class='text-center'>No Pilgrim Group Found</td></tr>";
                                              }
                                              ?>
                                         </tbody>

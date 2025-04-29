@@ -104,6 +104,7 @@ $uid = $_SESSION["sdtravels_user"];
                                                   <th scope="col">#</th>
                                                   <th scope="col">Reference</th>
                                                   <th scope="col">Full Name</th>
+                                                  <th scope="col">Pilgrim Group</th>
                                                   <th scope="col">Origin</th>
                                                   <th scope="col">Amount</th>
                                                   <th scope="col">Registration Form</th>
@@ -112,7 +113,7 @@ $uid = $_SESSION["sdtravels_user"];
                                         </thead>
                                         <tbody>
                                              <?php
-                                             $getPilgrim = mysqli_query($conn, "SELECT p.*, u.fullname as fullname FROM `pilgrims` as p JOIN `users` as u ON p.userid = u.userid WHERE p.userid = '$uid' ORDER BY p.created_at DESC");
+                                             $getPilgrim = mysqli_query($conn, "SELECT * FROM `pilgrims`  WHERE `userid` = '$uid' ORDER BY `created_at` DESC");
                                              if (mysqli_num_rows($getPilgrim) > 0) {
 
                                                   while ($row = mysqli_fetch_assoc($getPilgrim)) {
@@ -122,6 +123,9 @@ $uid = $_SESSION["sdtravels_user"];
                                                             <td><?= $row["ref"]; ?></td>
                                                             <td>
                                                                  <?= $row["fullname"]; ?>
+                                                            </td>
+                                                            <td>
+                                                                 <?= $row["pilgrim_group"]; ?>
                                                             </td>
                                                             <td><?= ucfirst($row["origin"]); ?></td>
                                                             <td>
