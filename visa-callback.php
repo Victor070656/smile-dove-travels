@@ -11,6 +11,13 @@ if (!empty($_SESSION["sdtravels_user"])) {
     $uid = $_SESSION["sdtravels_user"];
 }
 
+$now = date("d-m-Y H:i:s");
+$subject = "Visa Booking Notification";
+$emailMsg = "
+<h4>Visa Booked Now at $now</h4>
+<p>Login to your <a href='https://smiledovetravels.com.ng/manager'>admin dashboard</a> for details</p>
+";
+
 // mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 if (confirmTransaction($_GET["trxref"])) {
     // echo "<pre>";
@@ -95,7 +102,8 @@ if (confirmTransaction($_GET["trxref"])) {
 
     $applicant_query = mysqli_query($conn, "INSERT INTO `applicants` (`applicationid`, `userid`, `full_name`, `dob`, `place_of_birth`, `gender`, `nationality`, `phone`, `email`) 
         VALUES ('$applicantID', '$uid', '$fullname', '$dob', '$pob', '$gender', '$nationality', '$phone', '$email')");
-    if (!$applicant_query) throw new Exception("Applicant prep failed: " . mysqli_error($conn));
+    if (!$applicant_query)
+        throw new Exception("Applicant prep failed: " . mysqli_error($conn));
     $applicant_id = mysqli_insert_id($conn);
     // var_dump($applicant_query);
 
@@ -103,20 +111,23 @@ if (confirmTransaction($_GET["trxref"])) {
     $sql = "INSERT INTO `passports` (`applicant_id`, `passport_number`, `issue_date`, `expiry_date`, `passport_scan`) 
                 VALUES ('$applicant_id', '$passport_num', '$passport_issue', '$passport_exp', '$passport_scan')";
     $passports_query = mysqli_query($conn, $sql);
-    if (!$passports_query) throw new Exception("Passport prep failed: " . mysqli_error($conn));
+    if (!$passports_query)
+        throw new Exception("Passport prep failed: " . mysqli_error($conn));
 
     // insert into travel details table
     $sql = "INSERT INTO `travel_details` (`applicant_id`, `destination_country`, `visa_type`, `purpose`, `entry_date`, `exit_date`) 
                 VALUES ('$applicant_id', '$destin_country', '$visa_type', '$purpose_visit', '$entry_date', '$exit_date')";
     $travel_details_query = mysqli_query($conn, $sql);
-    if (!$travel_details_query) throw new Exception("Passport prep failed: " . mysqli_error($conn));
+    if (!$travel_details_query)
+        throw new Exception("Passport prep failed: " . mysqli_error($conn));
 
 
     // 3️⃣ Insert into employment table
     $sql = "INSERT INTO employment (applicant_id, employment_status, employer_name, monthly_income, bank_statement) 
                 VALUES ('$applicant_id', '$occupation', '$employer', '$income', '$bank_statement')";
     $employment_query = mysqli_query($conn, $sql);
-    if (!$employment_query) throw new Exception("Employment prep failed: " . mysqli_error($conn));
+    if (!$employment_query)
+        throw new Exception("Employment prep failed: " . mysqli_error($conn));
 
 
     // 4️⃣ Insert into sponsorship table (if applicable)
@@ -124,7 +135,8 @@ if (confirmTransaction($_GET["trxref"])) {
         $sql = "INSERT INTO sponsorships (applicant_id, sponsor_name, sponsor_relationship, sponsor_letter) 
                     VALUES ('$applicant_id', '$sponsor_name', '$sponsor_relationship', '$sponsor_letter')";
         $sponsorship_query = mysqli_query($conn, $sql);
-        if (!$sponsorship_query) throw new Exception("Sponsor prep failed: " . mysqli_error($conn));
+        if (!$sponsorship_query)
+            throw new Exception("Sponsor prep failed: " . mysqli_error($conn));
     }
 
     // 4️⃣ Insert into education table (if applicable)
@@ -132,17 +144,20 @@ if (confirmTransaction($_GET["trxref"])) {
         $sql = "INSERT INTO `education` (`applicant_id`, `certificate_files`) 
                     VALUES ('$applicant_id', '$cert')";
         $education_query = mysqli_query($conn, $sql);
-        if (!$education_query) throw new Exception("Certificates prep failed: " . mysqli_error($conn));
+        if (!$education_query)
+            throw new Exception("Certificates prep failed: " . mysqli_error($conn));
     }
 
     // 5️⃣ Insert into health & security table
     $sql = "INSERT INTO health_security (applicant_id, medical_certificate, police_clearance) 
                 VALUES ('$applicant_id', '$medical_certificate', '$police_clearance')";
     $health_query = mysqli_query($conn, $sql);
-    if (!$health_query) throw new Exception("Health security prep failed: " . mysqli_error($conn));
+    if (!$health_query)
+        throw new Exception("Health security prep failed: " . mysqli_error($conn));
 
     unset($_SESSION['visa_application']);
 
+    sendMail($subject, $emailMsg);
     echo "<script>alert('Visa application submitted successfully!'); location.href = 'visa.php'</script>";
 
     if (mysqli_errno($conn) > 0) {

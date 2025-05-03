@@ -11,6 +11,13 @@ if (!empty($_SESSION["sdtravels_user"])) {
     $uid = $_SESSION["sdtravels_user"];
 }
 
+$now = date("d-m-Y H:i:s");
+$subject = "Pilgrimage Booking Notification";
+$emailMsg = "
+<h4>Pilgrimage Package Booked Now at $now</h4>
+<p>Login to your <a href='https://smiledovetravels.com.ng/manager'>admin dashboard</a> for details</p>
+";
+
 // mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 if (confirmTransaction($_GET["trxref"])) {
     // echo "<pre>";
@@ -50,6 +57,7 @@ if (confirmTransaction($_GET["trxref"])) {
     $sql = "INSERT INTO `pilgrims` (`userid`, `fullname`, `pilgrim_group`, `ref`, `origin`, `price`, `file`) VALUES ('$uid', '$fullname', '$group', '$ref', '$origin', '$price', '$fileName')";
     $run = mysqli_query($conn, $sql);
     if ($run) {
+        sendMail($subject, $emailMsg);
         echo "<script>alert('Payment successful! Pilgrimage package booked'); location.href = 'pilgrimage.php'</script>";
     } else {
         echo "<script>alert('Payment not successful'); location.href = 'pilgrimage.php'</script>";

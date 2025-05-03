@@ -11,6 +11,13 @@ if (!empty($_SESSION["sdtravels_user"])) {
     $uid = $_SESSION["sdtravels_user"];
 }
 
+$now = date("d-m-Y H:i:s");
+$subject = "Flight Booking Notification";
+$emailMsg = "
+<h4>Flight Booked Now at $now</h4>
+<p>Login to your <a href='https://smiledovetravels.com.ng/manager'>admin dashboard</a> for details</p>
+";
+
 
 if (confirmTransaction($_GET["trxref"])) {
 
@@ -38,6 +45,7 @@ if (confirmTransaction($_GET["trxref"])) {
     $query = mysqli_query($conn, "INSERT INTO `flight_bookings` (`userid`, `ref`, `fullname`,`dob`,`gender`,`id_type`,`id_num`,`id_exp`,`nationality`,`email`,`phone`,`depart_city`, `dest_country`, `dest_city`,`depart_date`,`ticket_type`,`airline_class`,`price`) VALUES ('$uid','$ref','$fullname','$dob','$gender','$idtype','$idnum','$idexp','$nationality','$email','$phone','$depart_city','$destin_country','$destin_city','$depart_date','$ticket_type','$airline_class','$price')");
     if ($query) {
         unset($_SESSION["flight"]);
+        sendMail($subject, $emailMsg);
         echo "<script>alert('Flight successfully booked'); location.href = 'booking.php'</script>";
     } else {
         echo "<script>alert('Something went wrong! contact the admin.'); location.href = 'booking.php'</script>";

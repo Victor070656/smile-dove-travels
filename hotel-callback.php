@@ -11,6 +11,13 @@ if (!empty($_SESSION["sdtravels_user"])) {
     $uid = $_SESSION["sdtravels_user"];
 }
 
+$now = date("d-m-Y H:i:s");
+$subject = "Hotel Booking Notification";
+$emailMsg = "
+<h4>Hotel Booked Now at $now</h4>
+<p>Login to your <a href='https://smiledovetravels.com.ng/manager'>admin dashboard</a> for details</p>
+";
+
 
 if (confirmTransaction($_GET["trxref"])) {
 
@@ -40,6 +47,7 @@ if (confirmTransaction($_GET["trxref"])) {
     if ($query) {
         $upd = mysqli_query($conn, "UPDATE `hotel_rooms` SET `available` = 0 WHERE `roomid` = '$roomid'") ?? null;
         unset($_SESSION["hotel"]);
+        sendMail($subject, $emailMsg);
         echo "<script>alert('Hotel Room successfully booked'); location.href = 'booking.php'</script>";
     } else {
         echo "<script>alert('Something went wrong! contact the admin.'); location.href = 'booking.php'</script>";

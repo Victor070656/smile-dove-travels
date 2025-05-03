@@ -228,8 +228,16 @@ if (mysqli_num_rows($getPilgrimPrice) > 0) {
                 $duration = $_POST['duration'];
                 $guest = $_POST['guest'];
 
+                $now = date("d-m-Y H:i:s");
+                $subject = "Tour Booking Notification";
+                $emailMsg = "
+                <h4>Tour Booked Now at $now</h4>
+                <p>Login to your <a href='https://smiledovetravels.com.ng/manager'>admin dashboard</a> for details</p>
+                ";
+
                 $insert = mysqli_query($conn, "INSERT INTO `tour`(`userid`, `name`, `email`, `phone`, `destination`, `departure_date`, `duration`, `guests`) VALUES ('$uid', '$name', '$email', '$phone', '$dest', '$depart', '$duration', '$guest')");
                 if ($insert) {
+                  sendMail($subject, $emailMsg);
                   echo "<script>alert('Tour Booking Successful!')</script>";
                 } else {
                   echo "<script>alert('Tour Booking Failed!')</script>";
