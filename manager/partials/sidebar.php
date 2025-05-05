@@ -164,6 +164,14 @@
                 </div>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="newsletters.php">
+                    <span class="nav-icon">
+                        <iconify-icon icon="solar:user-outline"></iconify-icon>
+                    </span>
+                    <span class="nav-text"> Newsletter Emails </span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="profile.php">
                     <span class="nav-icon">
                         <iconify-icon icon="solar:user-outline"></iconify-icon>

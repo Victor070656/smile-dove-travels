@@ -1,5 +1,6 @@
 <?php
 include "../config/config.php";
+include "../config/function.php";
 session_start();
 if (!isset($_SESSION['sdtravels_manager'])) {
      echo "<script>alert('Please Login First'); location.href = 'login.php'</script>";
@@ -25,9 +26,11 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
      <meta charset="utf-8" />
      <title>Smile Dove Admin || Create Blogs</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta name="description" content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
+     <meta name="description"
+          content="Smile Dove Travels: An advanced, fully responsive admin dashboard template packed with features to streamline your analytics and management needs." />
      <meta name="author" content="StackBros" />
-     <meta name="keywords" content="Smile Dove Travels, admin dashboard, responsive template, analytics, modern UI, management tools" />
+     <meta name="keywords"
+          content="Smile Dove Travels, admin dashboard, responsive template, analytics, modern UI, management tools" />
      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
      <meta name="robots" content="index, follow" />
      <meta name="theme-color" content="#ffffff">
@@ -38,7 +41,8 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
      <!-- Google Font Family link -->
      <link rel="preconnect" href="https://fonts.googleapis.com/index.html">
      <link rel="preconnect" href="https://fonts.gstatic.com/index.html" crossorigin>
-     <link href="https://fonts.googleapis.com/css2c4ad.css?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2c4ad.css?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap"
+          rel="stylesheet">
 
      <!-- Vendor css -->
      <link href="assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
@@ -124,6 +128,8 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
                                         $tmp_name = $_FILES["image"]["tmp_name"];
                                         $blogid = uniqid();
 
+                                        // for email notification
+                                   
                                         $dir = "../uploads/blog";
                                         if (!dir($dir)) {
                                              mkdir($dir, 0777, true);
@@ -132,7 +138,37 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
                                         if (move_uploaded_file($tmp_name, $dir . "/$image")) {
                                              $query = mysqli_query($conn, "INSERT INTO `blogs` (`blogid`, `title`, `content`, `image`) VALUES ('$blogid', '$title', '$content', '$image')");
                                              if ($query) {
+                                                  $subject = "Newsletter from Smile Dove Travels";
+                                                  $body = '
+                                                  <link
+                                                       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+                                                       rel="stylesheet"
+                                                       integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+                                                       crossorigin="anonymous"
+                                                  />
+                                                  <h3 class="text-center mb-3">' . $title . '</h3>
+                                                  <div class="container">
+                                                       <img src="https://smiledovetravels.com.ng/uploads/blog/' . $image . '" alt="" class="img-fluid rounded-4 mb-3" />
+                                                       <p>' . $content . '</p><br>
+                                                       <p>For more details: <a href="https://smiledovetravels.com.ng/blog-details.php?id=' . $blogid . '" class="text-success fw-bold">Read More</a></p>
+                                                       <p>For more information, visit our website: <a href="https://smiledovetravels.com.ng" class="fw-bold">Smile Dove Travels</a></p>
+                                                       <p>Thank you for subscribing to our newsletter!</p>
+                                                       <p>Best regards,</p>
+                                                       <p>Smile Dove Travels</p>
+                                                  </div>
+                                                  <script
+                                                       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+                                                       integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+                                                       crossorigin="anonymous"
+                                                  ></script>
+                                                  ';
                                                   echo "<script>alert('Created Successfully!'); location.href = 'blogs.php'</script>";
+                                                  $getSubs = mysqli_query($conn, "SELECT `email` FROM `newsletters`");
+                                                  if (mysqli_num_rows($getSubs) > 0) {
+                                                       while ($sub = mysqli_fetch_assoc($getSubs)) {
+                                                            sendNotification($sub["email"], $subject, $body);
+                                                       }
+                                                  }
                                              } else {
                                                   echo "<script>alert('Something went wrong!'); </script>";
                                              }
@@ -180,7 +216,7 @@ $visaPrice = mysqli_fetch_assoc($getVisaPrices);
      <script src="assets/js/vendor.min.js"></script>
 
      <script>
-          $(document).ready(function() {
+          $(document).ready(function () {
                $('#tablee').DataTable({
                     "scrollX": "100%",
                });

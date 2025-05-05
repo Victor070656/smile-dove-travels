@@ -11,9 +11,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
 <html lang="en">
 <!-- Mirrored from html.kodesolution.com/2024/vizox-php/news-grid.php by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Mar 2025 21:49:19 GMT -->
 <!-- Added by HTTrack -->
-<meta
-  http-equiv="content-type"
-  content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
   <meta charset="utf-8" />
@@ -32,9 +30,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
 
   <!-- Responsive -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <!--[if lt IE 9
       ]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script
     ><![endif]-->
@@ -56,9 +52,7 @@ if (!empty($_SESSION["sdtravels_user"])) {
     <!--End Main Header -->
 
     <!-- Start main-content -->
-    <section
-      class="page-title"
-      style="background-image: url(images/background/page-title.jpg)">
+    <section class="page-title" style="background-image: url(images/background/page-title.jpg)">
       <div class="auto-container">
         <div class="title-outer">
           <h1 class="title">Blog</h1>
@@ -79,13 +73,16 @@ if (!empty($_SESSION["sdtravels_user"])) {
           $getBlogs = mysqli_query($conn, "SELECT * FROM `blogs` ORDER BY `id` DESC");
           if (mysqli_num_rows($getBlogs) > 0) {
             while ($blog = mysqli_fetch_assoc($getBlogs)) {
-          ?>
+              ?>
               <!-- News Block -->
               <div class="news-block col-lg-4 col-md-6 col-sm-12">
                 <div class="inner-box">
                   <div class="image-box">
                     <figure class="image shadow rounded">
-                      <a href="blog-details.php?id=<?= $blog['blogid']; ?>"><img src="uploads/blog/<?= $blog["image"]; ?>" alt="" class="bg-transparent" style="width: 100%; height: 270px; object-fit: cover; border-radius: 10px;" /></a>
+                      <a href="blog-details.php?id=<?= $blog['blogid']; ?>">
+                        <img src="uploads/blog/<?= $blog["image"]; ?>" alt="" class="bg-transparent"
+                          style="width: 100%; height: 270px; object-fit: cover; border-radius: 10px;" />
+                      </a>
                     </figure>
                   </div>
                   <div class="content-box">
@@ -94,20 +91,22 @@ if (!empty($_SESSION["sdtravels_user"])) {
                         <li><i class="fa fa-clock"></i> <?= date("d M Y", strtotime($blog["created_at"])); ?></li>
                       </ul>
                       <h4 class="title text-truncate">
-                        <a href="blog-details.php?id=<?= $blog['blogid']; ?>" class="text-truncate"><?= $blog["title"]; ?></a>
+                        <a href="blog-details.php?id=<?= $blog['blogid']; ?>"
+                          class="text-truncate"><?= $blog["title"]; ?></a>
                       </h4>
                       <p class="text-truncate"><?= $blog["title"]; ?></p>
-                      <a href="blog-details.php?id=<?= $blog['blogid']; ?>" class="read-more">Read More <i class="fa fa-long-arrow-alt-right"></i></a>
+                      <a href="blog-details.php?id=<?= $blog['blogid']; ?>" class="read-more">Read More <i
+                          class="fa fa-long-arrow-alt-right"></i></a>
                     </div>
                   </div>
                 </div>
               </div>
-            <?php
+              <?php
             }
           } else {
             ?>
             <p class="p-4 text-center">No Blog Posted Yet</p>
-          <?php
+            <?php
           }
           ?>
 
